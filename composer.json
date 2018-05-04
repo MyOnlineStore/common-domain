@@ -1,0 +1,27 @@
+{
+    "name": "myonlinestore/common-domain",
+    "type": "library",
+    "description": "Common MyOnlineStore domain concepts",
+    "homepage": "https://github.com/MyOnlineStore/common-domain",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4" : {
+            "MyOnlineStore\\Common\\Domain\\" : "src/",
+            "MyOnlineStore\\Tests\\Common\\Domain\\" : "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/opt/packages/assertion"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "myonlinestore/assertion": "@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.4.*",
+        "escapestudios/symfony2-coding-standard": "^3.0"
+    }
+}
