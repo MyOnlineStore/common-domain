@@ -6,22 +6,16 @@
     "license": "proprietary",
     "autoload": {
         "psr-4" : {
-            "MyOnlineStore\\Common\\Domain\\" : "src/",
-            "MyOnlineStore\\Tests\\Common\\Domain\\" : "tests/"
+            "MyOnlineStore\\Common\\Domain\\" : "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/opt/packages/assertion"
-        }
-    ],
     "require": {
         "php": "^7.0",
-        "myonlinestore/assertion": "@dev"
+        "ramsey/uuid": "^3.7"
     },
     "require-dev": {
         "phpunit/phpunit": "6.4.*",
-        "escapestudios/symfony2-coding-standard": "^3.0"
+        "escapestudios/symfony2-coding-standard": "^3.0",
+        "doctrine/orm": "2.5.x-dev as 2.5.6"
     }
 }

@@ -3,7 +3,7 @@
 namespace MyOnlineStore\Common\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use MyOnlineStore\Assertion\NumericAssertionTrait;
+use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
 
 /**
  * @ORM\Embeddable
