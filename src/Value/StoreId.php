@@ -8,7 +8,7 @@ use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
 /**
  * @ORM\Embeddable
  */
-class StoreId
+final class StoreId
 {
     use NumericAssertionTrait;
 
