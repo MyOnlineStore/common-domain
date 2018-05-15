@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Embeddable
  */
-final class RegionCode
+class RegionCode
 {
     /**
      * @ORM\Column(name="region_code", type="string", length=2)
