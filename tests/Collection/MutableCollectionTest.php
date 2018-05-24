@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
+use MyOnlineStore\Common\Domain\Collection\ImmutableCollection;
 use MyOnlineStore\Common\Domain\Collection\MutableCollection;
 
 final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
@@ -69,6 +70,24 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
                 $item->next();
             }
         );
+    }
+
+    public function testEqualsWillReturnTrueIfCollectionsAreOfTheSameTypeAndContainsTheSameElements()
+    {
+        $element1 = new \stdClass();
+        $element2 = new \stdClass();
+        $collection = new MutableCollection([$element1, $element2]);
+
+        self::assertTrue($collection->equals(new MutableCollection([$element1, $element2])));
+
+        // same elements in different order
+        self::assertTrue($collection->equals(new MutableCollection([$element2, $element1])));
+
+        // different collection type
+        self::assertFalse($collection->equals(new ImmutableCollection([$element1, $element2])));
+
+        // missing element 2
+        self::assertFalse($collection->equals(new MutableCollection([$element1])));
     }
 
     public function testFilterWillReturnCorrectElements()

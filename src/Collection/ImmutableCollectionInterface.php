@@ -18,6 +18,15 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate
     public function each(callable $callback);
 
     /**
+     * Returns if given collection is of the same type and has the same elements
+     *
+     * @param ImmutableCollectionInterface $otherCollection
+     *
+     * @return bool
+     */
+    public function equals(ImmutableCollectionInterface $otherCollection): bool;
+
+    /**
      * @return mixed
      */
     public function first();
