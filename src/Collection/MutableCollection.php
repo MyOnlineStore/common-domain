@@ -42,6 +42,28 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     /**
      * @inheritDoc
      */
+    public function equals(ImmutableCollectionInterface $otherCollection): bool
+    {
+        if (\get_class($this) !== \get_class($otherCollection)) {
+            return false;
+        }
+
+        if ($this->count() !== $otherCollection->count()) {
+            return false;
+        }
+
+        foreach ($this as $entry) {
+            if (!$otherCollection->contains($entry)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function first()
     {
         return reset($this);
