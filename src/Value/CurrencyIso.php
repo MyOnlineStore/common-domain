@@ -44,7 +44,7 @@ final class CurrencyIso
     private function getCurrencies(): array
     {
         if (null === self::$currencies) {
-            self::$currencies = require_once __DIR__.'/../../../../../vendor/moneyphp/money/resources/currency.php';
+            self::$currencies = require_once __DIR__.'/../../vendor/moneyphp/money/resources/currency.php';
         }
 
         return self::$currencies;
