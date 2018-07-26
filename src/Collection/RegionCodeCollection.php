@@ -33,6 +33,14 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
     }
 
     /**
+     * @inheritdoc
+     */
+    public function unique(): RegionCodeCollectionInterface
+    {
+        return new self(array_unique($this->toArray()));
+    }
+
+    /**
      * @param string[] $isoCodes
      *
      * @return RegionCodeCollectionInterface
@@ -47,13 +55,5 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
                 $isoCodes
             )
         );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function unique(): RegionCodeCollectionInterface
-    {
-        return new self(array_unique($this->toArray()));
     }
 }
