@@ -21,6 +21,12 @@ final class CurrencyIsoTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    public function testEquals()
+    {
+        self::assertTrue((new CurrencyIso('EUR'))->equals(new CurrencyIso('EUR')));
+        self::assertFalse((new CurrencyIso('EUR'))->equals(new CurrencyIso('USD')));
+    }
+
     public function testGetMinorUnit()
     {
         self::assertEquals(3, (new CurrencyIso('OMR'))->getMinorUnit());
