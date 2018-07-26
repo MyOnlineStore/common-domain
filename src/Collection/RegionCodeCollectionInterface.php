@@ -4,28 +4,17 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use MyOnlineStore\Domain\Collection\StringCollectionInterface;
 
 /**
  * @method RegionCode[] getIterator()
  */
-interface RegionCodeCollectionInterface extends ImmutableCollectionInterface
+interface RegionCodeCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {
     /**
-     * @return string[]
-     */
-    public function asStrings();
-
-    /**
-     * @param string[] $isoCodes
-     *
      * @return RegionCodeCollectionInterface
      */
-    public static function fromStrings(array $isoCodes): RegionCodeCollectionInterface;
-
-    /**
-     * @return self
-     */
-    public function reindex();
+    public function reindex(): RegionCodeCollectionInterface;
 
     /**
      * @return RegionCodeCollectionInterface

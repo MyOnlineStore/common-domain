@@ -33,7 +33,9 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
     }
 
     /**
-     * @inheritdoc
+     * @param string[] $isoCodes
+     *
+     * @return RegionCodeCollectionInterface
      */
     public static function fromStrings(array $isoCodes): RegionCodeCollectionInterface
     {

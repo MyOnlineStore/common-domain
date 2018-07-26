@@ -5,8 +5,10 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\Locale;
 
-final class LocaleCollection extends ArrayCollection implements LocaleCollectionInterface
+final class LocaleCollection extends MutableCollection implements LocaleCollectionInterface
 {
+    use StringCollectionTrait;
+
     /**
      * @inheritdoc
      */
@@ -25,7 +27,7 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
     /**
      * @inheritdoc
      */
-    public function asRegionCodes()
+    public function asRegionCodes(): RegionCodeCollectionInterface
     {
         return new RegionCodeCollection(
             array_values(
@@ -42,20 +44,12 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
     }
 
     /**
-     * @inheritdoc
-     */
-    public function asStrings()
-    {
-        return array_values(array_map('strval', $this->toArray()));
-    }
-
-    /**
      * @inheritDoc
      */
-    public function contains($element)
+    public function contains($element): bool
     {
-        return $this->exists(
-            function ($index, Locale $locale) use ($element) {
+        return $this->containsWith(
+            function (Locale $locale) use ($element) {
                 return $locale->equals($element);
             }
         );
@@ -66,7 +60,7 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
      *
      * @return self
      */
-    public static function fromStrings(array $input)
+    public static function fromStrings(array $input): self
     {
         return new self(
             array_map(
@@ -85,7 +79,7 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
     /**
      * @inheritdoc
      */
-    public function groupByCurrencyFormat($currencyIso, $previewAmount)
+    public function groupByCurrencyFormat($currencyIso, $previewAmount): array
     {
         return $this->groupBy(
             function (Locale $locale) use ($currencyIso, $previewAmount) {
@@ -94,14 +88,6 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
                 return $numberFormatter->formatCurrency($previewAmount, (string) $currencyIso);
             }
         );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function unique(): LocaleCollectionInterface
-    {
-        return new LocaleCollection(\array_unique($this->toArray()));
     }
 
     /**
@@ -124,5 +110,13 @@ final class LocaleCollection extends ArrayCollection implements LocaleCollection
         }
 
         return $locales;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function unique(): LocaleCollectionInterface
+    {
+        return new LocaleCollection(\array_unique($this->toArray()));
     }
 }

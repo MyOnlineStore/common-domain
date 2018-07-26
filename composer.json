@@ -12,7 +12,6 @@
     "require": {
         "php": "^7.0",
         "ramsey/uuid": "^3.7",
-        "doctrine/collections": "^1.4",
         "moneyphp/money": "^3.0"
     },
     "require-dev": {

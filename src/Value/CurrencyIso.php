@@ -10,10 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class CurrencyIso
 {
-    use EqualComparisonTrait;
-
     /**
-     * @var array
+     * @var array|null
      */
     private static $currencies;
 
@@ -36,6 +34,16 @@ final class CurrencyIso
         }
 
         $this->currency = $currencies[(string) $code]['alphabeticCode'];
+    }
+
+    /**
+     * @param object $object
+     *
+     * @return bool
+     */
+    public function equals($object): bool
+    {
+        return $this == $object;
     }
 
     /**

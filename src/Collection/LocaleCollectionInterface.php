@@ -5,21 +5,17 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Locale;
+use MyOnlineStore\Domain\Collection\StringCollectionInterface;
 
 /**
  * @method Locale[] getIterator()
  */
-interface LocaleCollectionInterface extends ImmutableCollectionInterface
+interface LocaleCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {
     /**
      * @return RegionCodeCollectionInterface
      */
-    public function asRegionCodes();
-
-    /**
-     * @return string[]
-     */
-    public function asStrings();
+    public function asRegionCodes(): RegionCodeCollectionInterface;
 
     /**
      * @param CurrencyIso $currencyIso
@@ -27,7 +23,7 @@ interface LocaleCollectionInterface extends ImmutableCollectionInterface
      *
      * @return LocaleCollectionInterface[]
      */
-    public function groupByCurrencyFormat($currencyIso, $previewAmount);
+    public function groupByCurrencyFormat($currencyIso, $previewAmount): array;
 
     /**
      * @return LocaleCollectionInterface
