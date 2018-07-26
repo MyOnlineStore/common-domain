@@ -56,6 +56,28 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     }
 
     /**
+     * @inheritdoc
+     */
+    public function groupByCurrencyFormat($currencyIso, $previewAmount): array
+    {
+        return $this->groupBy(
+            function (Locale $locale) use ($currencyIso, $previewAmount) {
+                $numberFormatter = new \NumberFormatter((string) $locale, \NumberFormatter::CURRENCY);
+
+                return $numberFormatter->formatCurrency($previewAmount, (string) $currencyIso);
+            }
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function unique(): LocaleCollectionInterface
+    {
+        return new LocaleCollection(\array_unique($this->toArray()));
+    }
+
+    /**
      * @param string[] $input
      *
      * @return self
@@ -73,20 +95,6 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
                 },
                 $input
             )
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function groupByCurrencyFormat($currencyIso, $previewAmount): array
-    {
-        return $this->groupBy(
-            function (Locale $locale) use ($currencyIso, $previewAmount) {
-                $numberFormatter = new \NumberFormatter((string) $locale, \NumberFormatter::CURRENCY);
-
-                return $numberFormatter->formatCurrency($previewAmount, (string) $currencyIso);
-            }
         );
     }
 
@@ -110,13 +118,5 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
         }
 
         return $locales;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function unique(): LocaleCollectionInterface
-    {
-        return new LocaleCollection(\array_unique($this->toArray()));
     }
 }
