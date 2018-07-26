@@ -14,7 +14,7 @@ interface RegionCodeCollectionInterface extends ImmutableCollectionInterface, St
     /**
      * @return RegionCodeCollectionInterface
      */
-    public function reindex(): RegionCodeCollectionInterface;
+    public function reindex();
 
     /**
      * @return RegionCodeCollectionInterface
