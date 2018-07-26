@@ -5,7 +5,6 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Locale;
-use MyOnlineStore\Domain\Collection\StringCollectionInterface;
 
 /**
  * @method Locale[] getIterator()
