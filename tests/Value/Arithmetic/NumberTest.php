@@ -21,6 +21,37 @@ class NumberTest extends TestCase
         self::assertEquals(new Number(666.7, 1), (new Number(123.123))->add(new Number(543.543), 1));
     }
 
+    public function testAssertOperand()
+    {
+        $operand = new Number(543);
+
+        $numberMock = $this->getMockBuilder(Number::class)
+            ->setConstructorArgs([123])
+            ->setMethods(['assertOperand'])
+            ->getMockForAbstractClass();
+
+        $numberMock->expects(self::exactly(5))->method('assertOperand')->with($operand);
+
+        // Make sure the assertion is performed during all operations:
+        $numberMock->add($operand);
+        $numberMock->divideBy($operand);
+        $numberMock->equals($operand);
+        $numberMock->multiplyBy($operand);
+        $numberMock->subtract($operand);
+    }
+
+    public function testAssignValuePreservesClass()
+    {
+        $subclassedNumber = $this->createSubclassedNumber(123);
+        $newSubclassedNumber = $subclassedNumber->add(new Number(543));
+
+        self::assertNotEquals(\get_class($subclassedNumber), Number::class);
+        self::assertInstanceOf(\get_class($subclassedNumber), $newSubclassedNumber);
+        self::assertEquals($this->createSubclassedNumber(666), $newSubclassedNumber);
+
+        self::assertEquals(new Number(666), (new Number(543))->add($subclassedNumber));
+    }
+
     public function testChangeValue()
     {
         self::assertEquals(new Number(666), (new Number(123))->changeValue(666));
@@ -108,42 +139,10 @@ class NumberTest extends TestCase
         self::assertNotEquals(new Number(1.23), (new Number(123))->toScale(2)); // implicit expectation scale
     }
 
-    public function testAssertOperand()
-    {
-        $operand = new Number(543);
-
-        /** @var \MyOnlineStore\Domain\Value\Arithmetic\Number $numberMock */
-        $numberMock = $this->getMockBuilder(Number::class)
-            ->setConstructorArgs([123])
-            ->setMethods(['assertOperand'])
-            ->getMockForAbstractClass();
-
-        $numberMock->expects(self::exactly(5))->method('assertOperand')->with($operand);
-
-        // Make sure the assertion is performed during all operations:
-        $numberMock->add($operand);
-        $numberMock->divideBy($operand);
-        $numberMock->equals($operand);
-        $numberMock->multiplyBy($operand);
-        $numberMock->subtract($operand);
-    }
-
-    public function testAssignValuePreservesClass()
-    {
-        $subclassedNumber = $this->createSubclassedNumber(123);
-        $newSubclassedNumber = $subclassedNumber->add(new Number(543));
-
-        self::assertNotEquals(get_class($subclassedNumber), Number::class);
-        self::assertInstanceOf(get_class($subclassedNumber), $newSubclassedNumber);
-        self::assertEquals($this->createSubclassedNumber(666), $newSubclassedNumber);
-
-        self::assertEquals(new Number(666), (new Number(543))->add($subclassedNumber));
-    }
-
     /**
      * @param mixed $value
      *
-     * @return \MyOnlineStore\Domain\Value\Arithmetic\Number
+     * @return \PHPUnit_Framework_MockObject_MockObject|Number
      */
     private function createSubclassedNumber($value)
     {

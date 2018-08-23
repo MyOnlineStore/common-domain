@@ -1,8 +1,8 @@
 <?php
 
-namespace MyOnlineStore\Common\Domain\Tests\Value\Arithmetic;
+namespace MyOnlineStore\Common\Domain\Tests\Value\Monetary;
 
-use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
+use MyOnlineStore\Common\Domain\Value\Monetary\Amount;
 
 final class AmountTest extends \PHPUnit\Framework\TestCase
 {

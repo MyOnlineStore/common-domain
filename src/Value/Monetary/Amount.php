@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
+namespace MyOnlineStore\Common\Domain\Value\Monetary;
+
+use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 
 final class Amount extends Number
 {
