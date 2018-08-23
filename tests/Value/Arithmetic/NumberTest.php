@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Tests\Domain\Value\Arithmetic;
 
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 use PHPUnit\Framework\TestCase;
 
-class NumberTest extends TestCase
+final class NumberTest extends TestCase
 {
     public function testAdd()
     {

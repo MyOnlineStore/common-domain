@@ -21,6 +21,8 @@
     ],
     "require": {
         "php": "^7.0",
+        "ext-bcmath": "*",
+        "ext-intl": "*",
         "litipk/php-bignumbers": "dev-fix-division-scale-guess as 0.7.3",
         "moneyphp/money": "^3.0",
         "ramsey/uuid": "^3.7"
@@ -34,12 +36,7 @@
         "vendor-dir": "vendor",
         "sort-packages": true,
         "platform": {
-            "php": "7.0.8",
-            "ext-bcmath": "0.1",
-            "ext-gd": "2.1",
-            "ext-intl": "3.0",
-            "ext-memcached": "3.0",
-            "ext-soap": "0.1"
+            "php": "7.0.8"
         }
     }
 }
