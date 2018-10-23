@@ -9,21 +9,11 @@
             "MyOnlineStore\\Common\\Domain\\": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/MyOnlineStore/litipk-php-exceptions"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/MyOnlineStore/php-bignumbers"
-        }
-    ],
     "require": {
         "php": "^7.0",
         "ext-bcmath": "*",
         "ext-intl": "*",
-        "litipk/php-bignumbers": "dev-fix-division-scale-guess as 0.7.3",
+        "litipk/php-bignumbers": "^0.8.6",
         "moneyphp/money": "^3.0",
         "ramsey/uuid": "^3.7"
     },
