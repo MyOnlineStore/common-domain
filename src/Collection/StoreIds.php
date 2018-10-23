@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Collection;
 
@@ -20,7 +21,7 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
         );
     }
 
-    public function contains($element)
+    public function contains($element): bool
     {
         return in_array($element, $this->getArrayCopy(), false);
     }
