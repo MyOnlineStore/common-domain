@@ -13,10 +13,13 @@ final class NumberTest extends TestCase
         self::assertEquals(new Number(666), (new Number(123))->add(new Number(543)));
         self::assertTrue((new Number(666.0))->equals((new Number(123))->add(new Number(543))));
         self::assertEquals(new Number(666.666), (new Number(123.123))->add(new Number(543.543)));
-        self::assertEquals(new Number(666.666), (new Number(123.666))->add(new Number(543)));
+
+        // operation without scale will retult in implicit natural scale
+        self::assertEquals(new Number(666.666, 3), (new Number(123.666))->add(new Number(543)));
+        self::assertEquals(new Number(0.0, 14), (new Number(666.6))->add(new Number(-666.6)));
+
         self::assertEquals(new Number(666.666), (new Number(123))->add(new Number(543.666)));
         self::assertNotEquals(new Number(0), (new Number(666.6))->add(new Number(-666.6))); // scale mismatch
-        self::assertEquals(new Number(0.0), (new Number(666.6))->add(new Number(-666.6)));
         self::assertNotEquals(new Number(666.6666), (new Number(123))->add(new Number(543.666)));
         self::assertNotEquals(new Number(666.7), (new Number(123.123))->add(new Number(543.543), 1)); // scale mismatch
         self::assertEquals(new Number(666.7, 1), (new Number(123.123))->add(new Number(543.543), 1));
@@ -55,18 +58,28 @@ final class NumberTest extends TestCase
 
     public function testChangeValue()
     {
+        // scale will be ignored when changing to integer inputs
         self::assertEquals(new Number(666), (new Number(123))->changeValue(666));
         self::assertEquals(new Number(666), (new Number(123.4))->changeValue(666));
-        self::assertNotEquals(new Number(666), (new Number(123.4))->changeValue(666, 1));
+        self::assertEquals(new Number(666), (new Number(123.4))->changeValue(666, 1));
         self::assertEquals(new Number(666, 1), (new Number(123.4))->changeValue(666, 1));
-        self::assertEquals(new Number(666), (new Number(123.4, 2))->changeValue(666)); // old scale is ignored
+        self::assertEquals(new Number(666), (new Number(123.4, 2))->changeValue(666));
+
+        // changing value with scale
+        self::assertNotEquals(new Number(666.5), (new Number(123.1))->changeValue(666.6, 5));
+        self::assertEquals(new Number(666.6, 5), (new Number(123.1))->changeValue(666.6, 5));
+
+        // changing value without scale will implictly use natural scale
+        self::assertEquals(new Number(666.6, 14), (new Number(123.1))->changeValue(666.6));
+        self::assertEquals(new Number(666.6, 14), (new Number(123.1, 5))->changeValue(666.6));
     }
 
     public function testDivideBy()
     {
         self::assertEquals(new Number(111), (new Number(666))->divideBy(new Number(6)));
-        self::assertEquals(new Number(111.1), (new Number(666.6))->divideBy(new Number(6)));
-        self::assertEquals(new Number(1.111), (new Number(666.6))->divideBy(new Number('6.0E2')));
+        self::assertEquals(new Number(111.1, 14), (new Number(666.6))->divideBy(new Number(6)));
+        self::assertEquals(new Number(1.111, 14), (new Number(666.6))->divideBy(new Number('6.0E2')));
+        self::assertEquals(new Number(1.11, 2), (new Number(666.6))->divideBy(new Number('6.0E2'), 2));
     }
 
     public function testEquals()
@@ -111,9 +124,6 @@ final class NumberTest extends TestCase
         // do not give a scale to the operation nor the expected value (results in scale difference)
         self::assertNotEquals(new Number(666.66), (new Number(111.11))->multiplyBy(new Number(6)));
 
-        // set the operation scale to the same scale as the implict scale of the expected value
-        self::assertEquals(new Number(666.66), (new Number(111.11))->multiplyBy(new Number(6), 16));
-
         // set the expected value scale to the same scale as the implicit scale of the operation result
         self::assertEquals(new Number(666.66, 2), (new Number(111.11))->multiplyBy(new Number(6)));
 
@@ -137,7 +147,6 @@ final class NumberTest extends TestCase
     {
         self::assertEquals(new Number('1.23'), (new Number(123))->toScale(2));
         self::assertEquals(new Number(1.23, 2), (new Number(123))->toScale(2));
-        self::assertNotEquals(new Number(1.23), (new Number(123))->toScale(2)); // implicit expectation scale
     }
 
     /**

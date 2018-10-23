@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
 use Litipk\BigNumbers\Decimal;
-use Litipk\Exceptions\InvalidArgumentTypeException;
+use Litipk\BigNumbers\Errors\BigNumbersError;
 
 class Number
 {
@@ -16,6 +16,8 @@ class Number
     /**
      * @param mixed    $value
      * @param int|null $scale
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($value, int $scale = null)
     {
@@ -48,6 +50,8 @@ class Number
      * @param int|null $scale
      *
      * @return static
+     *
+     * @throws \InvalidArgumentException
      */
     public function changeValue($value, int $scale = null)
     {
@@ -182,12 +186,8 @@ class Number
 
         try {
             $this->value = Decimal::create($value, $scale);
-        } catch (InvalidArgumentTypeException $exception) {
+        } catch (BigNumbersError $exception) {
             throw new \InvalidArgumentException($exception->getMessage(), 0, $exception);
-        }
-
-        if (null !== $scale) {
-            $this->value = $this->value->add(Decimal::fromFloat(0.0), $scale); // enforce scale
         }
     }
 }

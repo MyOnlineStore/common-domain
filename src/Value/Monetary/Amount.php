@@ -7,9 +7,6 @@ use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 
 final class Amount extends Number
 {
-    /**
-     * @inheritDoc
-     */
     public function __construct($value)
     {
         if (false !== \strpos((string) $value, '.')) {
