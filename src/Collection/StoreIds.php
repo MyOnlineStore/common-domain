@@ -23,6 +23,6 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 
     public function contains($element): bool
     {
-        return in_array($element, $this->getArrayCopy(), false);
+        return \in_array($element, $this->getArrayCopy(), false);
     }
 }
