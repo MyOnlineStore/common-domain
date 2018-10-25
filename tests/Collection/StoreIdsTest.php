@@ -25,4 +25,26 @@ final class StoreIdsTest extends TestCase
         self::assertTrue($storeIds->contains($storeId));
         self::assertFalse($storeIds->contains(new StoreId(456)));
     }
+
+    public function testUniqueWillReturnUniqueValues()
+    {
+        $storeId1 = new StoreId(123);
+        $storeId2 = new StoreId(456);
+        $storeId3 = new StoreId(789);
+
+        $collection = new StoreIds(
+            [
+                $storeId1,
+                $storeId1,
+                $storeId2,
+                $storeId3,
+                $storeId3,
+            ]
+        );
+
+        self::assertEquals(
+            new StoreIds([0 => $storeId1, 2 => $storeId2, 3 => $storeId3]),
+            $collection->unique()
+        );
+    }
 }

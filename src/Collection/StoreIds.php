@@ -25,4 +25,9 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
     {
         return \in_array($element, $this->getArrayCopy(), false);
     }
+
+    public function unique(): StoreIdsInterface
+    {
+        return new self(\array_unique($this->toArray()));
+    }
 }

@@ -10,4 +10,5 @@ use MyOnlineStore\Common\Domain\Value\StoreId;
  */
 interface StoreIdsInterface extends ImmutableCollectionInterface
 {
+    public function unique(): StoreIdsInterface;
 }
