@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Collection;
 
-interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate
+interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \ArrayAccess
 {
     /**
      * @param mixed $element
