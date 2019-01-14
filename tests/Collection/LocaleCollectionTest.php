@@ -8,8 +8,9 @@ use MyOnlineStore\Common\Domain\Collection\RegionCodeCollection;
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class LocaleCollectionTest extends \PHPUnit\Framework\TestCase
+final class LocaleCollectionTest extends TestCase
 {
     public function testAsRegionCodesWillReturnRegionCodeCollection()
     {
@@ -71,8 +72,8 @@ final class LocaleCollectionTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                '€ 123.456.789,12' => new LocaleCollection([Locale::fromString('nl_NL')]),
-                '123.456.789,12 €' => new LocaleCollection([Locale::fromString('nl_BE'), Locale::fromString('de_DE')]),
+                '€ 123.456.789,12' => new LocaleCollection([Locale::fromString('nl_NL'), Locale::fromString('nl_BE')]),
+                '123.456.789,12 €' => new LocaleCollection([Locale::fromString('de_DE')]),
             ],
             $collection->groupByCurrencyFormat(new CurrencyIso('EUR'), 123456789.1234)
         );
