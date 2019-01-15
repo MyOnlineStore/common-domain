@@ -13,6 +13,9 @@ final class Iban
      */
     private $iban;
 
+    /**
+     * @throws InvalidIban
+     */
     public function __construct(string $iban)
     {
         $iban = \mb_strtoupper($iban);
@@ -26,7 +29,7 @@ final class Iban
 
     public function equals(self $other): bool
     {
-        return \get_class($this) === \get_class($other) && $this->iban === $other->iban;
+        return $this == $other;
     }
 
     public function __toString(): string

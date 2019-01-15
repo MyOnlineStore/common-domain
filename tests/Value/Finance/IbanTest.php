@@ -26,6 +26,7 @@ final class IbanTest extends TestCase
         $emailAddress = new Iban('NL45ABNA0946659707');
 
         self::assertTrue($emailAddress->equals(new Iban('NL45ABNA0946659707')));
+        self::assertTrue($emailAddress->equals(new Iban('nl45abnA0946659707')));
         self::assertFalse($emailAddress->equals(new Iban('NL78RABO0334765924')));
     }
 }

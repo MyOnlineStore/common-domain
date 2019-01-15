@@ -14,6 +14,9 @@ final class EmailAddress
      */
     private $emailAddress;
 
+    /**
+     * @throws InvalidEmailAddress
+     */
     public function __construct(string $emailAddress)
     {
         $validator = new EmailValidator();
@@ -27,7 +30,7 @@ final class EmailAddress
 
     public function equals(self $other): bool
     {
-        return \get_class($this) === \get_class($other) && $this->emailAddress === $other->emailAddress;
+        return $this == $other;
     }
 
     public function __toString(): string
