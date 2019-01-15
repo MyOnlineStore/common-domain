@@ -72,8 +72,8 @@ final class LocaleCollectionTest extends TestCase
 
         self::assertEquals(
             [
-                '€ 123.456.789,12' => new LocaleCollection([Locale::fromString('nl_NL'), Locale::fromString('nl_BE')]),
-                '123.456.789,12 €' => new LocaleCollection([Locale::fromString('de_DE')]),
+                '€ 123.456.789,12' => new LocaleCollection([Locale::fromString('nl_NL')]),
+                '123.456.789,12 €' => new LocaleCollection([Locale::fromString('nl_BE'), Locale::fromString('de_DE')]),
             ],
             $collection->groupByCurrencyFormat(new CurrencyIso('EUR'), 123456789.1234)
         );
