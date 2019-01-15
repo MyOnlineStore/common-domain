@@ -8,8 +8,9 @@ use MyOnlineStore\Common\Domain\Collection\RegionCodeCollection;
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class LocaleCollectionTest extends \PHPUnit\Framework\TestCase
+final class LocaleCollectionTest extends TestCase
 {
     public function testAsRegionCodesWillReturnRegionCodeCollection()
     {
