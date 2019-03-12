@@ -24,6 +24,13 @@ final class StoreIdsTest extends TestCase
         self::assertContains($storeIds->getRandom(), $storeIds->toArray());
     }
 
+    public function testGetRandomThrowsExceptionIfCollectionIsEmpty()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        (new StoreIds([]))->getRandom();
+    }
+
     public function testContainsWillCompareBasedOnEqualityInsteadOfIdentity()
     {
         $storeId = new StoreId(123);

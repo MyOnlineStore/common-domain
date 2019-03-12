@@ -26,6 +26,10 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 
     public function getRandom(): StoreId
     {
+        if ($this->isEmpty()) {
+            throw new \InvalidArgumentException('Can not select random element from empty collection');
+        }
+
         return $this[\array_rand($this->toArray(), 1)];
     }
 
