@@ -9,16 +9,28 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 {
     use StringCollectionTrait;
 
+    /**
+     * @param StoreId[]|int[] $entries
+     */
     public function __construct(array $entries = [])
     {
         parent::__construct(
-            array_map(
+            \array_map(
                 function ($entry) {
                     return ($entry instanceof StoreId) ? $entry : new StoreId($entry);
                 },
                 $entries
             )
         );
+    }
+
+    public function getRandom(): StoreId
+    {
+        if ($this->isEmpty()) {
+            throw new \InvalidArgumentException('Can not select random element from empty collection');
+        }
+
+        return $this[\array_rand($this->toArray(), 1)];
     }
 
     public function contains($element): bool

@@ -17,6 +17,20 @@ final class StoreIdsTest extends TestCase
         );
     }
 
+    public function testGetRandomReturnsRandomElementFromCollection()
+    {
+        $storeIds = new StoreIds([new StoreId(123), new StoreId(456), new StoreId(789)]);
+
+        self::assertContains($storeIds->getRandom(), $storeIds->toArray());
+    }
+
+    public function testGetRandomThrowsExceptionIfCollectionIsEmpty()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        (new StoreIds([]))->getRandom();
+    }
+
     public function testContainsWillCompareBasedOnEqualityInsteadOfIdentity()
     {
         $storeId = new StoreId(123);

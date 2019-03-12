@@ -10,5 +10,10 @@ use MyOnlineStore\Common\Domain\Value\StoreId;
  */
 interface StoreIdsInterface extends ImmutableCollectionInterface
 {
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function getRandom(): StoreId;
+
     public function unique(): StoreIdsInterface;
 }
