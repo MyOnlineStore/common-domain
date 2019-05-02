@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Type;
 
 use MyOnlineStore\Common\Domain\Value\Type\AbstractUuid;
+use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-final class AbstractUuidTest extends \PHPUnit\Framework\TestCase
+final class AbstractUuidTest extends TestCase
 {
     public function testFromBytes()
     {
@@ -40,6 +41,17 @@ final class AbstractUuidTest extends \PHPUnit\Framework\TestCase
 
         self::assertTrue($stub->equals(UuidStub::fromString('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec')));
         self::assertFalse($stub->equals(UuidStub::fromString('5de6f213-1f41-42e0-8e0d-d2828f352ebe')));
+    }
+
+    public function testSpecialUuids()
+    {
+        $uuid1 = UuidStub::fromString('0e703880-7f48-11e8-b8d7-44a8421b9960');
+        $uuid2 = UuidStub::fromString('0e703936-7f48-11e8-b8d7-44a8421b9960');
+
+        self::assertTrue($uuid1->equals($uuid1));
+        self::assertFalse($uuid1->equals($uuid2));
+        self::assertTrue($uuid2->equals($uuid2));
+        self::assertFalse($uuid2->equals($uuid1));
     }
 }
 
