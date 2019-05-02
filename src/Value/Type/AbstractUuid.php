@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Type;
 
@@ -71,6 +72,6 @@ abstract class AbstractUuid
      */
     public function equals(AbstractUuid $otherUuid)
     {
-        return $this == $otherUuid;
+        return $this->uuid->equals($otherUuid->uuid);
     }
 }
