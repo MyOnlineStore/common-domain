@@ -9,7 +9,7 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
 {
     public function testEquals()
     {
-        $regionCode = new RegionCode('NL');
+        $regionCode = RegionCode::asNL();
         self::assertTrue($regionCode->equals(new RegionCode('nl')));
         self::assertFalse($regionCode->equals(new RegionCode('DE')));
     }
@@ -28,14 +28,14 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
 
     public function testToString()
     {
-        self::assertEquals('NL', (string) new RegionCode('NL'));
+        self::assertEquals('NL', (string) RegionCode::asNL());
         self::assertEquals('NL', (string) new RegionCode('nl'));
         self::assertEquals('DE', (string) new RegionCode('DE'));
     }
 
     public function testToLower()
     {
-        self::assertEquals('nl', (new RegionCode('NL'))->lower());
+        self::assertEquals('nl', RegionCode::asNL()->lower());
         self::assertEquals('nl', (new RegionCode('nl'))->lower());
         self::assertEquals('de', (new RegionCode('DE'))->lower());
     }
@@ -59,7 +59,7 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
     public function isEuRegionProvider(): array
     {
         return [
-            [new RegionCode('NL'), true],
+            [RegionCode::asNL(), true],
             [new RegionCode('BE'), true],
             [new RegionCode('AG'), false],
             [new RegionCode('CH'), false],

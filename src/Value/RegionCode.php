@@ -37,6 +37,11 @@ final class RegionCode
         $this->code = strtoupper($code);
     }
 
+    public static function asNL(): self
+    {
+        return new self('NL');
+    }
+
     /**
      * @param RegionCode $otherRegion
      *
