@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Type;
 
+use MyOnlineStore\Common\Domain\Exception\InvalidUuidProvidedException;
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -13,32 +15,56 @@ abstract class AbstractUuid
      */
     protected $uuid;
 
-    /**
-     * @param UuidInterface $uuid
-     */
     private function __construct(UuidInterface $uuid)
     {
         $this->uuid = $uuid;
     }
 
-    /**
-     * @param string $bytes
-     *
-     * @return static
-     */
-    public static function fromBytes($bytes)
+    public function __toString(): string
     {
-        return new static(Uuid::fromBytes($bytes));
+        return $this->uuid->toString();
+    }
+
+    public function bytes(): string
+    {
+        return $this->uuid->getBytes();
+    }
+
+    public function equals(AbstractUuid $otherUuid): bool
+    {
+        return $this->uuid->equals($otherUuid->uuid);
     }
 
     /**
-     * @param string $string
      *
      * @return static
+     *
+     * @throws InvalidUuidProvidedException
      */
-    public static function fromString($string)
+    public static function fromBytes(string $bytes)
     {
-        return new static(Uuid::fromString($string));
+        try {
+            return new static(Uuid::fromBytes($bytes));
+        } catch (\InvalidArgumentException $exception) {
+        }
+
+        throw new InvalidUuidProvidedException('invalid uuid provided', $exception->getCode(), $exception);
+    }
+
+    /**
+     *
+     * @return static
+     *
+     * @throws InvalidUuidProvidedException
+     */
+    public static function fromString(string $string)
+    {
+        try {
+            return new static(Uuid::fromString($string));
+        } catch (InvalidUuidStringException $exception) {
+        }
+
+        throw new InvalidUuidProvidedException('invalid uuid provided', $exception->getCode(), $exception);
     }
 
     /**
@@ -46,32 +72,8 @@ abstract class AbstractUuid
      */
     public static function generate()
     {
+        /** @noinspection PhpUnhandledExceptionInspection */
+
         return new static(Uuid::uuid4());
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->uuid->toString();
-    }
-
-    /**
-     * @return string
-     */
-    public function bytes()
-    {
-        return $this->uuid->getBytes();
-    }
-
-    /**
-     * @param AbstractUuid $otherUuid
-     *
-     * @return bool
-     */
-    public function equals(AbstractUuid $otherUuid)
-    {
-        return $this->uuid->equals($otherUuid->uuid);
     }
 }
