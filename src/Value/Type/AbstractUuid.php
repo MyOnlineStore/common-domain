@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Type;
 
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -35,6 +36,8 @@ abstract class AbstractUuid
      * @param string $namespace Must be a valid uuid on itself
      *
      * @return static
+     *
+     * @throws InvalidUuidStringException If the namespace is not a valid uuid
      */
     public static function fromNumericId(string $namespace, int $numericId): AbstractUuid
     {
