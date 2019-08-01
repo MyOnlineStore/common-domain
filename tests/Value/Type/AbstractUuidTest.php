@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Type;
 
 use MyOnlineStore\Common\Domain\Value\Type\AbstractUuid;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 
 final class AbstractUuidTest extends TestCase
@@ -52,6 +53,20 @@ final class AbstractUuidTest extends TestCase
         self::assertFalse($uuid1->equals($uuid2));
         self::assertTrue($uuid2->equals($uuid2));
         self::assertFalse($uuid2->equals($uuid1));
+    }
+
+    public function testFromNumericId()
+    {
+        $uuid = UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 123);
+
+        self::assertEquals($uuid, UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 123));
+        self::assertNotEquals($uuid, UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 124));
+    }
+
+    public function testFromNumericIdWithInvalidNamespace()
+    {
+        $this->expectException(InvalidUuidStringException::class);
+        UuidStub::fromNumericId('foobar', 123);
     }
 }
 
