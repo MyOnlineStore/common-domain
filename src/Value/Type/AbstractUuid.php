@@ -32,6 +32,16 @@ abstract class AbstractUuid
     }
 
     /**
+     * @param string $namespace Must be a valid uuid on itself
+     *
+     * @return static
+     */
+    public static function fromNumericId(string $namespace, int $numericId): AbstractUuid
+    {
+        return new static(Uuid::uuid5($namespace, (string) $numericId));
+    }
+
+    /**
      * @param string $string
      *
      * @return static

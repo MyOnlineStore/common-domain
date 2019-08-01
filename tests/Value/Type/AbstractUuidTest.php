@@ -53,6 +53,14 @@ final class AbstractUuidTest extends TestCase
         self::assertTrue($uuid2->equals($uuid2));
         self::assertFalse($uuid2->equals($uuid1));
     }
+
+    public function testFromNumericId()
+    {
+        $uuid = UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 123);
+
+        self::assertEquals($uuid, UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 123));
+        self::assertNotEquals($uuid, UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 124));
+    }
 }
 
 final class UuidStub extends AbstractUuid
