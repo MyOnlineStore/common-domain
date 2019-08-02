@@ -16,19 +16,19 @@ trait EnumValueGuardTrait
     {
         $validValues = $this->getValidValues();
 
-        if (!is_scalar($value)) {
+        if (!\is_scalar($value)) {
             throw new \InvalidArgumentException(
-                sprintf('given value is not a scalar value but of type %s', gettype($value))
+                \sprintf('given value is not a scalar value but of type %s', \gettype($value))
             );
         }
 
-        if (!in_array($value, $validValues, true)) {
+        if (!\in_array($value, $validValues, true)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'Invalid %s value given: "%s" (valid values: %s)',
-                    __CLASS__,
+                    self::class,
                     $value,
-                    implode(', ', $validValues)
+                    \implode(', ', $validValues)
                 )
             );
         }
@@ -37,7 +37,7 @@ trait EnumValueGuardTrait
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    abstract protected function getValidValues();
+    abstract protected function getValidValues(): array;
 }

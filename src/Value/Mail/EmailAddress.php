@@ -30,7 +30,7 @@ final class EmailAddress
 
     public function equals(self $other): bool
     {
-        return $this == $other;
+        return $this->emailAddress === $other->emailAddress;
     }
 
     public function __toString(): string

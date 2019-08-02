@@ -20,21 +20,15 @@ final class RegionCode
     private $code;
 
     /**
-     * @param string $code
-     *
      * @throws \InvalidArgumentException
      */
-    public function __construct($code)
+    public function __construct(string $code)
     {
-        if (null === $code) {
-            throw new \InvalidArgumentException('RegionCode can not be constructed with an empty ISO code');
+        if (!\preg_match('/^[a-z]{2}$/i', $code)) {
+            throw new \InvalidArgumentException(\sprintf('Invalid region code given: %s', $code));
         }
 
-        if (!preg_match('/^[a-z]{2}$/i', $code)) {
-            throw new \InvalidArgumentException(sprintf('Invalid region code given: %s', $code));
-        }
-
-        $this->code = strtoupper($code);
+        $this->code = \strtoupper($code);
     }
 
     public static function asNL(): self
@@ -42,14 +36,9 @@ final class RegionCode
         return new self('NL');
     }
 
-    /**
-     * @param RegionCode $otherRegion
-     *
-     * @return bool
-     */
-    public function equals(RegionCode $otherRegion): bool
+    public function equals(self $otherRegion): bool
     {
-        return 0 === strcmp($this->code, (string) $otherRegion);
+        return 0 === \strcmp($this->code, (string) $otherRegion);
     }
 
     /**
@@ -57,12 +46,9 @@ final class RegionCode
      */
     public function lower(): string
     {
-        return strtolower($this->code);
+        return \strtolower($this->code);
     }
 
-    /**
-     * @return bool
-     */
     public function isEuRegion(): bool
     {
         $euRegions = [
@@ -98,10 +84,7 @@ final class RegionCode
         return isset($euRegions[$this->code]);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->code;
     }

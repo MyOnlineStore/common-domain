@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Collection;
 
+use MyOnlineStore\Common\Domain\Value\CurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Locale;
 
 final class LocaleCollection extends MutableCollection implements LocaleCollectionInterface
@@ -10,30 +11,27 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     use StringCollectionTrait;
 
     /**
-     * @inheritdoc
+     * @param Locale[] $entries
      */
     public function __construct(array $entries = [])
     {
         parent::__construct(
-            array_filter(
+            \array_filter(
                 $entries,
-                function ($entry) {
+                static function ($entry): bool {
                     return $entry instanceof Locale;
                 }
             )
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function asRegionCodes(): RegionCodeCollectionInterface
     {
         return new RegionCodeCollection(
-            array_values(
-                array_unique(
-                    array_map(
-                        function (Locale $locale) {
+            \array_values(
+                \array_unique(
+                    \array_map(
+                        static function (Locale $locale) {
                             return $locale->regionCode();
                         },
                         $this->toArray()
@@ -49,19 +47,19 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     public function contains($element): bool
     {
         return $this->containsWith(
-            function (Locale $locale) use ($element) {
+            static function (Locale $locale) use ($element) {
                 return $locale->equals($element);
             }
         );
     }
 
     /**
-     * @inheritdoc
+     * @return LocaleCollectionInterface[]
      */
-    public function groupByCurrencyFormat($currencyIso, $previewAmount): array
+    public function groupByCurrencyFormat(CurrencyIso $currencyIso, float $previewAmount): array
     {
         return $this->groupBy(
-            function (Locale $locale) use ($currencyIso, $previewAmount) {
+            static function (Locale $locale) use ($currencyIso, $previewAmount) {
                 $numberFormatter = new \NumberFormatter((string) $locale, \NumberFormatter::CURRENCY);
 
                 return $numberFormatter->formatCurrency($previewAmount, (string) $currencyIso);
@@ -69,9 +67,6 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function unique(): LocaleCollectionInterface
     {
         return new LocaleCollection(\array_unique($this->toArray()));
@@ -79,14 +74,12 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
 
     /**
      * @param string[] $input
-     *
-     * @return self
      */
     public static function fromStrings(array $input): self
     {
         return new self(
-            array_map(
-                function ($locale) {
+            \array_map(
+                static function ($locale) {
                     try {
                         return Locale::fromString($locale);
                     } catch (\InvalidArgumentException $exception) {
@@ -99,11 +92,9 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     }
 
     /**
-     * @param callable $callable
-     *
      * @return LocaleCollection[]
      */
-    private function groupBy(callable $callable)
+    private function groupBy(callable $callable): array
     {
         $locales = [];
 

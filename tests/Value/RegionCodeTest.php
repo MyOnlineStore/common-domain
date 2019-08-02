@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class RegionCodeTest extends \PHPUnit\Framework\TestCase
+final class RegionCodeTest extends TestCase
 {
-    public function testEquals()
+    public function testEquals(): void
     {
         $regionCode = RegionCode::asNL();
         self::assertTrue($regionCode->equals(new RegionCode('nl')));
@@ -17,23 +18,22 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider invalidArgumentProvider
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @param mixed $argument
      */
-    public function testInvalidTypes($argument)
+    public function testInvalidTypes($argument): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new RegionCode($argument);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         self::assertEquals('NL', (string) RegionCode::asNL());
         self::assertEquals('NL', (string) new RegionCode('nl'));
         self::assertEquals('DE', (string) new RegionCode('DE'));
     }
 
-    public function testToLower()
+    public function testToLower(): void
     {
         self::assertEquals('nl', RegionCode::asNL()->lower());
         self::assertEquals('nl', (new RegionCode('nl'))->lower());
@@ -41,7 +41,7 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return array[]
+     * @return string[][]
      */
     public function invalidArgumentProvider(): array
     {
@@ -49,12 +49,11 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
             ['N'],
             ['Nld'],
             ['NLD'],
-            [null],
         ];
     }
 
     /**
-     * @return array[]
+     * @return RegionCode[][]|bool[][]
      */
     public function isEuRegionProvider(): array
     {
@@ -68,11 +67,8 @@ final class RegionCodeTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider isEuRegionProvider
-     *
-     * @param RegionCode $regionCode
-     * @param bool       $expected
      */
-    public function testIsEuRegion(RegionCode $regionCode, $expected)
+    public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {
         $this->assertEquals($expected, $regionCode->isEuRegion());
     }

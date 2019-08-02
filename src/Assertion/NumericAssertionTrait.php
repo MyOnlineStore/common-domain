@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Assertion;
 
@@ -6,11 +7,9 @@ trait NumericAssertionTrait
 {
     /**
      * @param mixed $value
-     *
-     * @return bool
      */
-    protected function assertIsNumeric($value)
+    protected function assertIsNumeric($value): bool
     {
-        return is_numeric($value);
+        return \is_numeric($value);
     }
 }

@@ -5,10 +5,11 @@ namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
 use MyOnlineStore\Common\Domain\Collection\ImmutableCollection;
 use MyOnlineStore\Common\Domain\Collection\MutableCollection;
+use PHPUnit\Framework\TestCase;
 
-final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
+final class MutableCollectionTest extends TestCase
 {
-    public function testAdd()
+    public function testAdd(): void
     {
         $collection = new MutableCollection(['foo', 'bar']);
         $collection->add('baz');
@@ -16,7 +17,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertSame(['foo', 'bar', 'baz'], $collection->toArray());
     }
 
-    public function testContains()
+    public function testContains(): void
     {
         $collection = new MutableCollection(['foo', 'bar']);
 
@@ -24,7 +25,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($collection->contains('baz'));
     }
 
-    public function testContainsWithWillReturnCorrectElements()
+    public function testContainsWithWillReturnCorrectElements(): void
     {
         $reflection = new \ReflectionClass(MutableCollection::class);
         $containsWith = $reflection->getMethod('containsWith');
@@ -36,7 +37,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
             $containsWith->invokeArgs(
                 $collection,
                 [
-                    function (\Exception $exception) {
+                    static function (\Throwable $exception) {
                         return 'foo' === $exception->getMessage();
                     },
                 ]
@@ -47,7 +48,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
             $containsWith->invokeArgs(
                 $collection,
                 [
-                    function (\Exception $exception) {
+                    static function (\Throwable $exception) {
                         return 'qux' === $exception->getMessage();
                     },
                 ]
@@ -55,7 +56,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testEachWillCallFunctionOnEachElement()
+    public function testEachWillCallFunctionOnEachElement(): void
     {
         $itemA = $this->createMock(\Iterator::class);
         $itemA->expects(self::once())->method('next');
@@ -66,13 +67,13 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $test = new MutableCollection([$itemA, $itemB]);
 
         $test->each(
-            function (\Iterator $item) {
+            static function (\Iterator $item): void {
                 $item->next();
             }
         );
     }
 
-    public function testEqualsWillReturnTrueIfCollectionsAreOfTheSameTypeAndContainsTheSameElements()
+    public function testEqualsWillReturnTrueIfCollectionsAreOfTheSameTypeAndContainsTheSameElements(): void
     {
         $element1 = new \stdClass();
         $element2 = new \stdClass();
@@ -90,7 +91,7 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($collection->equals(new MutableCollection([$element1])));
     }
 
-    public function testFilterWillReturnCorrectElements()
+    public function testFilterWillReturnCorrectElements(): void
     {
         $element1 = $this->getMockBuilder(\stdClass::class)->setMethods(['isFoobar'])->getMock();
         $element2 = $this->getMockBuilder(\stdClass::class)->setMethods(['isFoobar'])->getMock();
@@ -101,7 +102,6 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $extendedClass = new class([$element1, $element2]) extends MutableCollection
         {
             /**
-             * @param \Closure $closure
              *
              * @return static
              */
@@ -114,21 +114,21 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(
             [1 => $element2],
             $extendedClass->filter(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element->isFoobar();
                 }
             )->toArray()
         );
     }
 
-    public function testFirst()
+    public function testFirst(): void
     {
         $collection = new MutableCollection(['foo', 'bar']);
 
         self::assertSame('foo', $collection->first());
     }
 
-    public function testFirstHavingWillReturnCorrectElements()
+    public function testFirstHavingWillReturnCorrectElements(): void
     {
         $element1 = $this->getMockBuilder(\stdClass::class)->setMethods(['isFoobar'])->getMock();
         $element2 = $this->getMockBuilder(\stdClass::class)->setMethods(['isFoobar'])->getMock();
@@ -139,8 +139,6 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $extendedClass = new class([$element1, $element2]) extends MutableCollection
         {
             /**
-             * @param callable $callback
-             *
              * @return static
              *
              * @throws \OutOfBoundsException
@@ -154,14 +152,14 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertSame(
             $element2,
             $extendedClass->firstHaving(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element->isFoobar();
                 }
             )
         );
     }
 
-    public function testFirstHavingWithNoResultWillThrowException()
+    public function testFirstHavingWithNoResultWillThrowException(): void
     {
         $element1 = $this->getMockBuilder(\stdClass::class)->setMethods(['isFoobar'])->getMock();
 
@@ -170,8 +168,6 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $extendedClass = new class([$element1]) extends MutableCollection
         {
             /**
-             * @param callable $callback
-             *
              * @return static
              *
              * @throws \OutOfBoundsException
@@ -185,13 +181,13 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\OutOfBoundsException::class);
 
         $extendedClass->firstHaving(
-            function (\stdClass $element) {
+            static function (\stdClass $element) {
                 return $element->isFoobar();
             }
         );
     }
 
-    public function testIndexOf()
+    public function testIndexOf(): void
     {
         $collection = new MutableCollection(['foo', 'bar']);
 
@@ -199,21 +195,21 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertSame(1, $collection->indexOf('bar'));
     }
 
-    public function testIsEmpty()
+    public function testIsEmpty(): void
     {
         self::assertTrue((new MutableCollection())->isEmpty());
         self::assertFalse((new MutableCollection(['foo']))->isEmpty());
         self::assertFalse((new MutableCollection([null]))->isEmpty());
     }
 
-    public function testLastWillReturnLastElementInArray()
+    public function testLastWillReturnLastElementInArray(): void
     {
         $test = new MutableCollection([1, 2, 3]);
 
         self::assertSame(3, $test->last());
     }
 
-    public function testMapWillMapCorrectElements()
+    public function testMapWillMapCorrectElements(): void
     {
         $element1 = $this->createMock(\stdClass::class);
         $element2 = $this->createMock(\stdClass::class);
@@ -221,8 +217,6 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         $extendedClass = new class([$element1, $element2]) extends MutableCollection
         {
             /**
-             * @param \Closure $closure
-             *
              * @return static
              */
             public function map(\Closure $closure)
@@ -234,14 +228,14 @@ final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertSame(
             [$element1, $element2],
             $extendedClass->map(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element;
                 }
             )->toArray()
         );
     }
 
-    public function testReindexWillReturnReindexedArray()
+    public function testReindexWillReturnReindexedArray(): void
     {
         $test = new MutableCollection([1 => 1, 3 => 2, 666 => 3]);
 

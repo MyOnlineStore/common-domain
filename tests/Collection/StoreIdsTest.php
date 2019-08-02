@@ -9,29 +9,29 @@ use PHPUnit\Framework\TestCase;
 
 final class StoreIdsTest extends TestCase
 {
-    public function testConstructorWillEnsureValueObjects()
+    public function testConstructorWillEnsureValueObjects(): void
     {
         self::assertEquals(
             new StoreIds([new StoreId(123), new StoreId(456), new StoreId(789)]),
-            new StoreIds([new StoreId(123), '456', 789])
+            new StoreIds([new StoreId(123), 456, 789])
         );
     }
 
-    public function testGetRandomReturnsRandomElementFromCollection()
+    public function testGetRandomReturnsRandomElementFromCollection(): void
     {
         $storeIds = new StoreIds([new StoreId(123), new StoreId(456), new StoreId(789)]);
 
         self::assertContains($storeIds->getRandom(), $storeIds->toArray());
     }
 
-    public function testGetRandomThrowsExceptionIfCollectionIsEmpty()
+    public function testGetRandomThrowsExceptionIfCollectionIsEmpty(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         (new StoreIds([]))->getRandom();
     }
 
-    public function testContainsWillCompareBasedOnEqualityInsteadOfIdentity()
+    public function testContainsWillCompareBasedOnEqualityInsteadOfIdentity(): void
     {
         $storeId = new StoreId(123);
         $storeIds = new StoreIds([$storeId]);
@@ -40,7 +40,7 @@ final class StoreIdsTest extends TestCase
         self::assertFalse($storeIds->contains(new StoreId(456)));
     }
 
-    public function testUniqueWillReturnUniqueValues()
+    public function testUniqueWillReturnUniqueValues(): void
     {
         $storeId1 = new StoreId(123);
         $storeId2 = new StoreId(456);

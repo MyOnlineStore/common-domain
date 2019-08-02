@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class LocaleCollectionTest extends TestCase
 {
-    public function testAsRegionCodesWillReturnRegionCodeCollection()
+    public function testAsRegionCodesWillReturnRegionCodeCollection(): void
     {
         $collection = new LocaleCollection(
             [
@@ -28,7 +28,7 @@ final class LocaleCollectionTest extends TestCase
         );
     }
 
-    public function testAsString()
+    public function testAsString(): void
     {
         $collection = new LocaleCollection(
             [
@@ -41,14 +41,14 @@ final class LocaleCollectionTest extends TestCase
         self::assertEquals(['nl_NL', 'nl_BE', 'de_DE'], $collection->asStrings());
     }
 
-    public function testContains()
+    public function testContains(): void
     {
         $collection = new LocaleCollection([Locale::fromString('nl_NL'), Locale::fromString('de_DE')]);
         self::assertTrue($collection->contains(Locale::fromString('de_DE')));
         self::assertFalse($collection->contains(Locale::fromString('nl_BE')));
     }
 
-    public function testFromStringsWillConvertAndFilterInput()
+    public function testFromStringsWillConvertAndFilterInput(): void
     {
         $collection = LocaleCollection::fromStrings(['nl', 'nl_BE', 'fr_BE', 'FR']);
 
@@ -60,7 +60,7 @@ final class LocaleCollectionTest extends TestCase
         );
     }
 
-    public function testGroupByCurrencyFormat()
+    public function testGroupByCurrencyFormat(): void
     {
         $collection = new LocaleCollection(
             [
@@ -79,7 +79,7 @@ final class LocaleCollectionTest extends TestCase
         );
     }
 
-    public function testUnique()
+    public function testUnique(): void
     {
         $locales = LocaleCollection::fromStrings(['nl_NL', 'de_DE', 'nl_NL']);
         self::assertCount(3, $locales);

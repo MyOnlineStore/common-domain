@@ -16,8 +16,8 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
     {
         parent::__construct(
             \array_map(
-                function ($entry) {
-                    return ($entry instanceof StoreId) ? $entry : new StoreId($entry);
+                static function ($entry): StoreId {
+                    return $entry instanceof StoreId ? $entry : new StoreId($entry);
                 },
                 $entries
             )

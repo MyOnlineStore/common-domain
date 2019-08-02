@@ -14,31 +14,24 @@ class Number
     protected $value;
 
     /**
-     * @param mixed    $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, int $scale = null)
+    public function __construct($value, ?int $scale = null)
     {
         $this->assignValue($value, $scale);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->value;
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
-    public function add(Number $operand, int $scale = null)
+    public function add(Number $operand, ?int $scale = null): Number
     {
         $this->assertOperand($operand);
 
@@ -46,14 +39,13 @@ class Number
     }
 
     /**
-     * @param string   $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @return static
      *
      * @throws \InvalidArgumentException
      */
-    public function changeValue($value, int $scale = null)
+    public function changeValue($value, ?int $scale = null): Number
     {
         $newMetric = clone $this;
         $newMetric->assignValue($value, $scale);
@@ -62,68 +54,41 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
-    public function divideBy(Number $operand, int $scale = null)
+    public function divideBy(Number $operand, ?int $scale = null): Number
     {
         $this->assertOperand($operand);
 
         return $this->changeValue($this->value->div($operand->value, $scale), $scale);
     }
 
-    /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
-     * @return bool
-     */
-    public function equals(Number $operand, int $scale = null)
+    public function equals(Number $operand, ?int $scale = null): bool
     {
         $this->assertOperand($operand);
 
         return $this->value->equals($operand->value, $scale);
     }
 
-    /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
-     * @return bool
-     */
-    public function isGreaterThan(Number $operand, int $scale = null): bool
+    public function isGreaterThan(Number $operand, ?int $scale = null): bool
     {
         return 1 === $this->value->comp($operand->value, $scale);
     }
 
-    /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
-     * @return bool
-     */
-    public function isLessThan(Number $operand, int $scale = null): bool
+    public function isLessThan(Number $operand, ?int $scale = null): bool
     {
         return -1 === $this->value->comp($operand->value, $scale);
     }
 
-    /**
-     * @return bool
-     */
-    public function isZero()
+    public function isZero(): bool
     {
         return $this->value->isZero();
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
-    public function multiplyBy(Number $operand, int $scale = null)
+    public function multiplyBy(Number $operand, ?int $scale = null): Number
     {
         $this->assertOperand($operand);
 
@@ -131,23 +96,17 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
-    public function powerTo(Number $operand, int $scale = null)
+    public function powerTo(Number $operand, ?int $scale = null): Number
     {
         return $this->changeValue($this->value->pow($operand->value, $scale));
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
-    public function subtract(Number $operand, int $scale = null)
+    public function subtract(Number $operand, ?int $scale = null): Number
     {
         $this->assertOperand($operand);
 
@@ -155,30 +114,24 @@ class Number
     }
 
     /**
-     * @param int $scale
-     *
      * @return static
      */
-    public function toScale(int $scale)
+    public function toScale(int $scale): Number
     {
         return $this->changeValue($this->value->div(Decimal::create(10)->pow(Decimal::create($scale)), $scale));
     }
 
-    /**
-     * @param Number $operand
-     */
-    protected function assertOperand(Number $operand)
+    protected function assertOperand(Number $operand): void
     {
         // scope to perform assertions to guard against inproper operands
     }
 
     /**
-     * @param mixed    $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @throws \InvalidArgumentException
      */
-    private function assignValue($value, int $scale = null)
+    private function assignValue($value, ?int $scale = null): void
     {
         if ($value instanceof self) {
             $value = $value->value;

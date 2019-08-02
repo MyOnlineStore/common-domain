@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 final class CurrencyIso
 {
     /**
-     * @var array|null
+     * @var string[]|int[]|null
      */
     private static $currencies;
 
@@ -24,53 +24,44 @@ final class CurrencyIso
 
     /**
      * @param string $code ISO 4217 code (https://en.wikipedia.org/wiki/ISO_4217)
+     *
+     * @throws \InvalidArgumentException
      */
-    public function __construct($code)
+    public function __construct(string $code)
     {
         $currencies = $this->getCurrencies();
 
-        if (!isset($currencies[(string) $code])) {
-            throw new \InvalidArgumentException(sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
+        if (!isset($currencies[$code])) {
+            throw new \InvalidArgumentException(\sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
         }
 
-        $this->currency = $currencies[(string) $code]['alphabeticCode'];
+        $this->currency = $currencies[$code]['alphabeticCode'];
     }
 
-    /**
-     * @param object $object
-     *
-     * @return bool
-     */
-    public function equals($object): bool
+    public function equals(self $object): bool
     {
-        return $this == $object;
+        return $this->currency === $object->currency;
     }
 
-    /**
-     * @return array
-     */
-    private function getCurrencies(): array
-    {
-        if (null === self::$currencies) {
-            self::$currencies = require_once __DIR__.'/../../vendor/moneyphp/money/resources/currency.php';
-        }
-
-        return self::$currencies;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @return int
-     */
-    public function getMinorUnit()
+    public function getMinorUnit(): int
     {
         return $this->getCurrencies()[$this->currency]['minorUnit'];
+    }
+
+    /**
+     * @return string[]|int[]
+     */
+    private function getCurrencies(): array
+    {
+        if (null === self::$currencies) {
+            self::$currencies = require __DIR__.'/../../vendor/moneyphp/money/resources/currency.php';
+        }
+
+        return self::$currencies;
     }
 }

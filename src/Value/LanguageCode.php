@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value;
 
@@ -13,33 +14,23 @@ final class LanguageCode
     private $code;
 
     /**
-     * @param mixed $code
-     *
      * @throws \InvalidArgumentException
      */
-    public function __construct($code)
+    public function __construct(string $code)
     {
-        if (!preg_match('/^[a-z]{2,3}$/i', $code)) {
-            throw new \InvalidArgumentException(sprintf('Invalid language code given: %s', $code));
+        if (!\preg_match('/^[a-z]{2,3}$/i', $code)) {
+            throw new \InvalidArgumentException(\sprintf('Invalid language code given: %s', $code));
         }
 
-        $this->code = strtolower($code);
+        $this->code = \strtolower($code);
     }
 
-    /**
-     * @param LanguageCode $languageCode
-     *
-     * @return bool
-     */
-    public function equals(LanguageCode $languageCode)
+    public function equals(LanguageCode $languageCode): bool
     {
         return $this->code === (string) $languageCode;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->code;
     }

@@ -14,20 +14,15 @@ abstract class AbstractUuid
      */
     protected $uuid;
 
-    /**
-     * @param UuidInterface $uuid
-     */
     private function __construct(UuidInterface $uuid)
     {
         $this->uuid = $uuid;
     }
 
     /**
-     * @param string $bytes
-     *
      * @return static
      */
-    public static function fromBytes($bytes)
+    public static function fromBytes(string $bytes): AbstractUuid
     {
         return new static(Uuid::fromBytes($bytes));
     }
@@ -45,45 +40,36 @@ abstract class AbstractUuid
     }
 
     /**
-     * @param string $string
-     *
      * @return static
+     *
+     * @throws InvalidUuidStringException
      */
-    public static function fromString($string)
+    public static function fromString(string $string): AbstractUuid
     {
         return new static(Uuid::fromString($string));
     }
 
     /**
      * @return static
+     *
+     * @throws \Exception
      */
-    public static function generate()
+    public static function generate(): AbstractUuid
     {
         return new static(Uuid::uuid4());
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->uuid->toString();
     }
 
-    /**
-     * @return string
-     */
-    public function bytes()
+    public function bytes(): string
     {
         return $this->uuid->getBytes();
     }
 
-    /**
-     * @param AbstractUuid $otherUuid
-     *
-     * @return bool
-     */
-    public function equals(AbstractUuid $otherUuid)
+    public function equals(AbstractUuid $otherUuid): bool
     {
         return $this->uuid->equals($otherUuid->uuid);
     }

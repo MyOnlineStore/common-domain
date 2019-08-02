@@ -5,10 +5,11 @@ namespace MyOnlineStore\Common\Domain\Tests\Assertion;
 
 use MyOnlineStore\Common\Domain\Assertion\ArrayContainsClassAssertionTrait;
 use MyOnlineStore\Common\Domain\Value\Locale;
+use PHPUnit\Framework\TestCase;
 
-final class ArrayContainsClassAssertionTraitTest extends \PHPUnit\Framework\TestCase
+final class ArrayContainsClassAssertionTraitTest extends TestCase
 {
-    public function testAssertArrayContainsOnlyClass()
+    public function testAssertArrayContainsOnlyClass(): void
     {
         $trait = $this->getMockForTrait(ArrayContainsClassAssertionTrait::class);
 

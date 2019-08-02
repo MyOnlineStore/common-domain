@@ -6,10 +6,11 @@ namespace MyOnlineStore\Common\Domain\Tests\Value;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class LocaleTest extends \PHPUnit\Framework\TestCase
+final class LocaleTest extends TestCase
 {
-    public function testEquals()
+    public function testEquals(): void
     {
         self::assertTrue(Locale::fromString('nl_NL')->equals(Locale::fromString('nl_NL')));
         self::assertFalse(Locale::fromString('nl_BE')->equals(Locale::fromString('nl_NL')));
@@ -17,16 +18,16 @@ final class LocaleTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidArgumentProvider
-     * @expectedException \InvalidArgumentException
      *
      * @param mixed $argument
      */
-    public function testFromInvalidString($argument)
+    public function testFromInvalidString($argument): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         Locale::fromString($argument);
     }
 
-    public function testFromString()
+    public function testFromString(): void
     {
         $locale = Locale::fromString('nl_NL');
 
@@ -34,7 +35,7 @@ final class LocaleTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(new LanguageCode('nl'), $locale->languageCode());
     }
 
-    public function testFromStringCaseInsensitive()
+    public function testFromStringCaseInsensitive(): void
     {
         $locale = Locale::fromString('DE_de');
 
@@ -42,31 +43,30 @@ final class LocaleTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(new LanguageCode('de'), $locale->languageCode());
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         self::assertSame('nl_NL', (string) Locale::fromString('nl_NL'));
         self::assertSame('moh_CA', (string) Locale::fromString('moh_CA'));
     }
 
-    public function testLanguageCode()
+    public function testLanguageCode(): void
     {
         self::assertEquals(new LanguageCode('fr'), Locale::fromString('fr_BE')->languageCode());
         self::assertEquals(new LanguageCode('nl'), Locale::fromString('nl_BE')->languageCode());
     }
 
-    public function testRegionCode()
+    public function testRegionCode(): void
     {
         self::assertEquals(new RegionCode('NL'), Locale::fromString('nl_NL')->regionCode());
         self::assertEquals(new RegionCode('DE'), Locale::fromString('de_DE')->regionCode());
     }
 
     /**
-     * @return array[]
+     * @return string[][]
      */
-    public function invalidArgumentProvider()
+    public function invalidArgumentProvider(): array
     {
         return [
-            [123],
             ['ca_MOH'],
             ['nl'],
             ['n_NL'],

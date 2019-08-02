@@ -7,22 +7,13 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \
 {
     /**
      * @param mixed $element
-     *
-     * @return bool
      */
-    public function contains($element);
+    public function contains($element): bool;
 
-    /**
-     * @param callable $callback
-     */
-    public function each(callable $callback);
+    public function each(callable $callback): void;
 
     /**
      * Returns if given collection is of the same type and has the same elements
-     *
-     * @param ImmutableCollectionInterface $otherCollection
-     *
-     * @return bool
      */
     public function equals(ImmutableCollectionInterface $otherCollection): bool;
 
@@ -38,10 +29,7 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \
      */
     public function indexOf($element);
 
-    /**
-     * @return bool
-     */
-    public function isEmpty();
+    public function isEmpty(): bool;
 
     /**
      * Sets the internal iterator to the last element in the collection and returns this element.
@@ -56,7 +44,7 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \
     public function reindex();
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function toArray();
+    public function toArray(): array;
 }

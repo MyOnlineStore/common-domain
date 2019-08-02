@@ -8,5 +8,5 @@ interface MutableCollectionInterface extends ImmutableCollectionInterface
     /**
      * @param mixed $element
      */
-    public function add($element);
+    public function add($element): void;
 }

@@ -1,51 +1,34 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
-use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
 
 /**
  * @ORM\Embeddable
  */
 final class StoreId
 {
-    use NumericAssertionTrait;
-
     /**
      * @ORM\Column(name="store_id", type="integer")
      *
-     * @var int|string
+     * @var int
      */
     private $id;
 
-    /**
-     * @param int $id
-     */
-    public function __construct($id)
+    public function __construct(int $id)
     {
-        if (!$this->assertIsNumeric($id)) {
-            throw new \InvalidArgumentException(sprintf('Given ID "%s" is not numeric', $id));
-        }
-
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->id;
     }
 
-    /**
-     * @param StoreId $storeId
-     *
-     * @return bool
-     */
-    public function equals(StoreId $storeId)
+    public function equals(self $storeId): bool
     {
-        return $this == $storeId;
+        return $this->id === $storeId->id;
     }
 }

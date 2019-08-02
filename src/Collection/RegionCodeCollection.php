@@ -15,41 +15,33 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
     public function __construct(array $entries = [])
     {
         parent::__construct(
-            array_filter(
+            \array_filter(
                 $entries,
-                function ($entry) {
+                static function ($entry) {
                     return $entry instanceof RegionCode;
                 }
             )
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function contains($element): bool
     {
-        return in_array($element, $this->getArrayCopy());
+        return \in_array($element, $this->getArrayCopy(), false);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function unique(): RegionCodeCollectionInterface
     {
-        return new self(array_unique($this->toArray()));
+        return new self(\array_unique($this->toArray()));
     }
 
     /**
      * @param string[] $isoCodes
-     *
-     * @return RegionCodeCollectionInterface
      */
     public static function fromStrings(array $isoCodes): RegionCodeCollectionInterface
     {
         return new self(
-            array_map(
-                function ($isoCode) {
+            \array_map(
+                static function ($isoCode) {
                     return new RegionCode($isoCode);
                 },
                 $isoCodes

@@ -6,17 +6,9 @@ namespace MyOnlineStore\Common\Domain\Collection;
 class MutableCollection extends \ArrayObject implements MutableCollectionInterface
 {
     /**
-     * @param array $entries
-     */
-    public function __construct(array $entries = [])
-    {
-        parent::__construct($entries);
-    }
-
-    /**
      * @inheritDoc
      */
-    public function add($element)
+    public function add($element): void
     {
         $this[] = $element;
     }
@@ -24,27 +16,21 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     /**
      * @inheritDoc
      */
-    public function contains($element)
+    public function contains($element): bool
     {
-        return in_array($element, $this->getArrayCopy(), true);
+        return \in_array($element, $this->getArrayCopy(), true);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function each(callable $callback)
+    public function each(callable $callback): void
     {
         foreach ($this as $entry) {
             $callback($entry);
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     public function equals(ImmutableCollectionInterface $otherCollection): bool
     {
-        if (\get_class($this) !== \get_class($otherCollection)) {
+        if (static::class !== \get_class($otherCollection)) {
             return false;
         }
 
@@ -66,7 +52,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function first()
     {
-        return reset($this);
+        return \reset($this);
     }
 
     /**
@@ -74,13 +60,10 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function indexOf($element)
     {
-        return array_search($element, $this->getArrayCopy(), true);
+        return \array_search($element, $this->getArrayCopy(), true);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return 0 === $this->count();
     }
@@ -90,7 +73,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function last()
     {
-        return end($this);
+        return \end($this);
     }
 
     /**
@@ -98,22 +81,17 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function reindex()
     {
-        return new static(array_values($this->toArray()));
+        return new static(\array_values($this->toArray()));
     }
 
     /**
-     * @inheritDoc
+     * @return mixed[]
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->getArrayCopy();
     }
 
-    /**
-     * @param callable $callback
-     *
-     * @return bool
-     */
     protected function containsWith(callable $callback): bool
     {
         foreach ($this as $entry) {
@@ -126,18 +104,14 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @param \Closure $closure
-     *
      * @return static
      */
     protected function filter(\Closure $closure)
     {
-        return new static(array_filter($this->toArray(), $closure));
+        return new static(\array_filter($this->toArray(), $closure));
     }
 
     /**
-     * @param callable $callback
-     *
      * @return mixed
      *
      * @throws \OutOfBoundsException
@@ -154,12 +128,10 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @param \Closure $closure
-     *
      * @return static
      */
     protected function map(\Closure $closure)
     {
-        return new static(array_map($closure, $this->toArray()));
+        return new static(\array_map($closure, $this->toArray()));
     }
 }

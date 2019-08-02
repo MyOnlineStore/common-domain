@@ -11,12 +11,9 @@ use MyOnlineStore\Common\Domain\Value\RegionCode;
 interface RegionCodeCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {
     /**
-     * @return RegionCodeCollectionInterface
+     * @return static
      */
     public function reindex();
 
-    /**
-     * @return RegionCodeCollectionInterface
-     */
     public function unique(): RegionCodeCollectionInterface;
 }

@@ -10,17 +10,17 @@ use Ramsey\Uuid\Uuid;
 
 final class AbstractUuidTest extends TestCase
 {
-    public function testFromBytes()
+    public function testFromBytes(): void
     {
         $uuid = Uuid::fromString('3e5c88c3-8369-4404-8828-6a3927533387');
 
         self::assertEquals(
             $uuid->getBytes(),
-            (string) UuidStub::fromBytes($uuid->getBytes())->bytes()
+            UuidStub::fromBytes($uuid->getBytes())->bytes()
         );
     }
 
-    public function testFromString()
+    public function testFromString(): void
     {
         self::assertEquals(
             '3e5c88c3-8369-4404-8828-6a3927533387',
@@ -28,7 +28,7 @@ final class AbstractUuidTest extends TestCase
         );
     }
 
-    public function testGenerate()
+    public function testGenerate(): void
     {
         $uuid = Uuid::fromString((string) UuidStub::generate());
 
@@ -36,7 +36,7 @@ final class AbstractUuidTest extends TestCase
         self::assertEquals(4, $uuid->getVersion());
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $stub = UuidStub::fromString('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec');
 
@@ -44,7 +44,7 @@ final class AbstractUuidTest extends TestCase
         self::assertFalse($stub->equals(UuidStub::fromString('5de6f213-1f41-42e0-8e0d-d2828f352ebe')));
     }
 
-    public function testSpecialUuids()
+    public function testSpecialUuids(): void
     {
         $uuid1 = UuidStub::fromString('0e703880-7f48-11e8-b8d7-44a8421b9960');
         $uuid2 = UuidStub::fromString('0e703936-7f48-11e8-b8d7-44a8421b9960');
@@ -55,7 +55,7 @@ final class AbstractUuidTest extends TestCase
         self::assertFalse($uuid2->equals($uuid1));
     }
 
-    public function testFromNumericId()
+    public function testFromNumericId(): void
     {
         $uuid = UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 123);
 
@@ -63,7 +63,7 @@ final class AbstractUuidTest extends TestCase
         self::assertNotEquals($uuid, UuidStub::fromNumericId('b6094976-e5c7-4ddf-b35c-2f26d6fbcaec', 124));
     }
 
-    public function testFromNumericIdWithInvalidNamespace()
+    public function testFromNumericIdWithInvalidNamespace(): void
     {
         $this->expectException(InvalidUuidStringException::class);
         UuidStub::fromNumericId('foobar', 123);

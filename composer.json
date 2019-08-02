@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.2",
         "ext-bcmath": "*",
         "ext-intl": "*",
         "egulias/email-validator": "^2.1",
@@ -26,14 +26,14 @@
     },
     "require-dev": {
         "doctrine/orm": "2.5.x-dev as 2.5.6",
-        "myonlinestore/coding-standard": "^1.0",
-        "phpunit/phpunit": "6.4.*"
+        "myonlinestore/coding-standard": "^1.1.0",
+        "phpunit/phpunit": "^8.3.1"
     },
     "config": {
         "vendor-dir": "vendor",
         "sort-packages": true,
         "platform": {
-            "php": "7.0.8"
+            "php": "7.2.19"
         }
     }
 }

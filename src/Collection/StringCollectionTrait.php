@@ -10,11 +10,11 @@ trait StringCollectionTrait
      */
     public function asStrings(): array
     {
-        return array_map('strval', $this->toArray());
+        return \array_map('strval', $this->toArray());
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    abstract public function toArray();
+    abstract public function toArray(): array;
 }

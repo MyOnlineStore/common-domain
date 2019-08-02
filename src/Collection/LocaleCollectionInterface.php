@@ -11,21 +11,12 @@ use MyOnlineStore\Common\Domain\Value\Locale;
  */
 interface LocaleCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {
-    /**
-     * @return RegionCodeCollectionInterface
-     */
     public function asRegionCodes(): RegionCodeCollectionInterface;
 
     /**
-     * @param CurrencyIso $currencyIso
-     * @param float       $previewAmount
-     *
      * @return LocaleCollectionInterface[]
      */
-    public function groupByCurrencyFormat($currencyIso, $previewAmount): array;
+    public function groupByCurrencyFormat(CurrencyIso $currencyIso, float $previewAmount): array;
 
-    /**
-     * @return LocaleCollectionInterface
-     */
     public function unique(): LocaleCollectionInterface;
 }
