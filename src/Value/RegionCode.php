@@ -66,33 +66,34 @@ final class RegionCode
     public function isEuRegion(): bool
     {
         $euRegions = [
-            'BE' => 'BE',
-            'BG' => 'BG',
-            'CY' => 'CY',
-            'DE' => 'DE',
-            'DK' => 'DK',
-            'EE' => 'EE',
-            'FI' => 'FI',
-            'FR' => 'FR',
-            'GR' => 'GR',
-            'HU' => 'HU',
-            'IE' => 'IE',
-            'IT' => 'IT',
-            'HR' => 'HR',
-            'LV' => 'LV',
-            'LT' => 'LT',
-            'MT' => 'MT',
-            'NL' => 'NL',
-            'AT' => 'AT',
-            'PL' => 'PL',
-            'PT' => 'PT',
-            'RO' => 'RO',
-            'SI' => 'SI',
-            'SK' => 'SK',
-            'ES' => 'ES',
-            'CZ' => 'CZ',
-            'GB' => 'GB',
-            'SE' => 'SE',
+            'AT' => 'AT', // Austria
+            'BE' => 'BE', // Belgium
+            'BG' => 'BG', // Bulgaria
+            'CY' => 'CY', // Cyprus
+            'CZ' => 'CZ', // Czech Republic
+            'DE' => 'DE', // Germany
+            'DK' => 'DK', // Denmark
+            'EE' => 'EE', // Estonia
+            'ES' => 'ES', // Spain
+            'FI' => 'FI', // Finland
+            'FR' => 'FR', // France
+            'GB' => 'GB', // United Kingdom
+            'GR' => 'GR', // Greece
+            'HU' => 'HU', // Hungary
+            'IE' => 'IE', // Ireland
+            'IT' => 'IT', // Italy
+            'HR' => 'HR', // Croatia
+            'LT' => 'LT', // Lithuania
+            'LU' => 'LU', // Luxembourg
+            'LV' => 'LV', // Latvia
+            'MT' => 'MT', // Malta
+            'NL' => 'NL', // Netherlands
+            'PL' => 'PL', // Poland
+            'PT' => 'PT', // Portugal
+            'RO' => 'RO', // Romania
+            'SE' => 'SE', // Sweden
+            'SI' => 'SI', // Slovenia
+            'SK' => 'SK', // Slovakia
         ];
 
         return isset($euRegions[$this->code]);
