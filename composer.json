@@ -19,8 +19,11 @@
         "ext-bcmath": "*",
         "ext-intl": "*",
         "egulias/email-validator": "^2.1",
+        "giggsey/libphonenumber-for-php": "^8.11",
+        "layershifter/tld-extract": "^2.0",
+        "league/uri": "^5.3",
         "litipk/php-bignumbers": "^0.8.6",
-        "moneyphp/money": "^3.0",
+        "moneyphp/money": "^3.3",
         "ramsey/uuid": "^3.7",
         "ronanguilloux/isocodes": "^2.1"
     },
@@ -33,7 +36,7 @@
         "vendor-dir": "vendor",
         "sort-packages": true,
         "platform": {
-            "php": "7.0.8"
+            "php": "7.0.33"
         }
     }
 }

@@ -6,6 +6,8 @@ namespace MyOnlineStore\Common\Domain\Value;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @deprecated Use MyOnlineStore\Common\Domain\Value\Currency\CurrencyIso
+ *
  * @ORM\Embeddable
  */
 final class CurrencyIso
