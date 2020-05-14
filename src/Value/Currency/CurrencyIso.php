@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class CurrencyIso
 {
-    /**
-     * @var string[]|int[]
-     */
+    /** @var string[]|int[] */
     private static $currencies;
 
     /**

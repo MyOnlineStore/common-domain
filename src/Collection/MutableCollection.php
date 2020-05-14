@@ -14,7 +14,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @inheritDoc
+     * @inheritDoc 
+     *
+     * @return void
      */
     public function add($element)
     {
@@ -30,7 +32,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @inheritDoc
+     * @inheritDoc 
+     *
+     * @return void
      */
     public function each(callable $callback)
     {

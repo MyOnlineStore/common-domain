@@ -39,5 +39,5 @@ jobs:
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
             -   name: Unit Tests
                 run: vendor/bin/phpunit --coverage-text
-#            -   name: Run Psalm
-#                run: vendor/bin/psalm --output-format=github
+            -   name: Run Psalm
+                run: vendor/bin/psalm --output-format=github

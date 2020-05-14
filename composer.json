@@ -30,7 +30,8 @@
     "require-dev": {
         "doctrine/orm": "2.5.x-dev as 2.5.6",
         "myonlinestore/coding-standard": "^1.0",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "vimeo/psalm": "^3.11"
     },
     "config": {
         "sort-packages": true,

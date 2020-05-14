@@ -12,14 +12,10 @@ use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 final class PhoneNumber
 {
-    /**
-     * @var PhoneNumberUtil
-     */
+    /** @var PhoneNumberUtil */
     private $phoneNumberUtil;
 
-    /**
-     * @var LibPhoneNumber
-     */
+    /** @var LibPhoneNumber */
     private $value;
 
     /**

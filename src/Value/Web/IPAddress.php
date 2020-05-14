@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 final class IPAddress
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $value;
 
     /**

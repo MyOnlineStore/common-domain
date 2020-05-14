@@ -6,7 +6,9 @@ namespace MyOnlineStore\Common\Domain\Collection;
 class ImmutableCollection extends MutableCollection
 {
     /**
-     * @inheritDoc
+     * @inheritDoc 
+     *
+     * @return void
      */
     public function add($element)
     {

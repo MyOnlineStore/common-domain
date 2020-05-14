@@ -14,9 +14,7 @@ final class UrlPathType
     const RELATIVE_PATH = 2;
     const NETWORK_PATH = 3;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $value;
 
     public function __construct(int $value)

@@ -6,14 +6,10 @@ final class Locale
 {
     const FALLBACK_FRONTEND_LOCALE = 'en_GB';
 
-    /**
-     * @var RegionCode
-     */
+    /** @var RegionCode */
     private $regionCode;
 
-    /**
-     * @var LanguageCode
-     */
+    /** @var LanguageCode */
     private $languageCode;
 
     /**

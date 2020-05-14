@@ -7,9 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 final class EnumValueGuardTraitTest extends TestCase
 {
-    /**
-     * @var EnumValueGuardTrait
-     */
+    /** @var EnumValueGuardTrait */
     private $trait;
 
     protected function setUp(): void

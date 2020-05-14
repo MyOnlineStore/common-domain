@@ -8,14 +8,10 @@ use LayerShifter\TLDExtract\ResultInterface;
 
 final class DomainName
 {
-    /**
-     * @var Extract
-     */
+    /** @var Extract */
     private static $validator;
 
-    /**
-     * @var ResultInterface
-     */
+    /** @var ResultInterface */
     private $validatorResult;
 
     /**

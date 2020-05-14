@@ -8,9 +8,7 @@ use Litipk\BigNumbers\Errors\BigNumbersError;
 
 class Number
 {
-    /**
-     * @var Decimal
-     */
+    /** @var Decimal */
     protected $value;
 
     /**
@@ -166,8 +164,10 @@ class Number
 
     /**
      * @param Number $operand
+     *
+     * @return void
      */
-    protected function assertOperand(Number $operand)
+    protected function assertOperand(Number $operand): void
     {
         // scope to perform assertions to guard against inproper operands
     }
@@ -177,8 +177,10 @@ class Number
      * @param int|null $scale
      *
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
-    private function assignValue($value, int $scale = null)
+    private function assignValue($value, int $scale = null): void
     {
         if ($value instanceof self) {
             $value = $value->value;

@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 final class HostName
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $hostName;
 
     /**

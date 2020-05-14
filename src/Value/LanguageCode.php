@@ -7,9 +7,7 @@ namespace MyOnlineStore\Common\Domain\Value;
  */
 final class LanguageCode
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $code;
 
     /**

@@ -12,9 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class CurrencyIso
 {
-    /**
-     * @var array|null
-     */
+    /** @var array|null */
     private static $currencies;
 
     /**
