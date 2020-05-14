@@ -1,6 +1,6 @@
 <?php
 
-namespace MyOnlineStore\Tests\Domain\Assertion;
+namespace MyOnlineStore\Common\Domain\Tests\Assertion;
 
 use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
 

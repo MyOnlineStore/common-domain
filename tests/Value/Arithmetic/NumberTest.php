@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\Tests\Domain\Value\Arithmetic;
+namespace MyOnlineStore\Common\Domain\Tests\Value\Arithmetic;
 
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 use PHPUnit\Framework\TestCase;
