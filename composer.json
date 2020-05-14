@@ -28,6 +28,7 @@
         "ronanguilloux/isocodes": "^2.2"
     },
     "require-dev": {
+        "doctrine/orm": "^2.7",
         "myonlinestore/coding-standard": "^1.1",
         "phpunit/phpunit": "^8.5",
         "vimeo/psalm": "^3.11"
