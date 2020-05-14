@@ -10,7 +10,7 @@ trait StringCollectionTrait
      */
     public function asStrings(): array
     {
-        return array_map('strval', $this->toArray());
+        return \array_map('strval', $this->toArray());
     }
 
     /**

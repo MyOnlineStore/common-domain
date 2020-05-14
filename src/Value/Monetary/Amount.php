@@ -11,7 +11,7 @@ final class Amount extends Number
     {
         if (false !== \strpos((string) $value, '.')) {
             throw new \InvalidArgumentException(
-                sprintf('Amount must be a whole number, "%s" given', $value)
+                \sprintf('Amount must be a whole number, "%s" given', $value)
             );
         }
 

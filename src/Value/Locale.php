@@ -35,11 +35,11 @@ final class Locale
      */
     public static function fromString($string)
     {
-        if (false === strpos($string, '_')) {
-            throw new \InvalidArgumentException(sprintf('Given string "%s" is not a valid string representation of a locale', $string));
+        if (false === \strpos($string, '_')) {
+            throw new \InvalidArgumentException(\sprintf('Given string "%s" is not a valid string representation of a locale', $string));
         }
 
-        $localeParts = explode('_', $string);
+        $localeParts = \explode('_', $string);
 
         return new self(new LanguageCode($localeParts[0]), new RegionCode($localeParts[1]));
     }
@@ -51,7 +51,7 @@ final class Locale
      */
     public function equals(Locale $locale)
     {
-        return 0 === strcmp($this, $locale);
+        return 0 === \strcmp($this, $locale);
     }
 
     /**
@@ -75,6 +75,6 @@ final class Locale
      */
     public function __toString()
     {
-        return sprintf('%s_%s', $this->languageCode, $this->regionCode);
+        return \sprintf('%s_%s', $this->languageCode, $this->regionCode);
     }
 }

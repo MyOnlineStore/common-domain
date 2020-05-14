@@ -32,7 +32,7 @@ final class CurrencyIso
         $currencies = $this->getCurrencies();
 
         if (!isset($currencies[(string) $code])) {
-            throw new \InvalidArgumentException(sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
+            throw new \InvalidArgumentException(\sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
         }
 
         $this->currency = $currencies[(string) $code]['alphabeticCode'];

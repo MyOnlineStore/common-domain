@@ -25,7 +25,7 @@ final class StoreId
     public function __construct($id)
     {
         if (!$this->assertIsNumeric($id)) {
-            throw new \InvalidArgumentException(sprintf('Given ID "%s" is not numeric', $id));
+            throw new \InvalidArgumentException(\sprintf('Given ID "%s" is not numeric', $id));
         }
 
         $this->id = $id;

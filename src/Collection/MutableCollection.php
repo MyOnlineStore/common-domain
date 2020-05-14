@@ -26,7 +26,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function contains($element)
     {
-        return in_array($element, $this->getArrayCopy(), true);
+        return \in_array($element, $this->getArrayCopy(), true);
     }
 
     /**
@@ -66,7 +66,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function first()
     {
-        return reset($this);
+        return \reset($this);
     }
 
     /**
@@ -74,7 +74,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function indexOf($element)
     {
-        return array_search($element, $this->getArrayCopy(), true);
+        return \array_search($element, $this->getArrayCopy(), true);
     }
 
     /**
@@ -90,7 +90,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function last()
     {
-        return end($this);
+        return \end($this);
     }
 
     /**
@@ -98,7 +98,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function reindex()
     {
-        return new static(array_values($this->toArray()));
+        return new static(\array_values($this->toArray()));
     }
 
     /**
@@ -132,7 +132,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     protected function filter(\Closure $closure)
     {
-        return new static(array_filter($this->toArray(), $closure));
+        return new static(\array_filter($this->toArray(), $closure));
     }
 
     /**
@@ -160,6 +160,6 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     protected function map(\Closure $closure)
     {
-        return new static(array_map($closure, $this->toArray()));
+        return new static(\array_map($closure, $this->toArray()));
     }
 }

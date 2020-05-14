@@ -11,6 +11,6 @@ trait NumericAssertionTrait
      */
     protected function assertIsNumeric($value)
     {
-        return is_numeric($value);
+        return \is_numeric($value);
     }
 }
