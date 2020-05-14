@@ -6,8 +6,9 @@ namespace MyOnlineStore\Common\Domain\Tests\Value;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class LocaleTest extends \PHPUnit\Framework\TestCase
+final class LocaleTest extends TestCase
 {
     public function testEquals()
     {

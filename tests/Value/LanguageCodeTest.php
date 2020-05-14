@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
+use PHPUnit\Framework\TestCase;
 
-final class LanguageCodeTest extends \PHPUnit\Framework\TestCase
+final class LanguageCodeTest extends TestCase
 {
     /**
      * @dataProvider invalidArgumentProvider

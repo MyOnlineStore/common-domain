@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Assertion;
 
 use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
+use PHPUnit\Framework\TestCase;
 
-final class NumericAssertionTraitTest extends \PHPUnit\Framework\TestCase
+final class NumericAssertionTraitTest extends TestCase
 {
     public function testAssertIsNumeric()
     {

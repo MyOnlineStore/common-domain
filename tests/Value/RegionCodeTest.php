@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class RegionCodeTest extends \PHPUnit\Framework\TestCase
+final class RegionCodeTest extends TestCase
 {
     public function testEquals()
     {

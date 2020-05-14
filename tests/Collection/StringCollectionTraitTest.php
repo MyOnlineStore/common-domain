@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
 use MyOnlineStore\Common\Domain\Collection\StringCollectionTrait;
+use PHPUnit\Framework\TestCase;
 
-final class StringCollectionTraitTest extends \PHPUnit\Framework\TestCase
+final class StringCollectionTraitTest extends TestCase
 {
     public function testAsStringsWillReturnArrayOfStrings()
     {

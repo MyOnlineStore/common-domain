@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Monetary;
 
 use MyOnlineStore\Common\Domain\Value\Monetary\Amount;
+use PHPUnit\Framework\TestCase;
 
-final class AmountTest extends \PHPUnit\Framework\TestCase
+final class AmountTest extends TestCase
 {
     public function invalidInputProvider()
     {

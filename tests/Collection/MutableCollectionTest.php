@@ -5,8 +5,9 @@ namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
 use MyOnlineStore\Common\Domain\Collection\ImmutableCollection;
 use MyOnlineStore\Common\Domain\Collection\MutableCollection;
+use PHPUnit\Framework\TestCase;
 
-final class MutableCollectionTest extends \PHPUnit\Framework\TestCase
+final class MutableCollectionTest extends TestCase
 {
     public function testAdd()
     {

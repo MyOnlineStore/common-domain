@@ -5,8 +5,9 @@ namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
 use MyOnlineStore\Common\Domain\Collection\RegionCodeCollection;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class RegionCodeCollectionTest extends \PHPUnit\Framework\TestCase
+final class RegionCodeCollectionTest extends TestCase
 {
     public function testContainsShouldReturnIfTheGivenRegionCodeIsPresentInCollection()
     {

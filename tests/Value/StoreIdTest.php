@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\StoreId;
+use PHPUnit\Framework\TestCase;
 
-final class StoreIdTest extends \PHPUnit\Framework\TestCase
+final class StoreIdTest extends TestCase
 {
     public function testValidInput()
     {

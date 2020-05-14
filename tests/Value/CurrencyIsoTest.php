@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
+use PHPUnit\Framework\TestCase;
 
-final class CurrencyIsoTest extends \PHPUnit\Framework\TestCase
+final class CurrencyIsoTest extends TestCase
 {
     /**
      * @return array[]
