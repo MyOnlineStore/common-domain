@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.2",
         "ext-bcmath": "*",
         "ext-intl": "*",
         "egulias/email-validator": "^2.1",
@@ -33,10 +33,9 @@
         "phpunit/phpunit": "6.4.*"
     },
     "config": {
-        "vendor-dir": "vendor",
         "sort-packages": true,
         "platform": {
-            "php": "7.0.33"
+            "php": "7.2.24"
         }
     }
 }
