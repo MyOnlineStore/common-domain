@@ -18,12 +18,12 @@ final class LocaleTest extends TestCase
 
     /**
      * @dataProvider invalidArgumentProvider
-     * @expectedException \InvalidArgumentException
      *
      * @param mixed $argument
      */
     public function testFromInvalidString($argument): void
     {
+        $this->expectException('InvalidArgumentException');
         Locale::fromString($argument);
     }
 

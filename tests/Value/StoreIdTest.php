@@ -14,12 +14,10 @@ final class StoreIdTest extends TestCase
         $this->assertEquals('1234', (string) new StoreId('1234'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Given ID "1a234" is not numeric
-     */
     public function testInvalidInput(): void
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Given ID "1a234" is not numeric');
         new StoreId('1a234');
     }
 

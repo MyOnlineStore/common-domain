@@ -18,12 +18,11 @@ final class RegionCodeTest extends TestCase
     /**
      * @dataProvider invalidArgumentProvider
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @param mixed $argument
      */
     public function testInvalidTypes($argument): void
     {
+        $this->expectException('InvalidArgumentException');
         new RegionCode($argument);
     }
 
