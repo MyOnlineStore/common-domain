@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ArrayContainsClassAssertionTraitTest extends TestCase
 {
-    public function testAssertArrayContainsOnlyClass()
+    public function testAssertArrayContainsOnlyClass(): void
     {
         $trait = $this->getMockForTrait(ArrayContainsClassAssertionTrait::class);
 

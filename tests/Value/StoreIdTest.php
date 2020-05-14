@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class StoreIdTest extends TestCase
 {
-    public function testValidInput()
+    public function testValidInput(): void
     {
         $this->assertEquals('123', (string) new StoreId(123));
         $this->assertEquals('1234', (string) new StoreId('1234'));
@@ -18,12 +18,12 @@ final class StoreIdTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Given ID "1a234" is not numeric
      */
-    public function testInvalidInput()
+    public function testInvalidInput(): void
     {
         new StoreId('1a234');
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $this->assertFalse((new StoreId(1))->equals(new StoreId(2)));
         $this->assertTrue((new StoreId(1))->equals(new StoreId(1)));

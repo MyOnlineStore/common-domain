@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 class UrlPathTest extends TestCase
 {
-    public function testConstructWillIgnoreLeadingSlash()
+    public function testConstructWillIgnoreLeadingSlash(): void
     {
         self::assertEquals(new UrlPath('/foo/bar'), new UrlPath('foo/bar'));
     }
 
-    public function testIsEmptyWillReturnWhetherPathIsEmpty()
+    public function testIsEmptyWillReturnWhetherPathIsEmpty(): void
     {
         $emptyPath = new UrlPath('/');
         $nonEmptyPath = new UrlPath('/foo/bar');
@@ -22,7 +22,7 @@ class UrlPathTest extends TestCase
         self::assertFalse($nonEmptyPath->isEmpty());
     }
 
-    public function testToStringWillPrependLeadingSlash()
+    public function testToStringWillPrependLeadingSlash(): void
     {
         self::assertEquals('/foo/bar', (string) new UrlPath('foo/bar'));
     }

@@ -12,7 +12,7 @@ final class IPAddressTest extends TestCase
     const IPV4_ADDRESS = '213.125.219.90';
     const IPV6_ADDRESS = '2002:D57D:DB5A:0:0:0:0:0';
 
-    public function testCorrectCreationIpv4()
+    public function testCorrectCreationIpv4(): void
     {
         $ipAddress = new IPAddress(self::IPV4_ADDRESS);
 
@@ -20,7 +20,7 @@ final class IPAddressTest extends TestCase
         self::assertEquals(self::IPV4_ADDRESS, (string) $ipAddress);
     }
 
-    public function testCorrectCreationIpv6()
+    public function testCorrectCreationIpv6(): void
     {
         $ipAddress = new IPAddress(self::IPV6_ADDRESS);
 
@@ -28,7 +28,7 @@ final class IPAddressTest extends TestCase
         self::assertEquals(self::IPV6_ADDRESS, (string) $ipAddress);
     }
 
-    public function testIsIPv4()
+    public function testIsIPv4(): void
     {
         $ipAddress1 = new IPAddress(self::IPV6_ADDRESS);
         $ipAddress2 = new IPAddress(self::IPV4_ADDRESS);
@@ -37,7 +37,7 @@ final class IPAddressTest extends TestCase
         self::assertFalse($ipAddress1->isIPv4());
     }
 
-    public function testIsIPv6()
+    public function testIsIPv6(): void
     {
         $ipAddress1 = new IPAddress(self::IPV6_ADDRESS);
         $ipAddress2 = new IPAddress(self::IPV4_ADDRESS);
@@ -46,14 +46,14 @@ final class IPAddressTest extends TestCase
         self::assertFalse($ipAddress2->isIPv6());
     }
 
-    public function testAsLong()
+    public function testAsLong(): void
     {
         $address = new IPAddress(self::IPV4_ADDRESS);
 
         self::assertSame(3581795162, $address->asLong());
     }
 
-    public function testAsLongIpv6ShouldThrowError()
+    public function testAsLongIpv6ShouldThrowError(): void
     {
         $this->expectException(\UnexpectedValueException::class);
 
@@ -62,7 +62,7 @@ final class IPAddressTest extends TestCase
         $ipAddress->asLong();
     }
 
-    public function testFaultCreation()
+    public function testFaultCreation(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

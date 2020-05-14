@@ -13,7 +13,7 @@ class UrlHostTest extends TestCase
     /**
      * @dataProvider providerValidHostUrls
      */
-    public function testValidUrlHosts(string $hostname)
+    public function testValidUrlHosts(string $hostname): void
     {
         self::assertEquals($hostname, (string) new UrlHost($hostname));
     }
@@ -21,13 +21,13 @@ class UrlHostTest extends TestCase
     /**
      * @dataProvider provider
      */
-    public function testInvalidUrlHost(string $hostname)
+    public function testInvalidUrlHost(string $hostname): void
     {
         $this->expectException(InvalidHostName::class);
         new UrlHost($hostname);
     }
 
-    public function testValidDomainName()
+    public function testValidDomainName(): void
     {
         $urlHost = new UrlHost('pipo.nl');
         self::assertEquals(new DomainName((string) $urlHost), $urlHost->getDomainName());
@@ -36,7 +36,7 @@ class UrlHostTest extends TestCase
     /**
      * @dataProvider providerValidHostUrls
      */
-    public function testInValidDomainName(string $hostname)
+    public function testInValidDomainName(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -47,7 +47,7 @@ class UrlHostTest extends TestCase
     /**
      * @dataProvider providerValidDomains
      */
-    public function testValidDomainsFromDomainName(string $domainName)
+    public function testValidDomainsFromDomainName(string $domainName): void
     {
         self::assertEquals($domainName, (string) UrlHost::fromDomainName(new DomainName($domainName)));
     }
@@ -55,7 +55,7 @@ class UrlHostTest extends TestCase
     /**
      * @dataProvider providerValidHostUrls
      */
-    public function testInvalidDomainsFromDomainName(string $domainName)
+    public function testInvalidDomainsFromDomainName(string $domainName): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

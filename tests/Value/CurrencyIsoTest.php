@@ -11,7 +11,7 @@ final class CurrencyIsoTest extends TestCase
     /**
      * @return array[]
      */
-    public function invalidArgumentProvider()
+    public function invalidArgumentProvider(): array
     {
         return [
             [123],
@@ -22,13 +22,13 @@ final class CurrencyIsoTest extends TestCase
         ];
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         self::assertTrue((new CurrencyIso('EUR'))->equals(new CurrencyIso('EUR')));
         self::assertFalse((new CurrencyIso('EUR'))->equals(new CurrencyIso('USD')));
     }
 
-    public function testGetMinorUnit()
+    public function testGetMinorUnit(): void
     {
         self::assertEquals(3, (new CurrencyIso('OMR'))->getMinorUnit());
         self::assertEquals(2, (new CurrencyIso('EUR'))->getMinorUnit());
@@ -42,12 +42,12 @@ final class CurrencyIsoTest extends TestCase
      *
      * @param mixed $argument
      */
-    public function testInvalidTypes($argument)
+    public function testInvalidTypes($argument): void
     {
         new CurrencyIso($argument);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         self::assertEquals('EUR', (string) new CurrencyIso('EUR'));
         self::assertEquals('USD', (string) new CurrencyIso('USD'));

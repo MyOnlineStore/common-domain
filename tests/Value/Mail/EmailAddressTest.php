@@ -9,19 +9,19 @@ use PHPUnit\Framework\TestCase;
 
 final class EmailAddressTest extends TestCase
 {
-    public function testConstructorAndToString()
+    public function testConstructorAndToString(): void
     {
         $emailAddress = new EmailAddress('hi@mos.com');
         self::assertEquals('hi@mos.com', (string) $emailAddress);
     }
 
-    public function testConstructorDoesNotAcceptAnInvalidEmailAddress()
+    public function testConstructorDoesNotAcceptAnInvalidEmailAddress(): void
     {
         $this->expectException(InvalidEmailAddress::class);
         new EmailAddress('hi');
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $emailAddress = new EmailAddress('hi@mos.com');
 

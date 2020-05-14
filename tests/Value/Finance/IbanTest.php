@@ -9,19 +9,19 @@ use PHPUnit\Framework\TestCase;
 
 final class IbanTest extends TestCase
 {
-    public function testConstructorAndToString()
+    public function testConstructorAndToString(): void
     {
         $emailAddress = new Iban('NL45ABNA0946659707');
         self::assertEquals('NL45ABNA0946659707', (string) $emailAddress);
     }
 
-    public function testConstructorDoesNotAcceptAnInvalidIban()
+    public function testConstructorDoesNotAcceptAnInvalidIban(): void
     {
         $this->expectException(InvalidIban::class);
         new Iban('NLD60RABO0190431121');
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $emailAddress = new Iban('NL45ABNA0946659707');
 

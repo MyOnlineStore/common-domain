@@ -11,7 +11,7 @@ final class HostNameTest extends TestCase
     /**
      * @dataProvider providerValidHostNames
      */
-    public function testValidHostNames(string $hostname)
+    public function testValidHostNames(string $hostname): void
     {
         self::assertEquals($hostname, (string) new HostName($hostname));
     }
@@ -19,7 +19,7 @@ final class HostNameTest extends TestCase
     /**
      * @dataProvider providerInvalidHostNames
      */
-    public function testInvalidHostNames(string $hostname)
+    public function testInvalidHostNames(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class NumericAssertionTraitTest extends TestCase
 {
-    public function testAssertIsNumeric()
+    public function testAssertIsNumeric(): void
     {
         $trait = $this->getMockForTrait(NumericAssertionTrait::class);
 

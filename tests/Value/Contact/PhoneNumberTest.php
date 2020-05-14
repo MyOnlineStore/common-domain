@@ -74,11 +74,11 @@ final class PhoneNumberTest extends TestCase
         bool $expectedResult,
         PhoneNumber $phoneNumber,
         PhoneNumber $otherNumber
-    ) {
+    ): void {
         self::assertEquals($expectedResult, $phoneNumber->equals($otherNumber));
     }
 
-    public function testFormatted()
+    public function testFormatted(): void
     {
         self::assertEquals('0031882315726', (new PhoneNumber('0031882315726'))->getFormatted());
         self::assertEquals('0031412668011', (new PhoneNumber('+31 (0)412 66 80 11'))->getFormatted());
@@ -88,7 +88,7 @@ final class PhoneNumberTest extends TestCase
         self::assertEquals('0031112', (new PhoneNumber('112'))->getFormatted());
     }
 
-    public function testWithRegionCodeChangesCountryPrefix()
+    public function testWithRegionCodeChangesCountryPrefix(): void
     {
         $phoneNumber = new PhoneNumber('0031882315726');
 
@@ -101,7 +101,7 @@ final class PhoneNumberTest extends TestCase
     /**
      * @dataProvider shortInternationalFormatProvider
      */
-    public function testShortInternationalFormat(string $expectedFormat, PhoneNumber $phoneNumber)
+    public function testShortInternationalFormat(string $expectedFormat, PhoneNumber $phoneNumber): void
     {
         self::assertEquals($expectedFormat, $phoneNumber->getShortInternationalFormat());
     }
@@ -109,14 +109,14 @@ final class PhoneNumberTest extends TestCase
     /**
      * @dataProvider getInvalidStringValues
      */
-    public function testInvalidStringValues(string $value)
+    public function testInvalidStringValues(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         new PhoneNumber($value);
     }
 
-    public function testIsFixedLine()
+    public function testIsFixedLine(): void
     {
         self::assertTrue((new PhoneNumber('0031132315726'))->isFixedLine());
         self::assertTrue((new PhoneNumber('+31 (0)412 66 80 11'))->isFixedLine());
@@ -125,7 +125,7 @@ final class PhoneNumberTest extends TestCase
         self::assertFalse((new PhoneNumber('+447134567575'))->isFixedLine());
     }
 
-    public function testIsMobile()
+    public function testIsMobile(): void
     {
         self::assertFalse((new PhoneNumber('0031882315726'))->isMobile());
         self::assertFalse((new PhoneNumber('+31 (0)412 66 80 11'))->isMobile());
@@ -136,16 +136,16 @@ final class PhoneNumberTest extends TestCase
         self::assertFalse((new PhoneNumber('112'))->isMobile());
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $phoneNumber = new PhoneNumber('0031882315726');
-        self::assertEquals($phoneNumber->getFormatted(), (string) $phoneNumber);
+        self::assertEquals($phoneNumber->getShortInternationalFormat(), (string) $phoneNumber);
     }
 
     /**
      * @dataProvider getValidStringValues
      */
-    public function testValidStringValues(string $value)
+    public function testValidStringValues(string $value): void
     {
         self::assertInstanceOf(PhoneNumber::class, new PhoneNumber($value));
     }
