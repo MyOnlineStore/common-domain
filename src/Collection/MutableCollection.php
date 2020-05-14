@@ -66,7 +66,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function first()
     {
-        return \reset($this);
+        $arrayCopy = $this->getArrayCopy();
+
+        return \reset($arrayCopy);
     }
 
     /**
@@ -90,7 +92,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function last()
     {
-        return \end($this);
+        $arrayCopy = $this->getArrayCopy();
+
+        return \end($arrayCopy);
     }
 
     /**
