@@ -70,13 +70,11 @@ final class LocaleCollectionTest extends TestCase
             ]
         );
 
-        self::assertEquals(
-            [
-                '€ 123.456.789,12' => new LocaleCollection([Locale::fromString('nl_NL')]),
-                '123.456.789,12 €' => new LocaleCollection([Locale::fromString('nl_BE'), Locale::fromString('de_DE')]),
-            ],
-            $collection->groupByCurrencyFormat(new CurrencyIso('EUR'), 123456789.1234)
-        );
+        $result = $collection->groupByCurrencyFormat(new CurrencyIso('EUR'), 123456789.1234);
+
+        self::assertArrayHasKey('€ 123.456.789,12', $result);
+        self::assertArrayHasKey('123.456.789,12 €', $result);
+        self::assertNotEquals($result['€ 123.456.789,12'], $result['123.456.789,12 €']);
     }
 
     public function testUnique()
