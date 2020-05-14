@@ -24,7 +24,7 @@
         "league/uri": "^5.3",
         "litipk/php-bignumbers": "^0.8.6",
         "moneyphp/money": "^3.3",
-        "ramsey/uuid": "^3.7",
+        "ramsey/uuid": "^3.7 || ^4.0",
         "ronanguilloux/isocodes": "^2.2"
     },
     "require-dev": {
