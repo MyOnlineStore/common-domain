@@ -40,6 +40,8 @@ class Number
     }
 
     /**
+     * @param mixed $value
+     *
      * @return static
      *
      * @throws \InvalidArgumentException
