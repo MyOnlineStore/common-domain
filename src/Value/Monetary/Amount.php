@@ -18,9 +18,6 @@ final class Amount extends Number
         parent::__construct($value, 0);
     }
 
-    /**
-     * @return Amount
-     */
     public static function asZero(): Amount
     {
         return new self(0);
