@@ -1,14 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace MyOnlineStore\Common\Domain\Value\Monetary;
+namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
-use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 
-/**
- * @deprecated Use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount instead
- */
 final class Amount extends Number
 {
     /**

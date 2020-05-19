@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
 
 /**
  * @ORM\Embeddable
+ *
+ * @deprecated Should be removed from common-domain
  */
 final class StoreId
 {

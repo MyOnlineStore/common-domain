@@ -5,6 +5,9 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\StoreId;
 
+/**
+ * @deprecated Should be moved to common-collection
+ */
 final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 {
     use StringCollectionTrait;

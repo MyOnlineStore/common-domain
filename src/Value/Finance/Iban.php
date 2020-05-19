@@ -27,7 +27,7 @@ final class Iban
 
     public function equals(self $other): bool
     {
-        return $this == $other;
+        return $this->iban === $other->iban;
     }
 
     public function __toString(): string

@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Value\StoreId;
 
 /**
  * @method StoreId[] getIterator()
+ *
+ * @deprecated Should be moved to common-collection
  */
 interface StoreIdsInterface extends ImmutableCollectionInterface
 {
