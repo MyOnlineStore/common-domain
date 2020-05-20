@@ -3,15 +3,23 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Price
 {
     public const PRECISION_CALC = 6;
     public const PRECISION_DISPLAY = 2;
     public const PRECISION_INTERMEDIATE = 7;
 
-    /** @var string */
+    /**
+     * @ORM\Column(name="price", type="decimal", precision=15, scale=6)
+     *
+     * @var string
+     */
     private $amount;
 
     /**

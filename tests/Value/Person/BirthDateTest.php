@@ -14,10 +14,16 @@ final class BirthDateTest extends TestCase
         $birthDate = BirthDate::fromString($date);
 
         self::assertEquals(
-            \DateTimeImmutable::createFromFormat('Y-m-d', $date, new \DateTimeZone('UTC')),
+            \DateTimeImmutable::createFromFormat('Y-m-d', $date),
             $birthDate->getDate()
         );
         self::assertSame($date, (string) $birthDate);
+    }
+
+    public function testFromDateTime(): void
+    {
+        $birthDate = BirthDate::fromDateTime($date = new \DateTimeImmutable());
+        self::assertSame($date, $birthDate->getDate());
     }
 
     public function testEquals(): void

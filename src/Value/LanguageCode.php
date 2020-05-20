@@ -2,42 +2,43 @@
 
 namespace MyOnlineStore\Common\Domain\Value;
 
+use Doctrine\ORM\Mapping as ORM;
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
+
 /**
  * ISO 639 code (https://en.wikipedia.org/wiki/ISO_639)
+ *
+ * @ORM\Embeddable
  */
 final class LanguageCode
 {
-    /** @var string */
+    /**
+     * @ORM\Column(name="language_code", length=3)
+     *
+     * @var string
+     */
     private $code;
 
     /**
-     * @param mixed $code
+     * @param string $code
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function __construct($code)
     {
         if (!\preg_match('/^[a-z]{2,3}$/i', $code)) {
-            throw new \InvalidArgumentException(\sprintf('Invalid language code given: %s', $code));
+            throw new InvalidArgument(\sprintf('Invalid language code given: %s', $code));
         }
 
         $this->code = \strtolower($code);
     }
 
-    /**
-     * @param LanguageCode $languageCode
-     *
-     * @return bool
-     */
-    public function equals(LanguageCode $languageCode)
+    public function equals(self $comparator): bool
     {
-        return $this->code === (string) $languageCode;
+        return $this->code === $comparator->code;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->code;
     }

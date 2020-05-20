@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
@@ -23,7 +24,7 @@ final class LocaleTest extends TestCase
      */
     public function testFromInvalidString($argument): void
     {
-        $this->expectException('InvalidArgumentException');
+        $this->expectException(InvalidArgument::class);
         Locale::fromString($argument);
     }
 
@@ -62,7 +63,7 @@ final class LocaleTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return string[][]
      */
     public function invalidArgumentProvider(): array
     {

@@ -3,13 +3,21 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Mail;
 
+use Doctrine\ORM\Mapping as ORM;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
+/**
+ * @ORM\Embeddable
+ */
 final class EmailAddress
 {
-    /** @var string */
+    /**
+     * @ORM\Column(name="email_address")
+     *
+     * @var string
+     */
     private $emailAddress;
 
     /**
@@ -26,9 +34,9 @@ final class EmailAddress
         $this->emailAddress = $emailAddress;
     }
 
-    public function equals(self $other): bool
+    public function equals(self $comparator): bool
     {
-        return $this == $other;
+        return $this->emailAddress === $comparator->emailAddress;
     }
 
     public function __toString(): string

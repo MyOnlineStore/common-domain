@@ -3,14 +3,22 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\Person\InvalidGender;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Gender
 {
-    private const MALE = 'male';
-    private const FEMALE = 'female';
+    private const MALE = 'M';
+    private const FEMALE = 'F';
 
-    /** @var string */
+    /**
+     * @ORM\Column(name="gender", length=1)
+     *
+     * @var string
+     */
     private $gender;
 
     private function __construct(string $gender)

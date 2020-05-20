@@ -3,15 +3,27 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Value\Person\Name\FirstName;
 use MyOnlineStore\Common\Domain\Value\Person\Name\LastName;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Name
 {
-    /** @var FirstName */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Person\Name\FirstName", columnPrefix=false)
+     *
+     * @var FirstName
+     */
     private $firstName;
 
-    /** @var LastName */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Person\Name\LastName", columnPrefix=false)
+     *
+     * @var LastName
+     */
     private $lastName;
 
     public function __construct(FirstName $firstName, LastName $lastName)

@@ -3,11 +3,20 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Embeddable
+ */
 final class BirthDate
 {
     private const FORMAT = 'Y-m-d';
 
-    /** @var \DateTimeImmutable */
+    /**
+     * @ORM\Column(name="birth_date", type="date_immutable")
+     *
+     * @var \DateTimeImmutable
+     */
     private $date;
 
     private function __construct(\DateTimeImmutable $date)
@@ -15,20 +24,18 @@ final class BirthDate
         $this->date = $date;
     }
 
+    public static function fromDateTime(\DateTimeImmutable $date): self
+    {
+        return new self($date);
+    }
+
     public static function fromString(
         string $time,
-        string $format = self::FORMAT,
-        string $timezone = 'UTC'
+        string $format = self::FORMAT
     ): self {
         /** @psalm-suppress PossiblyFalseArgument */
 
-        return new self(
-            \DateTimeImmutable::createFromFormat(
-                $format,
-                $time,
-                new \DateTimeZone($timezone)
-            )
-        );
+        return new self(\DateTimeImmutable::createFromFormat($format, $time));
     }
 
     public function equals(self $comparator): bool

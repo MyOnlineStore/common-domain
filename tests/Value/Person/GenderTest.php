@@ -13,10 +13,10 @@ final class GenderTest extends TestCase
     {
         $gender = Gender::asMale();
 
-        self::assertSame('male', (string) $gender);
+        self::assertSame('M', (string) $gender);
         self::assertTrue($gender->isMale());
         self::assertFalse($gender->isFemale());
-        self::assertTrue($gender->equals(Gender::fromString('male')));
+        self::assertTrue($gender->equals(Gender::fromString('M')));
         self::assertFalse($gender->equals(Gender::asFemale()));
     }
 
@@ -24,10 +24,10 @@ final class GenderTest extends TestCase
     {
         $gender = Gender::asFemale();
 
-        self::assertSame('female', (string) $gender);
+        self::assertSame('F', (string) $gender);
         self::assertTrue($gender->isFemale());
         self::assertFalse($gender->isMale());
-        self::assertTrue($gender->equals(Gender::fromString('female')));
+        self::assertTrue($gender->equals(Gender::fromString('F')));
         self::assertFalse($gender->equals(Gender::asMale()));
     }
 

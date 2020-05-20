@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value;
 
 use Doctrine\ORM\Mapping as ORM;
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
@@ -22,16 +23,16 @@ final class RegionCode
     /**
      * @param string $code
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgument
      */
     public function __construct($code)
     {
         if (null === $code) {
-            throw new \InvalidArgumentException('RegionCode can not be constructed with an empty ISO code');
+            throw new InvalidArgument('RegionCode can not be constructed with an empty ISO code');
         }
 
         if (!\preg_match('/^[a-z]{2}$/i', $code)) {
-            throw new \InvalidArgumentException(\sprintf('Invalid region code given: %s', $code));
+            throw new InvalidArgument(\sprintf('Invalid region code given: %s', $code));
         }
 
         $this->code = \strtoupper($code);
@@ -42,27 +43,19 @@ final class RegionCode
         return new self('NL');
     }
 
-    /**
-     * @param RegionCode $otherRegion
-     *
-     * @return bool
-     */
-    public function equals(RegionCode $otherRegion): bool
+    public function equals(self $comparator): bool
     {
-        return 0 === \strcmp($this->code, (string) $otherRegion);
+        return 0 === \strcmp($this->code, $comparator->code);
     }
 
     /**
-     * @return string returns lowercased value
+     * @return string returns lowercase value
      */
     public function lower(): string
     {
         return \strtolower($this->code);
     }
 
-    /**
-     * @return bool
-     */
     public function isEuRegion(): bool
     {
         $euRegions = [
@@ -99,10 +92,7 @@ final class RegionCode
         return isset($euRegions[$this->code]);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->code;
     }

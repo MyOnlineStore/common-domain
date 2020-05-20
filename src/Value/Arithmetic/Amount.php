@@ -3,10 +3,22 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
+use Doctrine\ORM\Mapping as ORM;
+use Litipk\BigNumbers\Decimal;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Amount extends Number
 {
+    /**
+     * @ORM\Column(name="amount", type="bignumbers", options={"doctrine_type"="bigint"})
+     *
+     * @var Decimal
+     */
+    protected $value;
+
     /**
      * @inheritDoc
      *

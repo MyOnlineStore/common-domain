@@ -3,9 +3,18 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Embeddable
+ */
 final class IPAddress
 {
-    /** @var string */
+    /**
+     * @ORM\Column(name="ip_address", length=39)
+     *
+     * @var string
+     */
     private $value;
 
     /**

@@ -3,12 +3,20 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
+/**
+ * @ORM\Embeddable
+ */
 final class StreetNumber
 {
-    /** @var string */
+    /**
+     * @ORM\Column(name="street_number")
+     *
+     * @var string
+     */
     private $number;
 
     private function __construct(string $number)

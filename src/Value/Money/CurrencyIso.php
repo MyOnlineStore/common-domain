@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\Currency\InvalidCurrencyIso;
 
+/**
+ * @ORM\Embeddable
+ */
 final class CurrencyIso
 {
     private const CURRENCIES =  [
@@ -1263,7 +1267,11 @@ final class CurrencyIso
              ],
     ];
 
-    /** @var string */
+    /**
+     * @ORM\Column(name="currency", length=3)
+     *
+     * @var string
+     */
     private $currency;
 
     private function __construct(string $currency)

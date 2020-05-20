@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
 
 /**
- * @ORM\Embeddable
- *
  * @deprecated Should be removed from common-domain
+ *
+ * @ORM\Embeddable
  */
 final class StoreId
 {
@@ -22,7 +22,7 @@ final class StoreId
     private $id;
 
     /**
-     * @param int $id
+     * @param int|string $id
      */
     public function __construct($id)
     {
@@ -33,21 +33,13 @@ final class StoreId
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->id;
     }
 
-    /**
-     * @param StoreId $storeId
-     *
-     * @return bool
-     */
-    public function equals(StoreId $storeId)
+    public function equals(self $storeId): bool
     {
-        return $this == $storeId;
+        return (string) $this->id === (string) $storeId->id;
     }
 }

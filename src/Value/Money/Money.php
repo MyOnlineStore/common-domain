@@ -3,14 +3,26 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Money
 {
-    /** @var Amount */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Arithmetic\Amount", columnPrefix=false)
+     *
+     * @var Amount
+     */
     private $amount;
 
-    /** @var CurrencyIso */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Money\CurrencyIso", columnPrefix=false)
+     *
+     * @var CurrencyIso
+     */
     private $currency;
 
     public function __construct(Amount $amount, CurrencyIso $currency)
@@ -35,7 +47,6 @@ final class Money
 
     /**
      * @param int|string|float $amount
-     *
      */
     public static function fromFractionated($amount, CurrencyIso $currency): self
     {

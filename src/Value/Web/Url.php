@@ -4,18 +4,19 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
 use League\Uri\Http;
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 final class Url extends Http
 {
     /**
-     * @param string $value
+     * @throws InvalidArgument
      */
-    public static function fromString($value): self
+    public static function fromString(string $value): self
     {
         $url = self::createFromString($value);
 
         if (!$url->isValidUri()) {
-            throw new \InvalidArgumentException(\sprintf('Invalid URL "%s" provided', $value));
+            throw new InvalidArgument(\sprintf('Invalid URL "%s" provided', $value));
         }
 
         return $url;

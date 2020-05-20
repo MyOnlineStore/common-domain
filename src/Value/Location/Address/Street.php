@@ -3,22 +3,39 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Embeddable
+ */
 final class Street
 {
-    /** @var StreetName */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetName", columnPrefix=false)
+     *
+     * @var StreetName
+     */
     private $name;
 
-    /** @var StreetNumber */
+    /**
+     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber", columnPrefix=false)
+     *
+     * @var StreetNumber
+     */
     private $number;
 
-    /** @var StreetSuffix|null */
+    /**
+     * @ORM\Column(name="street_suffix", nullable=true)
+     *
+     * @var string|null
+     */
     private $suffix;
 
     public function __construct(StreetName $name, StreetNumber $number, ?StreetSuffix $suffix = null)
     {
         $this->name = $name;
         $this->number = $number;
-        $this->suffix = $suffix;
+        $this->suffix = $suffix ? (string) $suffix : null;
     }
 
     public function getName(): StreetName
@@ -33,6 +50,6 @@ final class Street
 
     public function getSuffix(): ?StreetSuffix
     {
-        return $this->suffix;
+        return $this->suffix ? StreetSuffix::fromString($this->suffix) : null;
     }
 }

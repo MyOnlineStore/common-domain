@@ -3,12 +3,20 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Finance;
 
+use Doctrine\ORM\Mapping as ORM;
 use IsoCodes\Iban as IbanValidator;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Iban
 {
-    /** @var string */
+    /**
+     * @ORM\Column(length=24)
+     *
+     * @var string
+     */
     private $iban;
 
     /**

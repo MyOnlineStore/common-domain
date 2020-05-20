@@ -33,6 +33,6 @@ final class StreetTest extends TestCase
 
         self::assertSame($name, $street->getName());
         self::assertSame($number, $street->getNumber());
-        self::assertSame($suffix, $street->getSuffix());
+        self::assertEquals($suffix, $street->getSuffix());
     }
 }
