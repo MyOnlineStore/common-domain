@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.11.4@58e1d8e68e5098bf4fbfdfb420c38d563f882549">
+  <file src="src/Assertion/EnumValueGuardTrait.php">
+    <InvalidScalarArgument occurrences="1">
+      <code>$value</code>
+    </InvalidScalarArgument>
+  </file>
+  <file src="src/Collection/ImmutableCollectionInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>each</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Collection/LocaleCollectionInterface.php">
+    <DeprecatedClass occurrences="1">
+      <code>CurrencyIso</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/Collection/MutableCollectionInterface.php">
+    <MissingReturnType occurrences="1">
+      <code>add</code>
+    </MissingReturnType>
+  </file>
+  <file src="src/Collection/RegionCodeCollectionInterface.php">
+    <LessSpecificImplementedReturnType occurrences="1">
+      <code>RegionCodeCollectionInterface</code>
+    </LessSpecificImplementedReturnType>
+  </file>
+  <file src="src/Value/Contact/PhoneNumber.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$this-&gt;value-&gt;getNationalNumber()</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Value/Currency/CurrencyIso.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === self::$currencies</code>
+    </DocblockTypeContradiction>
+    <InvalidArrayAccess occurrences="2">
+      <code>$currencies[(string) $code]['alphabeticCode']</code>
+      <code>$this-&gt;getCurrencies()[$this-&gt;currency]['minorUnit']</code>
+    </InvalidArrayAccess>
+    <InvalidArrayOffset occurrences="2">
+      <code>$currencies[(string) $code]['alphabeticCode']</code>
+      <code>$this-&gt;getCurrencies()[$this-&gt;currency]['minorUnit']</code>
+    </InvalidArrayOffset>
+  </file>
+  <file src="src/Value/Monetary/Amount.php">
+    <MissingParamType occurrences="1">
+      <code>$value</code>
+    </MissingParamType>
+  </file>
+  <file src="src/Value/RegionCode.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $code</code>
+    </DocblockTypeContradiction>
+  </file>
+  <file src="src/Value/Web/DomainName.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>isset(self::$validator)</code>
+    </DocblockTypeContradiction>
+  </file>
+  <file src="src/Value/Web/Url.php">
+    <DeprecatedInterface occurrences="1">
+      <code>Url</code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Value/Web/UrlPath.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>\is_string($value)</code>
+    </DocblockTypeContradiction>
+  </file>
+</files>

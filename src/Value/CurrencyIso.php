@@ -12,9 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class CurrencyIso
 {
-    /**
-     * @var array|null
-     */
+    /** @var array|null */
     private static $currencies;
 
     /**
@@ -32,7 +30,7 @@ final class CurrencyIso
         $currencies = $this->getCurrencies();
 
         if (!isset($currencies[(string) $code])) {
-            throw new \InvalidArgumentException(sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
+            throw new \InvalidArgumentException(\sprintf('Given value "%s" is not a valid ISO 4217 code', $code));
         }
 
         $this->currency = $currencies[(string) $code]['alphabeticCode'];

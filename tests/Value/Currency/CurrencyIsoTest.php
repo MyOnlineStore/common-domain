@@ -11,23 +11,22 @@ class CurrencyIsoTest extends TestCase
     /**
      * @dataProvider invalidArgumentProvider
      *
-     * @expectedException \InvalidArgumentException
-     *
      * @param mixed $argument
      */
-    public function testInvalidTypes($argument)
+    public function testInvalidTypes($argument): void
     {
+        $this->expectException('InvalidArgumentException');
         new CurrencyIso($argument);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         self::assertEquals('EUR', (string) new CurrencyIso('EUR'));
         self::assertEquals('USD', (string) new CurrencyIso('USD'));
         self::assertEquals('JPY', (string) new CurrencyIso('JPY'));
     }
 
-    public function testGetMinorUnit()
+    public function testGetMinorUnit(): void
     {
         self::assertEquals(3, (new CurrencyIso('OMR'))->getMinorUnit());
         self::assertEquals(2, (new CurrencyIso('EUR'))->getMinorUnit());

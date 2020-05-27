@@ -24,7 +24,7 @@ class UrlTest extends TestCase
     /**
      * @dataProvider validUrlDataProvider
      */
-    public function testFromStringWillParseStringCorrectly(string $input)
+    public function testFromStringWillParseStringCorrectly(string $input): void
     {
         self::assertEquals((string) Uri::createFromString($input), (string) Url::fromString($input));
     }
@@ -40,14 +40,14 @@ class UrlTest extends TestCase
     /**
      * @dataProvider invalidUrlDataProvider
      */
-    public function testFromStringWillThrowExceptionForMalformedUrls(string $input)
+    public function testFromStringWillThrowExceptionForMalformedUrls(string $input): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         Url::fromString($input);
     }
 
-    public function testEqualsWillReturnTrueIfObjectMatches()
+    public function testEqualsWillReturnTrueIfObjectMatches(): void
     {
         $otherUrl = Url::createFromString('https://api.host.com/api-route')
             ->withQuery('token=foo')
@@ -60,7 +60,7 @@ class UrlTest extends TestCase
     /**
      * @dataProvider invalidEqualUrlProvider
      */
-    public function testEqualsWillReturnFalseIfObjectDoesNotMatch(Url $otherUrl)
+    public function testEqualsWillReturnFalseIfObjectDoesNotMatch(Url $otherUrl): void
     {
         self::assertFalse(
             Url::createFromString('https://api.host.com:8080/api-route?token=foo#bar')->equals($otherUrl)

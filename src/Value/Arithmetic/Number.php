@@ -8,14 +8,11 @@ use Litipk\BigNumbers\Errors\BigNumbersError;
 
 class Number
 {
-    /**
-     * @var Decimal
-     */
+    /** @var Decimal */
     protected $value;
 
     /**
-     * @param mixed    $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @throws \InvalidArgumentException
      */
@@ -33,9 +30,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
     public function add(Number $operand, int $scale = null)
@@ -46,8 +40,7 @@ class Number
     }
 
     /**
-     * @param string   $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @return static
      *
@@ -62,9 +55,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
     public function divideBy(Number $operand, int $scale = null)
@@ -75,9 +65,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return bool
      */
     public function equals(Number $operand, int $scale = null)
@@ -87,23 +74,11 @@ class Number
         return $this->value->equals($operand->value, $scale);
     }
 
-    /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
-     * @return bool
-     */
     public function isGreaterThan(Number $operand, int $scale = null): bool
     {
         return 1 === $this->value->comp($operand->value, $scale);
     }
 
-    /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
-     * @return bool
-     */
     public function isLessThan(Number $operand, int $scale = null): bool
     {
         return -1 === $this->value->comp($operand->value, $scale);
@@ -118,9 +93,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
     public function multiplyBy(Number $operand, int $scale = null)
@@ -131,9 +103,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
     public function powerTo(Number $operand, int $scale = null)
@@ -142,9 +111,6 @@ class Number
     }
 
     /**
-     * @param Number|self $operand
-     * @param int|null    $scale
-     *
      * @return static
      */
     public function subtract(Number $operand, int $scale = null)
@@ -155,8 +121,6 @@ class Number
     }
 
     /**
-     * @param int $scale
-     *
      * @return static
      */
     public function toScale(int $scale)
@@ -164,21 +128,17 @@ class Number
         return $this->changeValue($this->value->div(Decimal::create(10)->pow(Decimal::create($scale)), $scale));
     }
 
-    /**
-     * @param Number $operand
-     */
-    protected function assertOperand(Number $operand)
+    protected function assertOperand(Number $operand): void
     {
         // scope to perform assertions to guard against inproper operands
     }
 
     /**
-     * @param mixed    $value
-     * @param int|null $scale
+     * @param mixed $value
      *
      * @throws \InvalidArgumentException
      */
-    private function assignValue($value, int $scale = null)
+    private function assignValue($value, int $scale = null): void
     {
         if ($value instanceof self) {
             $value = $value->value;

@@ -1,0 +1,77 @@
+name: CI
+
+on:
+    push:
+        branches-ignore:
+            - 'master'
+        tags-ignore:
+            - '**'
+
+jobs:
+    test:
+        name: Test
+
+        runs-on: ubuntu-18.04
+
+        strategy:
+            matrix:
+                php-version: ['7.2', '7.4']
+            fail-fast: false
+
+        steps:
+            # Setup
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-version }}
+                    coverage: pcov
+                    tools: cs2pr, prestissimo
+                    extensions: bcmath, intl
+            -   name: Cache Dependencies
+                uses: actions/cache@v1
+                with:
+                    path: ~/.composer/cache
+                    key: php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        php${{ matrix.php-version }}-composer-
+            -   name: Install Dependencies
+                run: composer install --no-ansi --no-interaction --no-progress --no-suggest
+
+            # Test
+#            -   name: Codestyle
+#                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
+            -   name: PHPUnit Checks Matcher
+                run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+            -   name: Unit Tests
+                run: |
+                    php vendor/bin/phpunit --coverage-text=coverage.txt --colors=never
+                    COVERAGE=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage.txt"), $out); echo $out[1];')
+                    echo "::set-env name=COVERAGE::${COVERAGE}"
+            -   name: Run Psalm
+                run: vendor/bin/psalm --output-format=github
+
+            # Compare to master
+#            -   name: Checkout Master
+#                uses: actions/checkout@v2
+#                with:
+#                    ref: master
+#            -   name: Install Dependencies Master
+#                run: composer install --no-interaction --no-ansi --no-progress --no-suggest
+#            -   name: Unit Tests Master
+#                run: |
+#                    php vendor/bin/phpunit --coverage-text=coverage-master.txt --colors=never
+#                    COVERAGE_MASTER=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage-master.txt"), $out); echo $out[1];')
+#                    echo "::set-env name=COVERAGE_MASTER::${COVERAGE_MASTER}"
+#            -   name: Report PR Status
+#                uses: actions/github-script@0.6.0
+#                with:
+#                    github-token: ${{github.token}}
+#                    script: |
+#                        const coverage = parseFloat(process.env.COVERAGE);
+#                        const coverageMaster = parseFloat(process.env.COVERAGE_MASTER);
+#                        const coverageChange = (coverage - coverageMaster).toFixed(2);
+#
+#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverage > 98 ? 'success' : 'failure', context: 'Unit Test Coverage', description: coverage+'%'});
+#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverageChange < 0 ? 'failure' : 'success', context: 'Unit Test Coverage Change', description: coverageChange+'%'});

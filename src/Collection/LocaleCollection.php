@@ -15,7 +15,7 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     public function __construct(array $entries = [])
     {
         parent::__construct(
-            array_filter(
+            \array_filter(
                 $entries,
                 function ($entry) {
                     return $entry instanceof Locale;
@@ -30,9 +30,9 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     public function asRegionCodes(): RegionCodeCollectionInterface
     {
         return new RegionCodeCollection(
-            array_values(
-                array_unique(
-                    array_map(
+            \array_values(
+                \array_unique(
+                    \array_map(
                         function (Locale $locale) {
                             return $locale->regionCode();
                         },
@@ -85,7 +85,7 @@ final class LocaleCollection extends MutableCollection implements LocaleCollecti
     public static function fromStrings(array $input): self
     {
         return new self(
-            array_map(
+            \array_map(
                 function ($locale) {
                     try {
                         return Locale::fromString($locale);

@@ -9,9 +9,7 @@ use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
 final class EmailAddress
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $emailAddress;
 
     /**

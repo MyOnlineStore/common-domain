@@ -5,10 +5,11 @@ namespace MyOnlineStore\Common\Domain\Tests\Collection;
 
 use MyOnlineStore\Common\Domain\Collection\RegionCodeCollection;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-final class RegionCodeCollectionTest extends \PHPUnit\Framework\TestCase
+final class RegionCodeCollectionTest extends TestCase
 {
-    public function testContainsShouldReturnIfTheGivenRegionCodeIsPresentInCollection()
+    public function testContainsShouldReturnIfTheGivenRegionCodeIsPresentInCollection(): void
     {
         $regionCodes = new RegionCodeCollection([new RegionCode('NL'), new RegionCode('DE')]);
 
@@ -16,7 +17,7 @@ final class RegionCodeCollectionTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($regionCodes->contains(new RegionCode('GB')));
     }
 
-    public function testFromCountryNamesWillReturnNewRegionCodeCollection()
+    public function testFromCountryNamesWillReturnNewRegionCodeCollection(): void
     {
         self::assertEquals(
             new RegionCodeCollection(
@@ -30,7 +31,7 @@ final class RegionCodeCollectionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testUniqueWillReturnCollectionWithUniqueCodesOnly()
+    public function testUniqueWillReturnCollectionWithUniqueCodesOnly(): void
     {
         $collection = new RegionCodeCollection(
             [

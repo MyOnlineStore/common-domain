@@ -7,9 +7,7 @@ namespace MyOnlineStore\Common\Domain\Value;
  */
 final class LanguageCode
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $code;
 
     /**
@@ -19,11 +17,11 @@ final class LanguageCode
      */
     public function __construct($code)
     {
-        if (!preg_match('/^[a-z]{2,3}$/i', $code)) {
-            throw new \InvalidArgumentException(sprintf('Invalid language code given: %s', $code));
+        if (!\preg_match('/^[a-z]{2,3}$/i', $code)) {
+            throw new \InvalidArgumentException(\sprintf('Invalid language code given: %s', $code));
         }
 
-        $this->code = strtolower($code);
+        $this->code = \strtolower($code);
     }
 
     /**

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class DomainNameTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         self::assertEquals('foo.bar', (string) new DomainName('foo.bar'));
     }
@@ -18,7 +18,7 @@ final class DomainNameTest extends TestCase
      *
      * @param mixed $value
      */
-    public function testInvalidStringValues($value)
+    public function testInvalidStringValues($value): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -28,12 +28,12 @@ final class DomainNameTest extends TestCase
     /**
      * @dataProvider getValidStringValues
      */
-    public function testValidStringValues(string $value)
+    public function testValidStringValues(string $value): void
     {
         self::assertInstanceOf(DomainName::class, new DomainName($value));
     }
 
-    public function testCreateSubDomain()
+    public function testCreateSubDomain(): void
     {
         self::assertEquals('www.domain.org', (string) DomainName::createSubDomain(new DomainName('domain.org'), 'www'));
         self::assertEquals(
@@ -42,31 +42,31 @@ final class DomainNameTest extends TestCase
         );
     }
 
-    public function testGetSubdomain()
+    public function testGetSubdomain(): void
     {
         self::assertEquals('www', (new DomainName('www.google.nl'))->getSubdomain());
         self::assertEquals('www.shop', (new DomainName('www.shop.google.nl'))->getSubdomain());
     }
 
-    public function testGetRootdomain()
+    public function testGetRootdomain(): void
     {
         self::assertEquals('google.nl', (new DomainName('www.google.nl'))->getRootDomain());
         self::assertEquals('mijnwebwinkel.co.uk', (new DomainName('www.shop.mijnwebwinkel.co.uk'))->getRootDomain());
     }
 
-    public function testIsRootdomain()
+    public function testIsRootdomain(): void
     {
         self::assertFalse((new DomainName('www.google.co.uk'))->isRootDomain());
         self::assertTrue((new DomainName('google.co.uk'))->isRootDomain());
     }
 
-    public function testGetTld()
+    public function testGetTld(): void
     {
         self::assertEquals('nl', (new DomainName('www.google.nl'))->getTld());
         self::assertEquals('co.uk', (new DomainName('www.shop.mijnwebwinkel.co.uk'))->getTld());
     }
 
-    public function testGetHostName()
+    public function testGetHostName(): void
     {
         self::assertEquals('google', (new DomainName('www.google.nl'))->getHostName());
         self::assertEquals('mijnwebwinkel', (new DomainName('www.shop.mijnwebwinkel.co.uk'))->getHostName());

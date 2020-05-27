@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UrlPathTypeTest extends TestCase
 {
-    public function testToInt()
+    public function testToInt(): void
     {
         self::assertEquals(UrlPathType::ABSOLUTE_PATH, UrlPathType::asAbsolutePath()->toInt());
         self::assertEquals(UrlPathType::ABSOLUTE_URL, UrlPathType::asAbsoluteUrl()->toInt());

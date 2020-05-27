@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ViewPortTest extends TestCase
 {
-    public function testAsSmall()
+    public function testAsSmall(): void
     {
         $viewPort = ViewPort::asSmall();
 
@@ -19,7 +19,7 @@ final class ViewPortTest extends TestCase
         self::assertSame('small', (string) $viewPort);
     }
 
-    public function testAsMedium()
+    public function testAsMedium(): void
     {
         $viewPort = ViewPort::asMedium();
 
@@ -30,7 +30,7 @@ final class ViewPortTest extends TestCase
         self::assertSame('medium', (string) $viewPort);
     }
 
-    public function testAsLarge()
+    public function testAsLarge(): void
     {
         $viewPort = ViewPort::asLarge();
 
@@ -41,7 +41,7 @@ final class ViewPortTest extends TestCase
         self::assertSame('large', (string) $viewPort);
     }
 
-    public function testInvalid()
+    public function testInvalid(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 

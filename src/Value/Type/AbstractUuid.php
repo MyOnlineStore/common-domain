@@ -9,9 +9,7 @@ use Ramsey\Uuid\UuidInterface;
 
 abstract class AbstractUuid
 {
-    /**
-     * @var UuidInterface
-     */
+    /** @var UuidInterface */
     protected $uuid;
 
     /**

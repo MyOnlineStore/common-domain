@@ -11,16 +11,13 @@ final class Amount extends Number
     {
         if (false !== \strpos((string) $value, '.')) {
             throw new \InvalidArgumentException(
-                sprintf('Amount must be a whole number, "%s" given', $value)
+                \sprintf('Amount must be a whole number, "%s" given', $value)
             );
         }
 
         parent::__construct($value, 0);
     }
 
-    /**
-     * @return Amount
-     */
     public static function asZero(): Amount
     {
         return new self(0);

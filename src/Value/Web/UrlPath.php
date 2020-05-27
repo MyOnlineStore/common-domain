@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 final class UrlPath
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $value;
 
     /**

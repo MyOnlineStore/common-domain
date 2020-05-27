@@ -4,13 +4,14 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Value\CurrencyIso;
+use PHPUnit\Framework\TestCase;
 
-final class CurrencyIsoTest extends \PHPUnit\Framework\TestCase
+final class CurrencyIsoTest extends TestCase
 {
     /**
      * @return array[]
      */
-    public function invalidArgumentProvider()
+    public function invalidArgumentProvider(): array
     {
         return [
             [123],
@@ -21,13 +22,13 @@ final class CurrencyIsoTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         self::assertTrue((new CurrencyIso('EUR'))->equals(new CurrencyIso('EUR')));
         self::assertFalse((new CurrencyIso('EUR'))->equals(new CurrencyIso('USD')));
     }
 
-    public function testGetMinorUnit()
+    public function testGetMinorUnit(): void
     {
         self::assertEquals(3, (new CurrencyIso('OMR'))->getMinorUnit());
         self::assertEquals(2, (new CurrencyIso('EUR'))->getMinorUnit());
@@ -37,16 +38,16 @@ final class CurrencyIsoTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidArgumentProvider
-     * @expectedException \InvalidArgumentException
      *
      * @param mixed $argument
      */
-    public function testInvalidTypes($argument)
+    public function testInvalidTypes($argument): void
     {
+        $this->expectException('InvalidArgumentException');
         new CurrencyIso($argument);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         self::assertEquals('EUR', (string) new CurrencyIso('EUR'));
         self::assertEquals('USD', (string) new CurrencyIso('USD'));

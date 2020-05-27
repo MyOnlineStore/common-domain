@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Monetary;
 
 use MyOnlineStore\Common\Domain\Value\Monetary\Amount;
+use PHPUnit\Framework\TestCase;
 
-final class AmountTest extends \PHPUnit\Framework\TestCase
+final class AmountTest extends TestCase
 {
     public function invalidInputProvider()
     {
@@ -19,7 +20,7 @@ final class AmountTest extends \PHPUnit\Framework\TestCase
      *
      * @param mixed $input
      */
-    public function testInvalidInput($input)
+    public function testInvalidInput($input): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -37,12 +38,12 @@ final class AmountTest extends \PHPUnit\Framework\TestCase
      *
      * @param mixed $input
      */
-    public function testValidInput($input)
+    public function testValidInput($input): void
     {
         self::assertInstanceOf(Amount::class, new Amount($input));
     }
 
-    public function testAsZero()
+    public function testAsZero(): void
     {
         $zeroAmount = Amount::asZero();
 

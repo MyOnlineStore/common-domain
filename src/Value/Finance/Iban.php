@@ -8,9 +8,7 @@ use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
 final class Iban
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $iban;
 
     /**

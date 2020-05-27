@@ -7,9 +7,7 @@ use MyOnlineStore\Common\Domain\Exception\Web\InvalidHostName;
 
 final class UrlHost
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $hostname;
 
     /**
