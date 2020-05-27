@@ -3,16 +3,23 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Monetary;
 
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 
+/**
+ * @deprecated Use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount instead
+ */
 final class Amount extends Number
 {
+    /**
+     * @inheritDoc
+     *
+     * @throws InvalidArgument
+     */
     public function __construct($value)
     {
         if (false !== \strpos((string) $value, '.')) {
-            throw new \InvalidArgumentException(
-                \sprintf('Amount must be a whole number, "%s" given', $value)
-            );
+            throw new InvalidArgument(\sprintf('Amount must be a whole number, "%s" given', $value));
         }
 
         parent::__construct($value, 0);

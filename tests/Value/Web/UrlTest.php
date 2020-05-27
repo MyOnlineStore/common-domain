@@ -7,7 +7,7 @@ use League\Uri\Uri;
 use MyOnlineStore\Common\Domain\Value\Web\Url;
 use PHPUnit\Framework\TestCase;
 
-class UrlTest extends TestCase
+final class UrlTest extends TestCase
 {
     /**
      * @return string[][]

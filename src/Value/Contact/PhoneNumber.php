@@ -23,12 +23,12 @@ final class PhoneNumber
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, RegionCode $regionCode = null)
+    public function __construct($value, ?RegionCode $regionCode = null)
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
 
         if (null === $regionCode) {
-            $regionCode = new RegionCode('NL');
+            $regionCode = RegionCode::asNL();
         }
 
         try {

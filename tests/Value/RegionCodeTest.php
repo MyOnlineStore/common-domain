@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 use PHPUnit\Framework\TestCase;
 
@@ -17,12 +18,10 @@ final class RegionCodeTest extends TestCase
 
     /**
      * @dataProvider invalidArgumentProvider
-     *
-     * @param mixed $argument
      */
-    public function testInvalidTypes($argument): void
+    public function testInvalidTypes(?string $argument): void
     {
-        $this->expectException('InvalidArgumentException');
+        $this->expectException(InvalidArgument::class);
         new RegionCode($argument);
     }
 
@@ -41,7 +40,7 @@ final class RegionCodeTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return string[][]|null[][]
      */
     public function invalidArgumentProvider(): array
     {
@@ -54,7 +53,7 @@ final class RegionCodeTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return RegionCode[][]|bool[][]
      */
     public function isEuRegionProvider(): array
     {
@@ -68,7 +67,6 @@ final class RegionCodeTest extends TestCase
 
     /**
      * @dataProvider isEuRegionProvider
-     *
      */
     public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {

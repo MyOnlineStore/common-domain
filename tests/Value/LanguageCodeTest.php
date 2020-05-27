@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Value;
 
+use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
 use PHPUnit\Framework\TestCase;
 
@@ -10,12 +11,10 @@ final class LanguageCodeTest extends TestCase
 {
     /**
      * @dataProvider invalidArgumentProvider
-     *
-     * @param mixed $argument
      */
-    public function testInvalidTypes($argument): void
+    public function testInvalidTypes(string $argument): void
     {
-        $this->expectException('InvalidArgumentException');
+        $this->expectException(InvalidArgument::class);
         new LanguageCode($argument);
     }
 
@@ -33,13 +32,13 @@ final class LanguageCodeTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return string[][]
      */
     public function invalidArgumentProvider(): array
     {
         return [
             ['n'],
-            ['nederland']
+            ['nederland'],
         ];
     }
 }

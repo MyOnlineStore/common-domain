@@ -21,10 +21,7 @@ class Number
         $this->assignValue($value, $scale);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->value;
     }
@@ -84,10 +81,7 @@ class Number
         return -1 === $this->value->comp($operand->value, $scale);
     }
 
-    /**
-     * @return bool
-     */
-    public function isZero()
+    public function isZero(): bool
     {
         return $this->value->isZero();
     }
@@ -130,7 +124,7 @@ class Number
 
     protected function assertOperand(Number $operand): void
     {
-        // scope to perform assertions to guard against inproper operands
+        // scope to perform assertions to guard against improper operands
     }
 
     /**

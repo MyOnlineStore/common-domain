@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
  * @method RegionCode[] getIterator()
+ *
+ * @deprecated Should be moved to common-collection
  */
 interface RegionCodeCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {

@@ -5,6 +5,9 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
+/**
+ * @deprecated Should be moved to common-collection
+ */
 final class RegionCodeCollection extends ImmutableCollection implements RegionCodeCollectionInterface
 {
     use StringCollectionTrait;
