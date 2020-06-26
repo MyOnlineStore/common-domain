@@ -52,7 +52,8 @@ final class Locale
 
     public function equals(self $locale): bool
     {
-        return 0 === \strcmp((string) $this, (string) $locale);
+        return $this->regionCode->equals($locale->regionCode) &&
+            $this->languageCode->equals($locale->languageCode);
     }
 
     public function languageCode(): LanguageCode
