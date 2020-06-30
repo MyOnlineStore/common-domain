@@ -1,0 +1,4 @@
+{
+    "bootstrap": "vendor/autoload.php",
+    "retry_threshold": 5
+}
