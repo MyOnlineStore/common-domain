@@ -21,6 +21,7 @@ final class StreetTest extends TestCase
         self::assertSame($name, $street->getName());
         self::assertSame($number, $street->getNumber());
         self::assertNull($street->getSuffix());
+        self::assertSame('foo 12a', (string) $street);
     }
 
     public function testWithSuffix(): void
@@ -34,5 +35,6 @@ final class StreetTest extends TestCase
         self::assertSame($name, $street->getName());
         self::assertSame($number, $street->getNumber());
         self::assertEquals($suffix, $street->getSuffix());
+        self::assertSame('foo 12a bar', (string) $street);
     }
 }
