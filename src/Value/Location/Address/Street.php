@@ -52,4 +52,9 @@ final class Street
     {
         return $this->suffix ? StreetSuffix::fromString($this->suffix) : null;
     }
+
+    public function __toString(): string
+    {
+        return \trim(\sprintf('%s %s %s', $this->name, $this->number, $this->suffix ?: ''));
+    }
 }
