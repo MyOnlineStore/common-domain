@@ -38,6 +38,13 @@ final class Street
         $this->suffix = $suffix ? (string) $suffix : null;
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->name->equals($operand->name) &&
+            $this->number->equals($operand->number) &&
+            $this->suffix === $operand->suffix;
+    }
+
     public function getName(): StreetName
     {
         return $this->name;

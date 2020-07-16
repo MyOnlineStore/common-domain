@@ -34,6 +34,11 @@ final class City
         return new self($city);
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->city === $operand->city;
+    }
+
     public function __toString(): string
     {
         return $this->city;

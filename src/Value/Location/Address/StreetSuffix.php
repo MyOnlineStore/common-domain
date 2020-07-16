@@ -26,6 +26,11 @@ final class StreetSuffix
         return new self($suffix);
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->suffix === $operand->suffix;
+    }
+
     public function __toString(): string
     {
         return $this->suffix;

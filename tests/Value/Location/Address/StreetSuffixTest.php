@@ -31,4 +31,12 @@ final class StreetSuffixTest extends TestCase
         $this->expectException(InvalidArgument::class);
         StreetSuffix::fromString($empty);
     }
+
+    public function testEquals(): void
+    {
+        $suffix = StreetSuffix::fromString('foo');
+
+        self::assertTrue($suffix->equals(StreetSuffix::fromString('foo')));
+        self::assertFalse($suffix->equals(StreetSuffix::fromString('bar')));
+    }
 }

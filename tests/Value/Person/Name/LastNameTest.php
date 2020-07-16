@@ -31,4 +31,12 @@ final class LastNameTest extends TestCase
         $this->expectException(InvalidArgument::class);
         LastName::fromString($empty);
     }
+
+    public function testEquals(): void
+    {
+        $lastName = LastName::fromString('foo');
+
+        self::assertTrue($lastName->equals(LastName::fromString('foo')));
+        self::assertFalse($lastName->equals(LastName::fromString('bar')));
+    }
 }

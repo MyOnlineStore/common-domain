@@ -11,6 +11,68 @@ use PHPUnit\Framework\TestCase;
 
 final class StreetTest extends TestCase
 {
+    public function testEquals(): void
+    {
+        $street = new Street(
+            StreetName::fromString('foo'),
+            StreetNumber::fromString('12a'),
+            StreetSuffix::fromString('bar')
+        );
+
+        self::assertTrue(
+            $street->equals(
+                new Street(
+                    StreetName::fromString('foo'),
+                    StreetNumber::fromString('12a'),
+                    StreetSuffix::fromString('bar')
+                )
+            )
+        );
+        self::assertFalse(
+            $street->equals(
+                new Street(
+                    StreetName::fromString('bar'),
+                    StreetNumber::fromString('12a'),
+                    StreetSuffix::fromString('bar')
+                )
+            )
+        );
+        self::assertFalse(
+            $street->equals(
+                new Street(
+                    StreetName::fromString('foo'),
+                    StreetNumber::fromString('12b'),
+                    StreetSuffix::fromString('bar')
+                )
+            )
+        );
+        self::assertFalse(
+            $street->equals(
+                new Street(
+                    StreetName::fromString('foo'),
+                    StreetNumber::fromString('12a'),
+                    StreetSuffix::fromString('foo')
+                )
+            )
+        );
+        self::assertFalse($street->equals(new Street(StreetName::fromString('foo'), StreetNumber::fromString('12a'))));
+
+        $street = new Street(StreetName::fromString('foo'), StreetNumber::fromString('12a'));
+
+        self::assertTrue($street->equals(new Street(StreetName::fromString('foo'), StreetNumber::fromString('12a'))));
+        self::assertFalse($street->equals(new Street(StreetName::fromString('bar'), StreetNumber::fromString('12a'))));
+        self::assertFalse($street->equals(new Street(StreetName::fromString('foo'), StreetNumber::fromString('12b'))));
+        self::assertFalse(
+            $street->equals(
+                new Street(
+                    StreetName::fromString('foo'),
+                    StreetNumber::fromString('12a'),
+                    StreetSuffix::fromString('foo')
+                )
+            )
+        );
+    }
+
     public function testWithoutSuffix(): void
     {
         $street = new Street(
