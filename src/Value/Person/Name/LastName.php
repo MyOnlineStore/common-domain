@@ -34,6 +34,11 @@ final class LastName
         return new self($lastName);
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->lastName === $operand->lastName;
+    }
+
     public function __toString(): string
     {
         return $this->lastName;

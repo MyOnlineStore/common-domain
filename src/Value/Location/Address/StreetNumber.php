@@ -34,6 +34,11 @@ final class StreetNumber
         return new self($number);
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->number === $operand->number;
+    }
+
     public function __toString(): string
     {
         return $this->number;

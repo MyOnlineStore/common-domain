@@ -32,6 +32,12 @@ final class Name
         $this->lastName = $lastName;
     }
 
+    public function equals(self $operand): bool
+    {
+        return $this->firstName->equals($operand->firstName) &&
+            $this->lastName->equals($operand->lastName);
+    }
+
     public function getFirstName(): FirstName
     {
         return $this->firstName;

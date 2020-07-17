@@ -31,4 +31,12 @@ final class StreetNameTest extends TestCase
         $this->expectException(InvalidArgument::class);
         StreetName::fromString($empty);
     }
+
+    public function testEquals(): void
+    {
+        $streetName = StreetName::fromString('foo');
+
+        self::assertTrue($streetName->equals(StreetName::fromString('foo')));
+        self::assertFalse($streetName->equals(StreetName::fromString('bar')));
+    }
 }

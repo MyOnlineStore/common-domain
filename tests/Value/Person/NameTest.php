@@ -22,4 +22,14 @@ final class NameTest extends TestCase
 
         self::assertSame('foo bar', (string) $name);
     }
+
+    public function testEquals(): void
+    {
+        $name = new Name(FirstName::fromString('foo'), LastName::fromString('bar'));
+
+        self::assertTrue($name->equals(new Name(FirstName::fromString('foo'), LastName::fromString('bar'))));
+        self::assertFalse($name->equals(new Name(FirstName::fromString('foo'), LastName::fromString('foo'))));
+        self::assertFalse($name->equals(new Name(FirstName::fromString('bar'), LastName::fromString('bar'))));
+        self::assertFalse($name->equals(new Name(FirstName::fromString('bar'), LastName::fromString('foo'))));
+    }
 }
