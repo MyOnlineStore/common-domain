@@ -10,9 +10,9 @@ final class Percentage extends Number
     /**
      * @inheritdoc
      */
-    public function __construct(string $value, int $scale = null)
+    public function __construct(int $value, int $scale = null)
     {
-        parent::__construct($value, $scale);
+        parent::__construct((string) $value, $scale);
 
         if ($this->value->isNegative() || $this->value->asInteger() > 100) {
             throw new InvalidArgument(sprintf("Given value '%d' is not a valid percentage", $value));
