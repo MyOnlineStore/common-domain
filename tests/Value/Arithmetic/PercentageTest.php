@@ -11,35 +11,48 @@ final class PercentageTest extends TestCase
 {
     public function testCreation()
     {
-        $percentage = new Percentage(50);
+        $percentage = Percentage::fromString('50');
 
         self::assertSame('50', (string) $percentage);
+    }
+
+    public function testCreationWithDecimals()
+    {
+        $percentage = Percentage::fromString('5.55');
+
+        self::assertSame('5.55', (string) $percentage);
     }
 
     public function testCreationWithLessThanZeroInt()
     {
         self::expectException(InvalidArgument::class);
 
-        new Percentage(-1);
+        Percentage::fromString('-1');
+    }
+
+    public function testCreationWithNonNumericValue()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        Percentage::fromString('nonNumeric');
     }
 
     public function testCreationWithMoreThanHunderdInt()
     {
         self::expectException(InvalidArgument::class);
 
-        new Percentage(101);
+        Percentage::fromString('101');
     }
 
     public function testCreationWithScale()
     {
-        $percentage = new Percentage(76, 4);
+        $percentage = Percentage::fromString('76', 4);
 
         self::assertSame('76.0000', (string) $percentage);
     }
 
     public function testIsZero()
     {
-        self::assertFalse((new Percentage(98))->isZero());
-        self::assertTrue((new Percentage(0))->isZero());
+        self::assertFalse((Percentage::fromString('98'))->isZero());
+        self::assertTrue((Percentage::fromString('0'))->isZero());
     }
 }
