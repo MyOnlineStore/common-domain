@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
+use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
+/**
+ * @ORM\Embeddable
+ */
 final class Percentage extends Number
 {
     /**
