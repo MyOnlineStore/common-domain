@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
 use Doctrine\ORM\Mapping as ORM;
+use Litipk\BigNumbers\Decimal;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
@@ -11,6 +12,13 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  */
 final class Percentage extends Number
 {
+    /**
+     * @ORM\Column(name="percentage", type="decimal", precision="5", scale="2")
+     *
+     * @var Decimal
+     */
+    protected $value;
+
     /**
      * @inheritdoc
      */
