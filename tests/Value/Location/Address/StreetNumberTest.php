@@ -12,6 +12,7 @@ final class StreetNumberTest extends TestCase
     public function testNotEmpty(): void
     {
         self::assertSame('foo', (string) StreetNumber::fromString('foo'));
+        self::assertSame('foo', (string) StreetNumber::fromString(' foo '));
     }
 
     public function emptyDataProvider(): \Generator

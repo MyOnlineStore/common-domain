@@ -12,6 +12,7 @@ final class StreetSuffixTest extends TestCase
     public function testNotEmpty(): void
     {
         self::assertSame('foo', (string) StreetSuffix::fromString('foo'));
+        self::assertSame('foo', (string) StreetSuffix::fromString(' foo '));
     }
 
     public function emptyDataProvider(): \Generator
