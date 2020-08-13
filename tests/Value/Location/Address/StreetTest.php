@@ -102,6 +102,23 @@ final class StreetTest extends TestCase
                 )
             )
         );
+        self::assertTrue(
+            Street::fromSingleLine('3e Haagstraat 135')->equals(
+                new Street(
+                    StreetName::fromString('3e Haagstraat'),
+                    StreetNumber::fromString('135')
+                )
+            )
+        );
+        self::assertTrue(
+            Street::fromSingleLine('3e Haagstraat 135a')->equals(
+                new Street(
+                    StreetName::fromString('3e Haagstraat'),
+                    StreetNumber::fromString('135'),
+                    StreetSuffix::fromString('a')
+                )
+            )
+        );
     }
 
     public function testFromSingleLineFailed(): void

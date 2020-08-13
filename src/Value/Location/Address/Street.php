@@ -44,12 +44,14 @@ final class Street
      */
     public static function fromSingleLine(string $streetAddress): self
     {
-        if (\preg_match('/^(\D*[^\d\s]) *([\d]+)(.*)$/', $streetAddress, $results)) {
-            return new self(
-                StreetName::fromString($results[1]),
-                StreetNumber::fromString($results[2]),
-                !empty(\trim($results[3])) ? StreetSuffix::fromString($results[3]) : null
-            );
+        if (\preg_match('/^(.\D+) *([\d]+)(.*)$/', $streetAddress, $results)) {
+            try {
+                $suffix = StreetSuffix::fromString($results[3]);
+            } catch (InvalidArgument $exception) {
+                $suffix = null;
+            }
+
+            return new self(StreetName::fromString($results[1]), StreetNumber::fromString($results[2]), $suffix);
         }
 
         throw new InvalidArgument('Unable to parse single line address');
