@@ -31,7 +31,7 @@ final class StreetNumber
     {
         Assert::notWhitespaceOnly($number);
 
-        return new self($number);
+        return new self(\trim($number));
     }
 
     public function equals(self $operand): bool

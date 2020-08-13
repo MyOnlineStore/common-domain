@@ -23,7 +23,7 @@ final class StreetSuffix
     {
         Assert::notWhitespaceOnly($suffix);
 
-        return new self($suffix);
+        return new self(\trim($suffix));
     }
 
     public function equals(self $operand): bool
