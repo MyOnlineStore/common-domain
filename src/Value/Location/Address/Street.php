@@ -11,6 +11,11 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  */
 final class Street
 {
+    private const SINGLE_LINE_PATTERNS = [
+        '/^(?P<street>\d*\D+)\s+(?P<number>\d+)(?P<suffix>\D*)$/',
+        '/^(?P<number>\d+)(?P<suffix>\w*)\s+(?P<street>\d*\D+)$/',
+    ];
+
     /**
      * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetName", columnPrefix=false)
      *
@@ -44,14 +49,14 @@ final class Street
      */
     public static function fromSingleLine(string $streetAddress): self
     {
-        if (\preg_match('/^(.\D+) *([\d]+)(.*)$/', $streetAddress, $results)) {
-            try {
-                $suffix = StreetSuffix::fromString($results[3]);
-            } catch (InvalidArgument $exception) {
-                $suffix = null;
+        foreach (self::SINGLE_LINE_PATTERNS as $pattern) {
+            if (\preg_match($pattern, $streetAddress, $results)) {
+                return new self(
+                    StreetName::fromString($results['street']),
+                    StreetNumber::fromString($results['number']),
+                    $results['suffix'] ? StreetSuffix::fromString($results['suffix']) : null
+                );
             }
-
-            return new self(StreetName::fromString($results[1]), StreetNumber::fromString($results[2]), $suffix);
         }
 
         throw new InvalidArgument('Unable to parse single line address');
