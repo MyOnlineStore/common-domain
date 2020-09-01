@@ -12,6 +12,20 @@ use PHPUnit\Framework\TestCase;
 
 final class StreetTest extends TestCase
 {
+    public function dataFromSingleLine(): \Generator
+    {
+        yield ['foo 12a', 'foo', '12', 'a'];
+        yield ['foo 12 a', 'foo', '12', 'a'];
+        yield ['foo 12', 'foo', '12', null];
+        yield ['3e Haagstraat 135', '3e Haagstraat', '135', null];
+        yield ['3e Haagstraat 135a', '3e Haagstraat', '135', 'a'];
+        yield ['33e Haagstraat 135a', '33e Haagstraat', '135', 'a'];
+        yield ['27 Kiln Road', 'Kiln Road', '27', null];
+        yield ['57065 Pwf Rd', 'Pwf Rd', '57065', null];
+        yield ['8122 Thompson Rd.', 'Thompson Rd.', '8122', null];
+        yield ['123A đường Lê Lợi', 'đường Lê Lợi', '123', 'A'];
+    }
+
     public function testEquals(): void
     {
         $street = new Street(
@@ -74,48 +88,17 @@ final class StreetTest extends TestCase
         );
     }
 
-    public function testFromSingleLine(): void
+    /**
+     * @dataProvider dataFromSingleLine
+     */
+    public function testFromSingleLine(string $line, string $street, string $number, ?string $suffix): void
     {
         self::assertTrue(
-            Street::fromSingleLine('foo 12a')->equals(
+            Street::fromSingleLine($line)->equals(
                 new Street(
-                    StreetName::fromString('foo'),
-                    StreetNumber::fromString('12'),
-                    StreetSuffix::fromString('a')
-                )
-            )
-        );
-        self::assertTrue(
-            Street::fromSingleLine('foo 12 a')->equals(
-                new Street(
-                    StreetName::fromString('foo'),
-                    StreetNumber::fromString('12'),
-                    StreetSuffix::fromString('a')
-                )
-            )
-        );
-        self::assertTrue(
-            Street::fromSingleLine('foo 12')->equals(
-                new Street(
-                    StreetName::fromString('foo'),
-                    StreetNumber::fromString('12')
-                )
-            )
-        );
-        self::assertTrue(
-            Street::fromSingleLine('3e Haagstraat 135')->equals(
-                new Street(
-                    StreetName::fromString('3e Haagstraat'),
-                    StreetNumber::fromString('135')
-                )
-            )
-        );
-        self::assertTrue(
-            Street::fromSingleLine('3e Haagstraat 135a')->equals(
-                new Street(
-                    StreetName::fromString('3e Haagstraat'),
-                    StreetNumber::fromString('135'),
-                    StreetSuffix::fromString('a')
+                    StreetName::fromString($street),
+                    StreetNumber::fromString($number),
+                    null !== $suffix ? StreetSuffix::fromString($suffix) : null
                 )
             )
         );
@@ -125,19 +108,6 @@ final class StreetTest extends TestCase
     {
         $this->expectException(InvalidArgument::class);
         Street::fromSingleLine('foo');
-    }
-
-    public function testWithoutSuffix(): void
-    {
-        $street = new Street(
-            $name = StreetName::fromString('foo'),
-            $number = StreetNumber::fromString('12a')
-        );
-
-        self::assertSame($name, $street->getName());
-        self::assertSame($number, $street->getNumber());
-        self::assertNull($street->getSuffix());
-        self::assertSame('foo 12a', (string) $street);
     }
 
     public function testWithSuffix(): void
@@ -152,5 +122,18 @@ final class StreetTest extends TestCase
         self::assertSame($number, $street->getNumber());
         self::assertEquals($suffix, $street->getSuffix());
         self::assertSame('foo 12a bar', (string) $street);
+    }
+
+    public function testWithoutSuffix(): void
+    {
+        $street = new Street(
+            $name = StreetName::fromString('foo'),
+            $number = StreetNumber::fromString('12a')
+        );
+
+        self::assertSame($name, $street->getName());
+        self::assertSame($number, $street->getNumber());
+        self::assertNull($street->getSuffix());
+        self::assertSame('foo 12a', (string) $street);
     }
 }
