@@ -50,7 +50,7 @@ final class Money
      */
     public static function fromFractionated($amount, CurrencyIso $currency): self
     {
-        if (false !== \strpos($amount, ',')) {
+        if (false !== \strpos((string) $amount, ',')) {
             throw new \InvalidArgumentException(\sprintf('cannot use comma separated amount "%s"', $amount));
         }
 
