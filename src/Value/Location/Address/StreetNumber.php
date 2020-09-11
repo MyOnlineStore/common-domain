@@ -36,7 +36,7 @@ final class StreetNumber
 
     public function equals(self $operand): bool
     {
-        return $this->number === $operand->number;
+        return \mb_strtoupper($this->number) === \mb_strtoupper($operand->number);
     }
 
     public function __toString(): string

@@ -28,7 +28,7 @@ final class StreetSuffix
 
     public function equals(self $operand): bool
     {
-        return $this->suffix === $operand->suffix;
+        return \mb_strtoupper($this->suffix) === \mb_strtoupper($operand->suffix);
     }
 
     public function __toString(): string

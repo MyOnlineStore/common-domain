@@ -38,6 +38,7 @@ final class StreetSuffixTest extends TestCase
         $suffix = StreetSuffix::fromString('foo');
 
         self::assertTrue($suffix->equals(StreetSuffix::fromString('foo')));
+        self::assertTrue($suffix->equals(StreetSuffix::fromString('FoO')));
         self::assertFalse($suffix->equals(StreetSuffix::fromString('bar')));
     }
 }
