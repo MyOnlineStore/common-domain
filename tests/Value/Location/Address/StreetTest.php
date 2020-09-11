@@ -24,6 +24,8 @@ final class StreetTest extends TestCase
         yield ['57065 Pwf Rd', 'Pwf Rd', '57065', null];
         yield ['8122 Thompson Rd.', 'Thompson Rd.', '8122', null];
         yield ['123A đường Lê Lợi', 'đường Lê Lợi', '123', 'A'];
+        yield ['Dorp 43 B 3', 'Dorp', '43', 'B 3'];
+        yield ['Dendermondsesteenweg 116A Bus 3', 'Dendermondsesteenweg', '116', 'A Bus 3'];
     }
 
     public function testEquals(): void

@@ -23,6 +23,7 @@ final class MoneyTest extends TestCase
             ['2323232', CurrencyIso::fromString('XXX'), '2323232', 2323232],
             ['232.3232', CurrencyIso::fromString('IQD'), '232.323', 232323],
             ['11.999998', CurrencyIso::fromString('EUR'), '12.00', 1200],
+            [11.999998, CurrencyIso::fromString('EUR'), '12.00', 1200],
         ];
     }
 

@@ -12,8 +12,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 final class Street
 {
     private const SINGLE_LINE_PATTERNS = [
-        '/^(?P<street>\d*\D+)\s+(?P<number>\d+)(?P<suffix>\D*)$/',
-        '/^(?P<number>\d+)(?P<suffix>\w*)\s+(?P<street>\d*\D+)$/',
+        '/^(?P<street>\d*\D+)\s+(?P<number>\d+)(?P<suffix>.*)$/',
+        '/^(?P<number>\d+)(?P<suffix>\w*)\s+(?P<street>.*)$/',
     ];
 
     /**
@@ -59,7 +59,7 @@ final class Street
             }
         }
 
-        throw new InvalidArgument('Unable to parse single line address');
+        throw new InvalidArgument(\sprintf('Unable to parse single line address "%s"', $streetAddress));
     }
 
     public function equals(self $operand): bool
