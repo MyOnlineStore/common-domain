@@ -38,6 +38,7 @@ final class StreetNumberTest extends TestCase
         $streetNumber = StreetNumber::fromString('foo');
 
         self::assertTrue($streetNumber->equals(StreetNumber::fromString('foo')));
+        self::assertTrue($streetNumber->equals(StreetNumber::fromString('FoO')));
         self::assertFalse($streetNumber->equals(StreetNumber::fromString('bar')));
     }
 }

@@ -36,7 +36,7 @@ final class City
 
     public function equals(self $operand): bool
     {
-        return $this->city === $operand->city;
+        return \mb_strtoupper($this->city) === \mb_strtoupper($operand->city);
     }
 
     public function __toString(): string

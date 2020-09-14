@@ -37,6 +37,7 @@ final class FirstNameTest extends TestCase
         $firstName = FirstName::fromString('foo');
 
         self::assertTrue($firstName->equals(FirstName::fromString('foo')));
+        self::assertTrue($firstName->equals(FirstName::fromString('FoO')));
         self::assertFalse($firstName->equals(FirstName::fromString('bar')));
     }
 }

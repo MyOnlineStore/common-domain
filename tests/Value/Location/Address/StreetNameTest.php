@@ -38,6 +38,7 @@ final class StreetNameTest extends TestCase
         $streetName = StreetName::fromString('foo');
 
         self::assertTrue($streetName->equals(StreetName::fromString('foo')));
+        self::assertTrue($streetName->equals(StreetName::fromString('FoO')));
         self::assertFalse($streetName->equals(StreetName::fromString('bar')));
     }
 }

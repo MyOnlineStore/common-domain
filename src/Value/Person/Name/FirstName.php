@@ -36,7 +36,7 @@ final class FirstName
 
     public function equals(self $operand): bool
     {
-        return $this->firstName === $operand->firstName;
+        return \mb_strtoupper($this->firstName) === \mb_strtoupper($operand->firstName);
     }
 
     public function __toString(): string

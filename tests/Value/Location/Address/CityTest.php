@@ -37,6 +37,7 @@ final class CityTest extends TestCase
         $streetName = City::fromString('foo');
 
         self::assertTrue($streetName->equals(City::fromString('foo')));
+        self::assertTrue($streetName->equals(City::fromString('FoO')));
         self::assertFalse($streetName->equals(City::fromString('bar')));
     }
 }
