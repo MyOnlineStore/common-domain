@@ -88,6 +88,13 @@ final class PhoneNumberTest extends TestCase
         self::assertEquals('0031112', (new PhoneNumber('112'))->getFormatted());
     }
 
+    public function testGetCountryCode(): void
+    {
+        self::assertEquals(31, (new PhoneNumber('0031882315726'))->getCountryCode());
+        self::assertEquals(31, (new PhoneNumber('+31 (0)412 66 80 11'))->getCountryCode());
+        self::assertEquals(32, (new PhoneNumber('+32 412 66 80 11'))->getCountryCode());
+    }
+
     public function testWithRegionCodeChangesCountryPrefix(): void
     {
         $phoneNumber = new PhoneNumber('0031882315726');
