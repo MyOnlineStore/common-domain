@@ -52,6 +52,11 @@ final class PhoneNumber
         return 0 === \strcasecmp((string) $this, (string) $comparison);
     }
 
+    public function getCountryCode(): ?int
+    {
+        return $this->value->getCountryCode();
+    }
+
     public function getFormatted(): string
     {
         return \str_replace('+', '00', $this->phoneNumberUtil->format($this->value, PhoneNumberFormat::E164));
