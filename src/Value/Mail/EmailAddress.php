@@ -31,7 +31,7 @@ final class EmailAddress
             throw new InvalidEmailAddress(\sprintf('"%s" is not a valid email address', $emailAddress));
         }
 
-        $this->emailAddress = $emailAddress;
+        $this->emailAddress = \mb_strtolower($emailAddress);
     }
 
     public function equals(self $comparator): bool
