@@ -48,7 +48,7 @@ jobs:
                 run: |
                     php vendor/bin/phpunit --coverage-text=coverage.txt --colors=never
                     COVERAGE=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage.txt"), $out); echo $out[1];')
-                    echo "::set-env name=COVERAGE::${COVERAGE}"
+                    echo "COVERAGE=${COVERAGE}" >> $GITHUB_ENV
             -   name: Run Psalm
                 run: vendor/bin/psalm --output-format=github
 
@@ -63,7 +63,7 @@ jobs:
 #                run: |
 #                    php vendor/bin/phpunit --coverage-text=coverage-master.txt --colors=never
 #                    COVERAGE_MASTER=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage-master.txt"), $out); echo $out[1];')
-#                    echo "::set-env name=COVERAGE_MASTER::${COVERAGE_MASTER}"
+#                    echo "COVERAGE_MASTER=${COVERAGE_MASTER}" >> $GITHUB_ENV
 #            -   name: Report PR Status
 #                uses: actions/github-script@0.6.0
 #                with:
