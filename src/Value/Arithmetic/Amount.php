@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Amount extends Number
 {
@@ -33,6 +35,9 @@ final class Amount extends Number
         parent::__construct($value, 0);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asZero(): Amount
     {
         return new self(0);

@@ -6,15 +6,22 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 use League\Uri\Http;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
+/**
+ * @psalm-immutable
+ */
 final class Url extends Http
 {
     /**
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
     public static function fromString(string $value): self
     {
+        /** @psalm-suppress ImpureMethodCall */
         $url = self::createFromString($value);
 
+        /** @psalm-suppress ImpureMethodCall */
         if (!$url->isValidUri()) {
             throw new InvalidArgument(\sprintf('Invalid URL "%s" provided', $value));
         }

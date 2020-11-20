@@ -5,14 +5,13 @@ namespace MyOnlineStore\Common\Domain\Assertion;
 
 /**
  * assert an array contains only instances of class X
+ *
+ * @psalm-immutable
  */
 trait ArrayContainsClassAssertionTrait
 {
     /**
-     * @param array  $entries
-     * @param string $className
-     *
-     * @return bool
+     * @param mixed[] $entries
      */
     public function assertArrayContainsOnlyClass(array $entries, string $className): bool
     {

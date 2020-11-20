@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class ZipCode
 {
@@ -29,6 +31,8 @@ final class ZipCode
 
     /**
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
     public static function fromString(string $zipCode): self
     {
@@ -37,11 +41,9 @@ final class ZipCode
         return new self(\mb_strtoupper($zipCode));
     }
 
-    public function __toString(): string
-    {
-        return $this->zipCode;
-    }
-
+    /**
+     * @psalm-pure
+     */
     public static function asNotAvailable(): self
     {
         return new self(self::NOT_AVAILABLE);
@@ -50,5 +52,10 @@ final class ZipCode
     public function equals(self $comparison): bool
     {
         return \str_replace(' ', '', $this->zipCode) === \str_replace(' ', '', $comparison->zipCode);
+    }
+
+    public function __toString(): string
+    {
+        return $this->zipCode;
     }
 }

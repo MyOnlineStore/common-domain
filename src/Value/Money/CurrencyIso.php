@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Exception\Currency\InvalidCurrencyIso;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class CurrencyIso
 {
@@ -1283,6 +1285,8 @@ final class CurrencyIso
      * @param string $code ISO 4217 code (https://en.wikipedia.org/wiki/ISO_4217)
      *
      * @throws InvalidCurrencyIso
+     *
+     * @psalm-pure
      */
     public static function fromString(string $code): self
     {

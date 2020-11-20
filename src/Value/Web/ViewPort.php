@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class ViewPort
 {
@@ -41,19 +43,28 @@ final class ViewPort
         return $this->value;
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asSmall(): self
     {
-        return new static(self::SMALL);
+        return new self(self::SMALL);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asMedium(): self
     {
-        return new static(self::MEDIUM);
+        return new self(self::MEDIUM);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asLarge(): self
     {
-        return new static(self::LARGE);
+        return new self(self::LARGE);
     }
 
     public function isSmall(): bool
@@ -72,7 +83,9 @@ final class ViewPort
     }
 
     /**
-     * @return string[]
+     * @return list<string>
+     *
+     * @psalm-pure
      */
     public static function getAvailableViewPorts(): array
     {

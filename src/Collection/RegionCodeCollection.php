@@ -20,7 +20,7 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
         parent::__construct(
             \array_filter(
                 $entries,
-                function ($entry) {
+                static function ($entry) {
                     return $entry instanceof RegionCode;
                 }
             )
@@ -35,9 +35,6 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
         return \in_array($element, $this->getArrayCopy());
     }
 
-    /**
-     * @inheritdoc
-     */
     public function unique(): RegionCodeCollectionInterface
     {
         return new self(\array_unique($this->toArray()));
@@ -45,14 +42,12 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
 
     /**
      * @param string[] $isoCodes
-     *
-     * @return RegionCodeCollectionInterface
      */
     public static function fromStrings(array $isoCodes): RegionCodeCollectionInterface
     {
         return new self(
             \array_map(
-                function ($isoCode) {
+                static function ($isoCode) {
                     return new RegionCode($isoCode);
                 },
                 $isoCodes

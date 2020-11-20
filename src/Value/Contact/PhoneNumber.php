@@ -10,6 +10,9 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
+/**
+ * @psalm-immutable
+ */
 final class PhoneNumber
 {
     /** @var PhoneNumberUtil */
@@ -32,6 +35,7 @@ final class PhoneNumber
         }
 
         try {
+            /** @psalm-suppress ImpureMethodCall */
             $this->value = $this->phoneNumberUtil->parse($value, (string) $regionCode);
         } catch (NumberParseException $exception) {
             throw new \InvalidArgumentException(
@@ -59,16 +63,19 @@ final class PhoneNumber
 
     public function getFormatted(): string
     {
+        /** @psalm-suppress ImpureMethodCall */
         return \str_replace('+', '00', $this->phoneNumberUtil->format($this->value, PhoneNumberFormat::E164));
     }
 
     public function getShortInternationalFormat(): string
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->phoneNumberUtil->format($this->value, PhoneNumberFormat::E164);
     }
 
     public function isFixedLine(): bool
     {
+        /** @psalm-suppress ImpureMethodCall */
         return \in_array(
             $this->phoneNumberUtil->getNumberType($this->value),
             [
@@ -81,6 +88,7 @@ final class PhoneNumber
 
     public function isMobile(): bool
     {
+        /** @psalm-suppress ImpureMethodCall */
         return \in_array(
             $this->phoneNumberUtil->getNumberType($this->value),
             [

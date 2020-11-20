@@ -6,6 +6,9 @@ namespace MyOnlineStore\Common\Domain\Value\Finance;
 use IsoCodes\SwiftBic;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidBic;
 
+/**
+ * @psalm-immutable
+ */
 final class Bic
 {
     /** @var string */
@@ -16,10 +19,14 @@ final class Bic
         $this->bic = $bic;
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function fromString(string $bic): self
     {
         $bic = \mb_strtoupper($bic);
 
+        /** @psalm-suppress ImpureMethodCall */
         if (!SwiftBic::validate($bic)) {
             throw InvalidBic::withBic($bic);
         }

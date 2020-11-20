@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Value\Arithmetic\Number;
 
 /**
  * @deprecated Use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount instead
+ *
+ * @psalm-immutable
  */
 final class Amount extends Number
 {
@@ -25,6 +27,9 @@ final class Amount extends Number
         parent::__construct($value, 0);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asZero(): Amount
     {
         return new self(0);

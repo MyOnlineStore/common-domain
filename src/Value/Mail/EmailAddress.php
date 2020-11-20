@@ -10,6 +10,8 @@ use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class EmailAddress
 {
@@ -27,6 +29,7 @@ final class EmailAddress
     {
         $validator = new EmailValidator();
 
+        /** @psalm-suppress ImpureMethodCall */
         if (!$validator->isValid($emailAddress, new RFCValidation())) {
             throw new InvalidEmailAddress(\sprintf('"%s" is not a valid email address', $emailAddress));
         }

@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Money
 {
@@ -47,6 +49,8 @@ final class Money
 
     /**
      * @param int|string|float $amount
+     *
+     * @psalm-pure
      */
     public static function fromFractionated($amount, CurrencyIso $currency): self
     {
