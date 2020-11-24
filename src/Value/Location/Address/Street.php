@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Street
 {
@@ -46,6 +48,8 @@ final class Street
 
     /**
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
     public static function fromSingleLine(string $streetAddress): self
     {

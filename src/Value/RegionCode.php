@@ -10,6 +10,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  * ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  *
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class RegionCode
 {
@@ -38,6 +40,9 @@ final class RegionCode
         $this->code = \strtoupper($code);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function asNL(): self
     {
         return new self('NL');

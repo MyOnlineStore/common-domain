@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class IPAddress
 {

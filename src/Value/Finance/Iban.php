@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Iban
 {

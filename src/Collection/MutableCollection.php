@@ -17,7 +17,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @inheritDoc 
+     * @inheritDoc
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
      */
     public function equals(ImmutableCollectionInterface $otherCollection): bool
     {
-        if (\get_class($this) !== \get_class($otherCollection)) {
+        if (static::class !== \get_class($otherCollection)) {
             return false;
         }
 
@@ -120,11 +120,6 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         return $this->getArrayCopy();
     }
 
-    /**
-     * @param callable $callback
-     *
-     * @return bool
-     */
     protected function containsWith(callable $callback): bool
     {
         foreach ($this as $entry) {
@@ -137,8 +132,6 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @param \Closure $closure
-     *
      * @return static
      */
     protected function filter(\Closure $closure)
@@ -147,8 +140,6 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @param callable $callback
-     *
      * @return mixed
      *
      * @throws \OutOfBoundsException
@@ -165,8 +156,6 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @param \Closure $closure
-     *
      * @return static
      */
     protected function map(\Closure $closure)

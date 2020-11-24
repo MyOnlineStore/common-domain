@@ -7,15 +7,15 @@ use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @psalm-immutable
+ */
 abstract class AbstractUuid
 {
     /** @var UuidInterface */
     protected $uuid;
 
-    /**
-     * @param UuidInterface $uuid
-     */
-    private function __construct(UuidInterface $uuid)
+    final private function __construct(UuidInterface $uuid)
     {
         $this->uuid = $uuid;
     }
@@ -24,6 +24,8 @@ abstract class AbstractUuid
      * @param string $bytes
      *
      * @return static
+     *
+     * @psalm-pure
      */
     public static function fromBytes($bytes)
     {
@@ -35,7 +37,9 @@ abstract class AbstractUuid
      *
      * @return static
      *
-     * @throws InvalidUuidStringException If the namespace is not a valid uuid
+     * @throws InvalidUuidStringException
+     *
+     * @psalm-pure
      */
     public static function fromNumericId(string $namespace, int $numericId): AbstractUuid
     {
@@ -46,6 +50,8 @@ abstract class AbstractUuid
      * @param string $string
      *
      * @return static
+     *
+     * @psalm-pure
      */
     public static function fromString($string)
     {
@@ -54,34 +60,26 @@ abstract class AbstractUuid
 
     /**
      * @return static
+     *
+     * @psalm-pure
      */
     public static function generate()
     {
+        /** @psalm-suppress ImpureMethodCall */
         return new static(Uuid::uuid4());
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->uuid->toString();
     }
 
-    /**
-     * @return string
-     */
-    public function bytes()
+    public function bytes(): string
     {
         return $this->uuid->getBytes();
     }
 
-    /**
-     * @param AbstractUuid $otherUuid
-     *
-     * @return bool
-     */
-    public function equals(AbstractUuid $otherUuid)
+    public function equals(AbstractUuid $otherUuid): bool
     {
         return $this->uuid->equals($otherUuid->uuid);
     }

@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Value\Person\Name\LastName;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Name
 {

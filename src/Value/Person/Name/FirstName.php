@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class FirstName
 {
@@ -26,6 +28,8 @@ final class FirstName
 
     /**
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
     public static function fromString(string $firstName): self
     {

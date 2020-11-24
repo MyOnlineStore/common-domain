@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Assertion;
 
+/**
+ * @psalm-immutable
+ */
 trait EnumValueGuardTrait
 {
     /**
@@ -38,6 +41,8 @@ trait EnumValueGuardTrait
 
     /**
      * @return mixed[]
+     *
+     * @psalm-pure
      */
     abstract protected function getValidValues();
 }

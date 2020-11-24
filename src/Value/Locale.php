@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Locale
 {
@@ -36,6 +38,8 @@ final class Locale
      * @param string $string
      *
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
     public static function fromString($string): self
     {

@@ -8,6 +8,8 @@ use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class Price
 {
@@ -19,6 +21,8 @@ final class Price
      * @ORM\Column(name="price", type="decimal", precision=15, scale=6)
      *
      * @var string
+     *
+     * @psalm-var numeric-string
      */
     private $amount;
 
@@ -31,6 +35,7 @@ final class Price
             throw new \InvalidArgumentException(\sprintf('%s is not a numeric value', $amount));
         }
 
+        /** @psalm-suppress PropertyTypeCoercion */
         $this->amount = (string) $amount;
     }
 
@@ -62,6 +67,8 @@ final class Price
     /**
      * add a percentage of the value represented by this Price
      * object and returns a new Price object
+     *
+     * @psalm-param numeric-string $percentage
      */
     public function addPercentage(string $percentage, int $scale = self::PRECISION_CALC): self
     {
@@ -111,6 +118,8 @@ final class Price
 
     /**
      * Get a percentage that was already added to the price, for example get the 21% of 121%
+     *
+     * @psalm-param numeric-string $percentage
      */
     public function getAddedPercentage(string $percentage, int $scale = self::PRECISION_CALC): self
     {
@@ -128,6 +137,8 @@ final class Price
 
     /**
      * Verkrijg een percentage van de huidige amount
+     *
+     * @psalm-param numeric-string $percentage
      */
     public function getPercentage(string $percentage, int $scale = self::PRECISION_CALC): self
     {
@@ -225,6 +236,8 @@ final class Price
     /**
      * Extracts a percentage of the value represented by this Price
      * object and returns a new Price object
+     *
+     * @psalm-param numeric-string $percentage
      */
     public function subtractPercentage(string $percentage, int $scale = self::PRECISION_CALC): self
     {

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
+/**
+ * @psalm-immutable
+ */
 final class UrlPath
 {
     /** @var string */
@@ -29,6 +32,6 @@ final class UrlPath
 
     public function __toString(): string
     {
-        return '/'.$this->value;
+        return '/' . $this->value;
     }
 }

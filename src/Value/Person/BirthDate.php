@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class BirthDate
 {
@@ -24,11 +26,17 @@ final class BirthDate
         $this->date = $date;
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function fromDateTime(\DateTimeImmutable $date): self
     {
         return new self($date);
     }
 
+    /**
+     * @psalm-pure
+     */
     public static function fromString(
         string $time,
         string $format = self::FORMAT

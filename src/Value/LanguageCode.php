@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  * ISO 639 code (https://en.wikipedia.org/wiki/ISO_639)
  *
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class LanguageCode
 {

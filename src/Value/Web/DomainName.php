@@ -6,9 +6,12 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 use LayerShifter\TLDExtract\Extract;
 use LayerShifter\TLDExtract\ResultInterface;
 
+/**
+ * @psalm-immutable
+ */
 final class DomainName
 {
-    /** @var Extract */
+    /** @var Extract|null */
     private static $validator;
 
     /** @var ResultInterface */
@@ -27,8 +30,10 @@ final class DomainName
             );
         }
 
+        /** @psalm-suppress ImpureMethodCall */
         $this->validatorResult = self::$validator->parse($value);
 
+        /** @psalm-suppress ImpureMethodCall */
         if (!$this->validatorResult->isValidDomain()) {
             throw new \InvalidArgumentException(\sprintf('Invalid domain name: "%s"', $value));
         }
@@ -49,16 +54,19 @@ final class DomainName
      */
     public function getHostName()
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->validatorResult->getHostname();
     }
 
     public function getRootDomain(): self
     {
+        /** @psalm-suppress ImpureMethodCall */
         return new self((string) $this->validatorResult->getRegistrableDomain());
     }
 
     public function isRootDomain(): bool
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->validatorResult->getRegistrableDomain() === $this->validatorResult->getFullHost();
     }
 
@@ -67,6 +75,7 @@ final class DomainName
      */
     public function getSubdomain()
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->validatorResult->getSubdomain();
     }
 
@@ -75,11 +84,13 @@ final class DomainName
      */
     public function getTld()
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->validatorResult->getSuffix();
     }
 
     public function __toString(): string
     {
+        /** @psalm-suppress ImpureMethodCall */
         return $this->validatorResult->getFullHost();
     }
 }

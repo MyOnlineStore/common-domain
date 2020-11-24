@@ -9,6 +9,8 @@ use MyOnlineStore\Common\Domain\Assertion\NumericAssertionTrait;
  * @deprecated Should be removed from common-domain
  *
  * @ORM\Embeddable
+ *
+ * @psalm-immutable
  */
 final class StoreId
 {
