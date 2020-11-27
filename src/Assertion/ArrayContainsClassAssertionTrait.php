@@ -6,6 +6,8 @@ namespace MyOnlineStore\Common\Domain\Assertion;
 /**
  * assert an array contains only instances of class X
  *
+ * @deprecated Use Psalm annotations/templating instead
+ *
  * @psalm-immutable
  */
 trait ArrayContainsClassAssertionTrait

@@ -6,6 +6,6 @@ namespace MyOnlineStore\Common\Domain\Exception;
 /**
  * @psalm-immutable
  */
-class NotFoundException extends \Exception
+class NotFound extends \Exception
 {
 }

@@ -23,6 +23,8 @@ final class EmailAddress
     private $emailAddress;
 
     /**
+     * @deprecated Use a named constructor instead
+     *
      * @throws InvalidEmailAddress
      */
     public function __construct(string $emailAddress)
@@ -37,9 +39,22 @@ final class EmailAddress
         $this->emailAddress = \mb_strtolower($emailAddress);
     }
 
+    /**
+     * @throws InvalidEmailAddress
+     */
+    public static function fromString(string $emailAddress): self
+    {
+        return new self($emailAddress);
+    }
+
     public function equals(self $comparator): bool
     {
         return $this->emailAddress === $comparator->emailAddress;
+    }
+
+    public function toString(): string
+    {
+        return $this->emailAddress;
     }
 
     public function __toString(): string

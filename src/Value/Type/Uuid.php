@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value\Type;
 
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 use Ramsey\Uuid\UuidInterface;
 
 /**
  * @psalm-immutable
  */
-abstract class AbstractUuid
+abstract class Uuid
 {
     /** @var UuidInterface */
     protected $uuid;
@@ -29,7 +29,7 @@ abstract class AbstractUuid
      */
     public static function fromBytes($bytes)
     {
-        return new static(Uuid::fromBytes($bytes));
+        return new static(RamseyUuid::fromBytes($bytes));
     }
 
     /**
@@ -41,9 +41,9 @@ abstract class AbstractUuid
      *
      * @psalm-pure
      */
-    public static function fromNumericId(string $namespace, int $numericId): AbstractUuid
+    public static function fromNumericId(string $namespace, int $numericId): Uuid
     {
-        return new static(Uuid::uuid5($namespace, (string) $numericId));
+        return new static(RamseyUuid::uuid5($namespace, (string) $numericId));
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class AbstractUuid
      */
     public static function fromString($string)
     {
-        return new static(Uuid::fromString($string));
+        return new static(RamseyUuid::fromString($string));
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class AbstractUuid
     public static function generate()
     {
         /** @psalm-suppress ImpureMethodCall */
-        return new static(Uuid::uuid4());
+        return new static(RamseyUuid::uuid4());
     }
 
     public function __toString(): string
@@ -79,7 +79,7 @@ abstract class AbstractUuid
         return $this->uuid->getBytes();
     }
 
-    public function equals(AbstractUuid $otherUuid): bool
+    public function equals(Uuid $otherUuid): bool
     {
         return $this->uuid->equals($otherUuid->uuid);
     }

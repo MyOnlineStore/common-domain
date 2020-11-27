@@ -6,6 +6,6 @@ namespace MyOnlineStore\Common\Domain\Exception;
 /**
  * @psalm-immutable
  */
-final class LocaleNotFound extends NotFoundException
+final class LocaleNotFound extends NotFound
 {
 }

@@ -13,9 +13,11 @@ final class EmailAddressTest extends TestCase
     {
         $emailAddress = new EmailAddress('hi@mos.com');
         self::assertEquals('hi@mos.com', (string) $emailAddress);
+        self::assertEquals('hi@mos.com', $emailAddress->toString());
 
         $emailAddress = new EmailAddress('Hi@Mos.com');
         self::assertEquals('hi@mos.com', (string) $emailAddress);
+        self::assertEquals('hi@mos.com', $emailAddress->toString());
     }
 
     public function testConstructorDoesNotAcceptAnInvalidEmailAddress(): void
@@ -29,6 +31,7 @@ final class EmailAddressTest extends TestCase
         $emailAddress = new EmailAddress('hi@mos.com');
 
         self::assertTrue($emailAddress->equals(new EmailAddress('hi@mos.com')));
+        self::assertTrue($emailAddress->equals(EmailAddress::fromString('hi@mos.com')));
         self::assertTrue($emailAddress->equals(new EmailAddress('Hi@Mos.com')));
         self::assertFalse($emailAddress->equals(new EmailAddress('bye@mos.com')));
     }

@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Value\Type;
 
-use MyOnlineStore\Common\Domain\Value\Type\AbstractUuid;
+use MyOnlineStore\Common\Domain\Value\Type\Uuid;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 
-final class AbstractUuidTest extends TestCase
+final class UuidTest extends TestCase
 {
     public function testFromBytes(): void
     {
-        $uuid = Uuid::fromString('3e5c88c3-8369-4404-8828-6a3927533387');
+        $uuid = RamseyUuid::fromString('3e5c88c3-8369-4404-8828-6a3927533387');
 
         self::assertEquals(
             $uuid->getBytes(),
@@ -30,9 +30,9 @@ final class AbstractUuidTest extends TestCase
 
     public function testGenerate(): void
     {
-        $uuid = Uuid::fromString((string) UuidStub::generate());
+        $uuid = RamseyUuid::fromString((string) UuidStub::generate());
 
-        self::assertInstanceOf(Uuid::class, $uuid);
+        self::assertInstanceOf(RamseyUuid::class, $uuid);
         self::assertEquals(4, $uuid->getVersion());
     }
 
@@ -70,6 +70,6 @@ final class AbstractUuidTest extends TestCase
     }
 }
 
-final class UuidStub extends AbstractUuid
+final class UuidStub extends Uuid
 {
 }

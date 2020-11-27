@@ -3,6 +3,8 @@
 namespace MyOnlineStore\Common\Domain\Assertion;
 
 /**
+ * @deprecated Use types instead
+ *
  * @psalm-immutable
  */
 trait NumericAssertionTrait
