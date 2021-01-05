@@ -53,16 +53,40 @@ final class RegionCodeTest extends TestCase
     }
 
     /**
-     * @return RegionCode[][]|bool[][]
+     * @return \Generator<array{RegionCode, bool}>
      */
-    public function isEuRegionProvider(): array
+    public function isEuRegionProvider(): \Generator
     {
-        return [
-            [RegionCode::asNL(), true],
-            [new RegionCode('BE'), true],
-            [new RegionCode('AG'), false],
-            [new RegionCode('CH'), false],
-        ];
+        yield [new RegionCode('AT'), true];
+        yield [new RegionCode('BE'), true];
+        yield [new RegionCode('BG'), true];
+        yield [new RegionCode('CY'), true];
+        yield [new RegionCode('CZ'), true];
+        yield [new RegionCode('DE'), true];
+        yield [new RegionCode('DK'), true];
+        yield [new RegionCode('EE'), true];
+        yield [new RegionCode('ES'), true];
+        yield [new RegionCode('FI'), true];
+        yield [new RegionCode('FR'), true];
+        yield [new RegionCode('GR'), true];
+        yield [new RegionCode('HU'), true];
+        yield [new RegionCode('IE'), true];
+        yield [new RegionCode('IT'), true];
+        yield [new RegionCode('HR'), true];
+        yield [new RegionCode('LT'), true];
+        yield [new RegionCode('LU'), true];
+        yield [new RegionCode('LV'), true];
+        yield [new RegionCode('MT'), true];
+        yield [new RegionCode('NL'), true];
+        yield [new RegionCode('PL'), true];
+        yield [new RegionCode('PT'), true];
+        yield [new RegionCode('RO'), true];
+        yield [new RegionCode('SE'), true];
+        yield [new RegionCode('SI'), true];
+        yield [new RegionCode('SK'), true];
+        yield [new RegionCode('AG'), false];
+        yield [new RegionCode('CH'), false];
+        yield [new RegionCode('GB'), false];
     }
 
     /**
@@ -70,6 +94,6 @@ final class RegionCodeTest extends TestCase
      */
     public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {
-        $this->assertEquals($expected, $regionCode->isEuRegion());
+        self::assertEquals($expected, $regionCode->isEuRegion());
     }
 }
