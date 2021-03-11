@@ -61,7 +61,7 @@ final class Money
         return new self(
             new Amount(
                 (int) \bcmul(
-                    (string) \round($amount, $currency->getMinorUnit()),
+                    (string) \round((float) $amount, $currency->getMinorUnit()),
                     \sprintf('1%s', \str_repeat('0', $currency->getMinorUnit())),
                     $currency->getMinorUnit()
                 )

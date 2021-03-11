@@ -20,7 +20,7 @@ final class UrlHost
      */
     public function __construct($hostname)
     {
-        if (!\filter_var('http://' . $hostname, \FILTER_VALIDATE_URL, \FILTER_FLAG_HOST_REQUIRED)) {
+        if (!\filter_var('http://' . $hostname, \FILTER_VALIDATE_URL)) {
             throw new InvalidHostName(\sprintf('"%s" is not a valid UrlHost', $hostname));
         }
 
