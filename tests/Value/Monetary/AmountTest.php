@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AmountTest extends TestCase
 {
-    public function invalidInputProvider()
+    public function invalidInputProvider(): \Generator
     {
         yield ['1.23'];
         yield [1.23];
@@ -27,7 +27,7 @@ final class AmountTest extends TestCase
         new Amount($input);
     }
 
-    public function validInputProvider()
+    public function validInputProvider(): \Generator
     {
         yield [123];
         yield ['123'];

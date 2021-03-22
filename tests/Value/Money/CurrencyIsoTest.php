@@ -11,7 +11,7 @@ final class CurrencyIsoTest extends TestCase
 {
     public function testAgainstMoneyPhpCurrency(): void
     {
-        $currencies = require __DIR__.'/../../../vendor/moneyphp/money/resources/currency.php';
+        $currencies = require __DIR__ . '/../../../vendor/moneyphp/money/resources/currency.php';
 
         foreach ($currencies as $code => $currency) {
             $currencyIso = CurrencyIso::fromString($code);

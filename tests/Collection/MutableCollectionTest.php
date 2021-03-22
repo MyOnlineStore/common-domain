@@ -37,7 +37,7 @@ final class MutableCollectionTest extends TestCase
             $containsWith->invokeArgs(
                 $collection,
                 [
-                    function (\Exception $exception) {
+                    static function (\Throwable $exception) {
                         return 'foo' === $exception->getMessage();
                     },
                 ]
@@ -48,7 +48,7 @@ final class MutableCollectionTest extends TestCase
             $containsWith->invokeArgs(
                 $collection,
                 [
-                    function (\Exception $exception) {
+                    static function (\Throwable $exception) {
                         return 'qux' === $exception->getMessage();
                     },
                 ]
@@ -67,7 +67,7 @@ final class MutableCollectionTest extends TestCase
         $test = new MutableCollection([$itemA, $itemB]);
 
         $test->each(
-            function (\Iterator $item): void {
+            static function (\Iterator $item): void {
                 $item->next();
             }
         );
@@ -99,10 +99,9 @@ final class MutableCollectionTest extends TestCase
         $element1->expects(self::once())->method('isFoobar')->willReturn(false);
         $element2->expects(self::once())->method('isFoobar')->willReturn(true);
 
-        $extendedClass = new class([$element1, $element2]) extends MutableCollection
+        $extendedClass = new class ([$element1, $element2]) extends MutableCollection
         {
             /**
-             *
              * @return static
              */
             public function filter(\Closure $closure)
@@ -114,7 +113,7 @@ final class MutableCollectionTest extends TestCase
         self::assertEquals(
             [1 => $element2],
             $extendedClass->filter(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element->isFoobar();
                 }
             )->toArray()
@@ -136,10 +135,9 @@ final class MutableCollectionTest extends TestCase
         $element1->expects(self::once())->method('isFoobar')->willReturn(false);
         $element2->expects(self::once())->method('isFoobar')->willReturn(true);
 
-        $extendedClass = new class([$element1, $element2]) extends MutableCollection
+        $extendedClass = new class ([$element1, $element2]) extends MutableCollection
         {
             /**
-             *
              * @return static
              *
              * @throws \OutOfBoundsException
@@ -153,7 +151,7 @@ final class MutableCollectionTest extends TestCase
         self::assertSame(
             $element2,
             $extendedClass->firstHaving(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element->isFoobar();
                 }
             )
@@ -166,10 +164,9 @@ final class MutableCollectionTest extends TestCase
 
         $element1->expects(self::once())->method('isFoobar')->willReturn(false);
 
-        $extendedClass = new class([$element1]) extends MutableCollection
+        $extendedClass = new class ([$element1]) extends MutableCollection
         {
             /**
-             *
              * @return static
              *
              * @throws \OutOfBoundsException
@@ -183,7 +180,7 @@ final class MutableCollectionTest extends TestCase
         $this->expectException(\OutOfBoundsException::class);
 
         $extendedClass->firstHaving(
-            function (\stdClass $element) {
+            static function (\stdClass $element) {
                 return $element->isFoobar();
             }
         );
@@ -216,10 +213,9 @@ final class MutableCollectionTest extends TestCase
         $element1 = $this->createMock(\stdClass::class);
         $element2 = $this->createMock(\stdClass::class);
 
-        $extendedClass = new class([$element1, $element2]) extends MutableCollection
+        $extendedClass = new class ([$element1, $element2]) extends MutableCollection
         {
             /**
-             *
              * @return static
              */
             public function map(\Closure $closure)
@@ -231,7 +227,7 @@ final class MutableCollectionTest extends TestCase
         self::assertSame(
             [$element1, $element2],
             $extendedClass->map(
-                function (\stdClass $element) {
+                static function (\stdClass $element) {
                     return $element;
                 }
             )->toArray()

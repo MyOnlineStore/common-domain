@@ -70,6 +70,8 @@ final class AbstractUuidTest extends TestCase
     }
 }
 
+// phpcs:disable
+
 final class UuidStub extends AbstractUuid
 {
 }

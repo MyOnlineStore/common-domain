@@ -9,8 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 final class IPAddressTest extends TestCase
 {
-    const IPV4_ADDRESS = '213.125.219.90';
-    const IPV6_ADDRESS = '2002:D57D:DB5A:0:0:0:0:0';
+    public const IPV4_ADDRESS = '213.125.219.90';
+    public const IPV6_ADDRESS = '2002:D57D:DB5A:0:0:0:0:0';
 
     public function testCorrectCreationIpv4(): void
     {
