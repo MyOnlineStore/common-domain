@@ -81,7 +81,7 @@ final class Price
 
     public function asCents(int $roundingMode = \PHP_ROUND_HALF_EVEN): int
     {
-        return (int) \round(\bcmul('100.0', $this->amount, self::PRECISION_CALC), 0, $roundingMode);
+        return (int) \round((float) \bcmul('100.0', $this->amount, self::PRECISION_CALC), 0, $roundingMode);
     }
 
     public static function asZero(): self

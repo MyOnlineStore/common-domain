@@ -3,38 +3,29 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-use LayerShifter\TLDExtract\Extract;
-use LayerShifter\TLDExtract\ResultInterface;
+use Pdp\Cache;
+use Pdp\CurlHttpClient;
+use Pdp\Domain;
+use Pdp\Manager;
 
 /**
  * @psalm-immutable
  */
 final class DomainName
 {
-    /** @var Extract|null */
-    private static $validator;
-
-    /** @var ResultInterface */
-    private $validatorResult;
+    /** @var Domain */
+    private $domain;
 
     /**
      * @throws \InvalidArgumentException
      */
     public function __construct(string $value)
     {
-        if (!isset(self::$validator)) {
-            self::$validator = new Extract(
-                null,
-                null,
-                Extract::MODE_ALLOW_ICANN | Extract::MODE_ALLOW_PRIVATE
-            );
-        }
-
+        $manager = new Manager(new Cache(), new CurlHttpClient());
         /** @psalm-suppress ImpureMethodCall */
-        $this->validatorResult = self::$validator->parse($value);
+        $this->domain = $manager->getRules()->resolve($value);
 
-        /** @psalm-suppress ImpureMethodCall */
-        if (!$this->validatorResult->isValidDomain()) {
+        if (null === $this->domain->getRegistrableDomain()) {
             throw new \InvalidArgumentException(\sprintf('Invalid domain name: "%s"', $value));
         }
     }
@@ -49,48 +40,34 @@ final class DomainName
         return (string) $this === (string) $otherDomainName;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getHostName()
+    public function getHostName(): ?string
     {
-        /** @psalm-suppress ImpureMethodCall */
-        return $this->validatorResult->getHostname();
+        return \explode('.', (string) $this->domain->getRegistrableDomain(), 2)[0] ?? null;
     }
 
     public function getRootDomain(): self
     {
-        /** @psalm-suppress ImpureMethodCall */
-        return new self((string) $this->validatorResult->getRegistrableDomain());
+        return new self((string) $this->domain->getRegistrableDomain());
     }
 
     public function isRootDomain(): bool
     {
-        /** @psalm-suppress ImpureMethodCall */
-        return $this->validatorResult->getRegistrableDomain() === $this->validatorResult->getFullHost();
+        return $this->domain->getRegistrableDomain() === $this->domain->getContent();
     }
 
-    /**
-     * @return null|string
-     */
-    public function getSubdomain()
+    public function getSubdomain(): ?string
     {
-        /** @psalm-suppress ImpureMethodCall */
-        return $this->validatorResult->getSubdomain();
+        return $this->domain->getSubDomain();
     }
 
-    /**
-     * @return null|string
-     */
-    public function getTld()
+    public function getTld(): ?string
     {
         /** @psalm-suppress ImpureMethodCall */
-        return $this->validatorResult->getSuffix();
+        return $this->domain->getPublicSuffix();
     }
 
     public function __toString(): string
     {
-        /** @psalm-suppress ImpureMethodCall */
-        return $this->validatorResult->getFullHost();
+        return (string) $this->domain->getContent();
     }
 }
