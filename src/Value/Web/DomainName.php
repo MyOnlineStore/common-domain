@@ -45,7 +45,7 @@ final class DomainName
     }
 
     /**
-     * @deprecated
+     * @deprecated Should be extracted to external service
      */
     public function getHostName(): ?string
     {
@@ -53,7 +53,7 @@ final class DomainName
     }
 
     /**
-     * @deprecated
+     * @deprecated Should be extracted to external service
      */
     public function getRootDomain(): self
     {
@@ -61,7 +61,7 @@ final class DomainName
     }
 
     /**
-     * @deprecated
+     * @deprecated Should be extracted to external service
      */
     public function isRootDomain(): bool
     {
@@ -69,7 +69,7 @@ final class DomainName
     }
 
     /**
-     * @deprecated
+     * @deprecated Should be extracted to external service
      */
     public function getSubdomain(): ?string
     {
@@ -77,7 +77,7 @@ final class DomainName
     }
 
     /**
-     * @deprecated
+     * @deprecated Should be extracted to external service
      */
     public function getTld(): ?string
     {
