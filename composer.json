@@ -11,6 +11,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "MyOnlineStore\\Common\\Domain\\Benchmark\\": "tests/benchmarks/",
             "MyOnlineStore\\Common\\Domain\\Tests\\": "tests/"
         }
     },

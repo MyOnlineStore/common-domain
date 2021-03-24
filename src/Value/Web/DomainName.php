@@ -3,31 +3,35 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
+use MyOnlineStore\Common\Domain\Assertion\Assert;
 use Pdp\Cache;
 use Pdp\CurlHttpClient;
 use Pdp\Domain;
 use Pdp\Manager;
+use Pdp\Rules;
 
 /**
  * @psalm-immutable
  */
 final class DomainName
 {
-    /** @var Domain */
-    private $domain;
+    /** @var string */
+    private $domainName;
+
+    /** @var Domain|null */
+    private $resolvedDomainName;
+
+    /** @var Rules|null */
+    private static $rules;
 
     /**
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $value)
+    public function __construct(string $domainName)
     {
-        $manager = new Manager(new Cache(), new CurlHttpClient());
-        /** @psalm-suppress ImpureMethodCall */
-        $this->domain = $manager->getRules()->resolve($value);
+        Assert::contains($domainName, '.');
 
-        if (null === $this->domain->getRegistrableDomain()) {
-            throw new \InvalidArgumentException(\sprintf('Invalid domain name: "%s"', $value));
-        }
+        $this->domainName = $domainName;
     }
 
     public static function createSubDomain(self $domain, string $subdomain): self
@@ -37,37 +41,75 @@ final class DomainName
 
     public function equals(self $otherDomainName): bool
     {
-        return (string) $this === (string) $otherDomainName;
+        return $this->domainName === $otherDomainName->domainName;
     }
 
+    /**
+     * @deprecated Should be extracted to external service
+     */
     public function getHostName(): ?string
     {
-        return \explode('.', (string) $this->domain->getRegistrableDomain(), 2)[0] ?? null;
+        return \explode('.', (string) $this->getResolvedDomain()->getRegistrableDomain(), 2)[0] ?? null;
     }
 
+    /**
+     * @deprecated Should be extracted to external service
+     */
     public function getRootDomain(): self
     {
-        return new self((string) $this->domain->getRegistrableDomain());
+        return new self((string) $this->getResolvedDomain()->getRegistrableDomain());
     }
 
+    /**
+     * @deprecated Should be extracted to external service
+     */
     public function isRootDomain(): bool
     {
-        return $this->domain->getRegistrableDomain() === $this->domain->getContent();
+        return $this->getResolvedDomain()->getRegistrableDomain() === $this->getResolvedDomain()->getContent();
     }
 
+    /**
+     * @deprecated Should be extracted to external service
+     */
     public function getSubdomain(): ?string
     {
-        return $this->domain->getSubDomain();
+        return $this->getResolvedDomain()->getSubDomain();
     }
 
+    /**
+     * @deprecated Should be extracted to external service
+     */
     public function getTld(): ?string
     {
         /** @psalm-suppress ImpureMethodCall */
-        return $this->domain->getPublicSuffix();
+        return $this->getResolvedDomain()->getPublicSuffix();
     }
 
     public function __toString(): string
     {
-        return (string) $this->domain->getContent();
+        return $this->domainName;
+    }
+
+    private function getResolvedDomain(): Domain
+    {
+        if (null === $this->resolvedDomainName) {
+            /** @psalm-suppress ImpureStaticProperty */
+            if (null === self::$rules) {
+                /**
+                 * @psalm-suppress ImpureMethodCall
+                 * @psalm-suppress ImpureStaticProperty
+                 */
+                self::$rules = (new Manager(new Cache(), new CurlHttpClient()))->getRules();
+            }
+
+            /**
+             * @psalm-suppress ImpureMethodCall
+             * @psalm-suppress ImpureStaticProperty
+             * @psalm-suppress InaccessibleProperty
+             */
+            $this->resolvedDomainName = self::$rules->resolve($this->domainName);
+        }
+
+        return $this->resolvedDomainName;
     }
 }
