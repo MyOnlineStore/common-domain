@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Web;
 
 use MyOnlineStore\Common\Domain\Value\Web\IPAddress;
-use MyOnlineStore\Common\Domain\Value\Web\IPAddressVersion;
 use PHPUnit\Framework\TestCase;
 
 final class IPAddressTest extends TestCase
@@ -16,16 +15,16 @@ final class IPAddressTest extends TestCase
     {
         $ipAddress = new IPAddress(self::IPV4_ADDRESS);
 
-        self::assertEquals(IPAddressVersion::IPV4, $ipAddress->getVersion());
-        self::assertEquals(self::IPV4_ADDRESS, (string) $ipAddress);
+        self::assertEquals(IPAddress::IPV4, $ipAddress->getVersion());
+        self::assertEquals(self::IPV4_ADDRESS, $ipAddress->toString());
     }
 
     public function testCorrectCreationIpv6(): void
     {
         $ipAddress = new IPAddress(self::IPV6_ADDRESS);
 
-        self::assertEquals(IPAddressVersion::IPV6, $ipAddress->getVersion());
-        self::assertEquals(self::IPV6_ADDRESS, (string) $ipAddress);
+        self::assertEquals(IPAddress::IPV6, $ipAddress->getVersion());
+        self::assertEquals(self::IPV6_ADDRESS, $ipAddress->toString());
     }
 
     public function testIsIPv4(): void
@@ -50,7 +49,7 @@ final class IPAddressTest extends TestCase
     {
         $address = new IPAddress(self::IPV4_ADDRESS);
 
-        self::assertSame(3581795162, $address->asLong());
+        self::assertSame(3581795162, $address->toLong());
     }
 
     public function testAsLongIpv6ShouldThrowError(): void
@@ -59,7 +58,7 @@ final class IPAddressTest extends TestCase
 
         $ipAddress = new IPAddress(self::IPV6_ADDRESS);
 
-        $ipAddress->asLong();
+        $ipAddress->toLong();
     }
 
     public function testFaultCreation(): void

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Tests\Value\Contact;
 
+use MyOnlineStore\Common\Domain\Exception\Contact\InvalidPhoneNumber;
 use MyOnlineStore\Common\Domain\Value\Contact\PhoneNumber;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 use PHPUnit\Framework\TestCase;
@@ -43,13 +44,13 @@ final class PhoneNumberTest extends TestCase
     public function shortInternationalFormatProvider(): array
     {
         return [
-            ['+321882315726', new PhoneNumber('1882315726', new RegionCode('BE'))],
-            ['+31412668011', new PhoneNumber('+31 (0)412 66 80 11')],
-            ['+32412668011', new PhoneNumber('+32 0412 66 80 11')],
-            ['+32412668011', new PhoneNumber('+32 412 66 80 11')],
-            ['+31612483496', new PhoneNumber('0612483496')],
-            ['+10612483496', new PhoneNumber('0612483496', new RegionCode('US'))],
-            ['+31112', new PhoneNumber('112')],
+            ['+321882315726', new PhoneNumber('1882315726', RegionCode::fromString('BE'))],
+            ['+31412668011', new PhoneNumber('+31 (0)412 66 80 11', RegionCode::fromString('NL'))],
+            ['+32412668011', new PhoneNumber('+32 0412 66 80 11', RegionCode::fromString('NL'))],
+            ['+32412668011', new PhoneNumber('+32 412 66 80 11', RegionCode::fromString('NL'))],
+            ['+31612483496', new PhoneNumber('0612483496', RegionCode::fromString('NL'))],
+            ['+10612483496', new PhoneNumber('0612483496', RegionCode::fromString('US'))],
+            ['+31112', new PhoneNumber('112', RegionCode::fromString('NL'))],
         ];
     }
 
@@ -59,11 +60,11 @@ final class PhoneNumberTest extends TestCase
     public function equalPhoneNumberProvider(): array
     {
         return [
-            [false, new PhoneNumber('0031612483496'), new PhoneNumber('0031612483497')],
-            [false, new PhoneNumber('003232364627'), new PhoneNumber('03 236 46 27')],
-            [true, new PhoneNumber('0031612483496'), new PhoneNumber('0612483496')],
-            [true, new PhoneNumber('0031612483496'), new PhoneNumber('06 12 48 34 96')],
-            [true, new PhoneNumber('0031612483496'), new PhoneNumber('+31 (0)6 12 48 34 96')],
+            [false, new PhoneNumber('0031612483496', RegionCode::fromString('NL')), new PhoneNumber('0031612483497', RegionCode::fromString('NL'))],
+            [false, new PhoneNumber('003232364627', RegionCode::fromString('NL')), new PhoneNumber('03 236 46 27', RegionCode::fromString('NL'))],
+            [true, new PhoneNumber('0031612483496', RegionCode::fromString('NL')), new PhoneNumber('0612483496', RegionCode::fromString('NL'))],
+            [true, new PhoneNumber('0031612483496', RegionCode::fromString('NL')), new PhoneNumber('06 12 48 34 96', RegionCode::fromString('NL'))],
+            [true, new PhoneNumber('0031612483496', RegionCode::fromString('NL')), new PhoneNumber('+31 (0)6 12 48 34 96', RegionCode::fromString('NL'))],
         ];
     }
 
@@ -80,29 +81,29 @@ final class PhoneNumberTest extends TestCase
 
     public function testFormatted(): void
     {
-        self::assertEquals('0031882315726', (new PhoneNumber('0031882315726'))->getFormatted());
-        self::assertEquals('0031412668011', (new PhoneNumber('+31 (0)412 66 80 11'))->getFormatted());
-        self::assertEquals('0032412668011', (new PhoneNumber('+32 0412 66 80 11'))->getFormatted());
-        self::assertEquals('0032412668011', (new PhoneNumber('+32 412 66 80 11'))->getFormatted());
-        self::assertEquals('0031612483496', (new PhoneNumber('0612483496'))->getFormatted());
-        self::assertEquals('0031112', (new PhoneNumber('112'))->getFormatted());
+        self::assertEquals('0031882315726', (new PhoneNumber('0031882315726', RegionCode::fromString('NL')))->getFormatted());
+        self::assertEquals('0031412668011', (new PhoneNumber('+31 (0)412 66 80 11', RegionCode::fromString('NL')))->getFormatted());
+        self::assertEquals('0032412668011', (new PhoneNumber('+32 0412 66 80 11', RegionCode::fromString('NL')))->getFormatted());
+        self::assertEquals('0032412668011', (new PhoneNumber('+32 412 66 80 11', RegionCode::fromString('NL')))->getFormatted());
+        self::assertEquals('0031612483496', (new PhoneNumber('0612483496', RegionCode::fromString('NL')))->getFormatted());
+        self::assertEquals('0031112', (new PhoneNumber('112', RegionCode::fromString('NL')))->getFormatted());
     }
 
     public function testGetCountryCode(): void
     {
-        self::assertEquals(31, (new PhoneNumber('0031882315726'))->getCountryCode());
-        self::assertEquals(31, (new PhoneNumber('+31 (0)412 66 80 11'))->getCountryCode());
-        self::assertEquals(32, (new PhoneNumber('+32 412 66 80 11'))->getCountryCode());
+        self::assertEquals(31, (new PhoneNumber('0031882315726', RegionCode::fromString('NL')))->getCountryCode());
+        self::assertEquals(31, (new PhoneNumber('+31 (0)412 66 80 11', RegionCode::fromString('NL')))->getCountryCode());
+        self::assertEquals(32, (new PhoneNumber('+32 412 66 80 11', RegionCode::fromString('NL')))->getCountryCode());
     }
 
     public function testWithRegionCodeChangesCountryPrefix(): void
     {
-        $phoneNumber = new PhoneNumber('0031882315726');
+        $phoneNumber = new PhoneNumber('0031882315726', RegionCode::fromString('NL'));
 
-        self::assertEquals('+31882315726', (string) $phoneNumber);
-        self::assertEquals('+32882315726', (string) $phoneNumber->withRegionCode(new RegionCode('BE')));
-        self::assertEquals('+49882315726', (string) $phoneNumber->withRegionCode(new RegionCode('DE')));
-        self::assertEquals('+44882315726', (string) $phoneNumber->withRegionCode(new RegionCode('GB')));
+        self::assertEquals('+31882315726', $phoneNumber->toString());
+        self::assertEquals('+32882315726', $phoneNumber->withRegionCode(RegionCode::fromString('BE'))->toString());
+        self::assertEquals('+49882315726', $phoneNumber->withRegionCode(RegionCode::fromString('DE'))->toString());
+        self::assertEquals('+44882315726', $phoneNumber->withRegionCode(RegionCode::fromString('GB'))->toString());
     }
 
     /**
@@ -118,35 +119,35 @@ final class PhoneNumberTest extends TestCase
      */
     public function testInvalidStringValues(string $value): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidPhoneNumber::class);
 
-        new PhoneNumber($value);
+        new PhoneNumber($value, RegionCode::fromString('NL'));
     }
 
     public function testIsFixedLine(): void
     {
-        self::assertTrue((new PhoneNumber('0031132315726'))->isFixedLine());
-        self::assertTrue((new PhoneNumber('+31 (0)412 66 80 11'))->isFixedLine());
-        self::assertTrue((new PhoneNumber('+31 412 66 80 11'))->isFixedLine());
-        self::assertFalse((new PhoneNumber('0612483496'))->isFixedLine());
-        self::assertFalse((new PhoneNumber('+447134567575'))->isFixedLine());
+        self::assertTrue((new PhoneNumber('0031132315726', RegionCode::fromString('NL')))->isFixedLine());
+        self::assertTrue((new PhoneNumber('+31 (0)412 66 80 11', RegionCode::fromString('NL')))->isFixedLine());
+        self::assertTrue((new PhoneNumber('+31 412 66 80 11', RegionCode::fromString('NL')))->isFixedLine());
+        self::assertFalse((new PhoneNumber('0612483496', RegionCode::fromString('NL')))->isFixedLine());
+        self::assertFalse((new PhoneNumber('+447134567575', RegionCode::fromString('NL')))->isFixedLine());
     }
 
     public function testIsMobile(): void
     {
-        self::assertFalse((new PhoneNumber('0031882315726'))->isMobile());
-        self::assertFalse((new PhoneNumber('+31 (0)412 66 80 11'))->isMobile());
-        self::assertFalse((new PhoneNumber('+32 0412 66 80 11'))->isMobile());
-        self::assertFalse((new PhoneNumber('+32 412 66 80 11'))->isMobile());
-        self::assertTrue((new PhoneNumber('0612483496'))->isMobile());
-        self::assertTrue((new PhoneNumber('+447134567575'))->isMobile());
-        self::assertFalse((new PhoneNumber('112'))->isMobile());
+        self::assertFalse((new PhoneNumber('0031882315726', RegionCode::fromString('NL')))->isMobile());
+        self::assertFalse((new PhoneNumber('+31 (0)412 66 80 11', RegionCode::fromString('NL')))->isMobile());
+        self::assertFalse((new PhoneNumber('+32 0412 66 80 11', RegionCode::fromString('NL')))->isMobile());
+        self::assertFalse((new PhoneNumber('+32 412 66 80 11', RegionCode::fromString('NL')))->isMobile());
+        self::assertTrue((new PhoneNumber('0612483496', RegionCode::fromString('NL')))->isMobile());
+        self::assertTrue((new PhoneNumber('+447134567575', RegionCode::fromString('NL')))->isMobile());
+        self::assertFalse((new PhoneNumber('112', RegionCode::fromString('NL')))->isMobile());
     }
 
     public function testToString(): void
     {
-        $phoneNumber = new PhoneNumber('0031882315726');
-        self::assertEquals($phoneNumber->getShortInternationalFormat(), (string) $phoneNumber);
+        $phoneNumber = new PhoneNumber('0031882315726', RegionCode::fromString('NL'));
+        self::assertEquals($phoneNumber->getShortInternationalFormat(), $phoneNumber->toString());
     }
 
     /**
@@ -154,6 +155,6 @@ final class PhoneNumberTest extends TestCase
      */
     public function testValidStringValues(string $value): void
     {
-        self::assertInstanceOf(PhoneNumber::class, new PhoneNumber($value));
+        self::assertInstanceOf(PhoneNumber::class, new PhoneNumber($value, RegionCode::fromString('NL')));
     }
 }

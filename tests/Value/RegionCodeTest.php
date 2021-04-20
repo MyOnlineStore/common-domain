@@ -11,36 +11,36 @@ final class RegionCodeTest extends TestCase
 {
     public function testEquals(): void
     {
-        $regionCode = RegionCode::asNL();
-        self::assertTrue($regionCode->equals(new RegionCode('nl')));
-        self::assertFalse($regionCode->equals(new RegionCode('DE')));
+        $regionCode = RegionCode::fromString('NL');
+        self::assertTrue($regionCode->equals(RegionCode::fromString('nl')));
+        self::assertFalse($regionCode->equals(RegionCode::fromString('DE')));
     }
 
     /**
      * @dataProvider invalidArgumentProvider
      */
-    public function testInvalidTypes(?string $argument): void
+    public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidArgument::class);
-        new RegionCode($argument);
+        RegionCode::fromString($argument);
     }
 
     public function testToString(): void
     {
-        self::assertEquals('NL', (string) RegionCode::asNL());
-        self::assertEquals('NL', (string) new RegionCode('nl'));
-        self::assertEquals('DE', (string) new RegionCode('DE'));
+        self::assertEquals('NL', RegionCode::fromString('NL')->toString());
+        self::assertEquals('NL', RegionCode::fromString('nl')->toString());
+        self::assertEquals('DE', RegionCode::fromString('DE')->toString());
     }
 
     public function testToLower(): void
     {
-        self::assertEquals('nl', RegionCode::asNL()->lower());
-        self::assertEquals('nl', (new RegionCode('nl'))->lower());
-        self::assertEquals('de', (new RegionCode('DE'))->lower());
+        self::assertEquals('nl', RegionCode::fromString('NL')->lower());
+        self::assertEquals('nl', RegionCode::fromString('nl')->lower());
+        self::assertEquals('de', RegionCode::fromString('DE')->lower());
     }
 
     /**
-     * @return string[][]|null[][]
+     * @return list<list<string>>
      */
     public function invalidArgumentProvider(): array
     {
@@ -48,7 +48,6 @@ final class RegionCodeTest extends TestCase
             ['N'],
             ['Nld'],
             ['NLD'],
-            [null],
         ];
     }
 
@@ -57,36 +56,36 @@ final class RegionCodeTest extends TestCase
      */
     public function isEuRegionProvider(): \Generator
     {
-        yield [new RegionCode('AT'), true];
-        yield [new RegionCode('BE'), true];
-        yield [new RegionCode('BG'), true];
-        yield [new RegionCode('CY'), true];
-        yield [new RegionCode('CZ'), true];
-        yield [new RegionCode('DE'), true];
-        yield [new RegionCode('DK'), true];
-        yield [new RegionCode('EE'), true];
-        yield [new RegionCode('ES'), true];
-        yield [new RegionCode('FI'), true];
-        yield [new RegionCode('FR'), true];
-        yield [new RegionCode('GR'), true];
-        yield [new RegionCode('HU'), true];
-        yield [new RegionCode('IE'), true];
-        yield [new RegionCode('IT'), true];
-        yield [new RegionCode('HR'), true];
-        yield [new RegionCode('LT'), true];
-        yield [new RegionCode('LU'), true];
-        yield [new RegionCode('LV'), true];
-        yield [new RegionCode('MT'), true];
-        yield [new RegionCode('NL'), true];
-        yield [new RegionCode('PL'), true];
-        yield [new RegionCode('PT'), true];
-        yield [new RegionCode('RO'), true];
-        yield [new RegionCode('SE'), true];
-        yield [new RegionCode('SI'), true];
-        yield [new RegionCode('SK'), true];
-        yield [new RegionCode('AG'), false];
-        yield [new RegionCode('CH'), false];
-        yield [new RegionCode('GB'), false];
+        yield [RegionCode::fromString('AT'), true];
+        yield [RegionCode::fromString('BE'), true];
+        yield [RegionCode::fromString('BG'), true];
+        yield [RegionCode::fromString('CY'), true];
+        yield [RegionCode::fromString('CZ'), true];
+        yield [RegionCode::fromString('DE'), true];
+        yield [RegionCode::fromString('DK'), true];
+        yield [RegionCode::fromString('EE'), true];
+        yield [RegionCode::fromString('ES'), true];
+        yield [RegionCode::fromString('FI'), true];
+        yield [RegionCode::fromString('FR'), true];
+        yield [RegionCode::fromString('GR'), true];
+        yield [RegionCode::fromString('HU'), true];
+        yield [RegionCode::fromString('IE'), true];
+        yield [RegionCode::fromString('IT'), true];
+        yield [RegionCode::fromString('HR'), true];
+        yield [RegionCode::fromString('LT'), true];
+        yield [RegionCode::fromString('LU'), true];
+        yield [RegionCode::fromString('LV'), true];
+        yield [RegionCode::fromString('MT'), true];
+        yield [RegionCode::fromString('NL'), true];
+        yield [RegionCode::fromString('PL'), true];
+        yield [RegionCode::fromString('PT'), true];
+        yield [RegionCode::fromString('RO'), true];
+        yield [RegionCode::fromString('SE'), true];
+        yield [RegionCode::fromString('SI'), true];
+        yield [RegionCode::fromString('SK'), true];
+        yield [RegionCode::fromString('AG'), false];
+        yield [RegionCode::fromString('CH'), false];
+        yield [RegionCode::fromString('GB'), false];
     }
 
     /**
@@ -94,6 +93,6 @@ final class RegionCodeTest extends TestCase
      */
     public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {
-        self::assertEquals($expected, $regionCode->isEuRegion());
+        self::assertSame($expected, $regionCode->isEuRegion());
     }
 }

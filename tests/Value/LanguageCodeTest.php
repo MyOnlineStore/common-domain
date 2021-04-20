@@ -15,20 +15,20 @@ final class LanguageCodeTest extends TestCase
     public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidArgument::class);
-        new LanguageCode($argument);
+        LanguageCode::fromString($argument);
     }
 
     public function testToString(): void
     {
-        self::assertEquals('nl', (string) new LanguageCode('nl'));
-        self::assertEquals('nl', (string) new LanguageCode('NL'));
-        self::assertEquals('moh', (string) new LanguageCode('MoH'));
+        self::assertEquals('nl', LanguageCode::fromString('nl')->toString());
+        self::assertEquals('nl', LanguageCode::fromString('NL')->toString());
+        self::assertEquals('moh', LanguageCode::fromString('MoH')->toString());
     }
 
     public function testEqual(): void
     {
-        self::assertTrue((new LanguageCode('nl'))->equals(new LanguageCode('nl')));
-        self::assertFalse((new LanguageCode('nl'))->equals(new LanguageCode('en')));
+        self::assertTrue(LanguageCode::fromString('nl')->equals(LanguageCode::fromString('nl')));
+        self::assertFalse(LanguageCode::fromString('nl')->equals(LanguageCode::fromString('en')));
     }
 
     /**
