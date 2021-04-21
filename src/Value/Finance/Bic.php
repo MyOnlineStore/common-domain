@@ -11,12 +11,9 @@ use MyOnlineStore\Common\Domain\Exception\Finance\InvalidBic;
  */
 final class Bic
 {
-    /** @var string */
-    private $bic;
-
-    private function __construct(string $bic)
-    {
-        $this->bic = $bic;
+    private function __construct(
+        private string $bic
+    ) {
     }
 
     /**
@@ -24,7 +21,7 @@ final class Bic
      */
     public static function fromString(string $bic): self
     {
-        $bic = \mb_strtoupper($bic);
+        $bic = \strtoupper($bic);
 
         /** @psalm-suppress ImpureMethodCall */
         if (!SwiftBic::validate($bic)) {
@@ -34,12 +31,12 @@ final class Bic
         return new self($bic);
     }
 
-    public function equals(self $bic): bool
+    public function equals(self $other): bool
     {
-        return $this->bic === $bic->bic;
+        return $this->bic === $other->bic;
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return $this->bic;
     }

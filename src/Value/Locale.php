@@ -1,77 +1,47 @@
 <?php
+declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value;
 
-use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
 final class Locale
 {
-    public const FALLBACK_FRONTEND_LOCALE = 'en_GB';
-
-    /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\RegionCode", columnPrefix=false)
-     *
-     * @var RegionCode
-     */
-    private $regionCode;
-
-    /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\LanguageCode", columnPrefix=false)
-     *
-     * @var LanguageCode
-     */
-    private $languageCode;
-
-    public function __construct(LanguageCode $languageCode, RegionCode $regionCode)
-    {
-        $this->languageCode = $languageCode;
-        $this->regionCode = $regionCode;
+    public function __construct(
+        public LanguageCode $languageCode,
+        public RegionCode $regionCode
+    ) {
     }
 
     /**
-     * @param string $string
-     *
      * @throws InvalidArgument
      *
      * @psalm-pure
      */
-    public static function fromString($string): self
+    public static function fromString(string $string): self
     {
-        if (false === \strpos($string, '_')) {
+        $localeParts = \explode('_', $string);
+
+        if (2 !== \count($localeParts)) {
             throw new InvalidArgument(
                 \sprintf('Given string "%s" is not a valid string representation of a locale', $string)
             );
         }
 
-        $localeParts = \explode('_', $string);
-
-        return new self(new LanguageCode($localeParts[0]), new RegionCode($localeParts[1]));
+        return new self(LanguageCode::fromString($localeParts[0]), RegionCode::fromString($localeParts[1]));
     }
 
-    public function equals(self $locale): bool
+    public function equals(self $other): bool
     {
-        return $this->regionCode->equals($locale->regionCode) &&
-            $this->languageCode->equals($locale->languageCode);
+        return $this->regionCode->equals($other->regionCode)
+            && $this->languageCode->equals($other->languageCode);
     }
 
-    public function languageCode(): LanguageCode
+    public function toString(): string
     {
-        return $this->languageCode;
-    }
-
-    public function regionCode(): RegionCode
-    {
-        return $this->regionCode;
-    }
-
-    public function __toString(): string
-    {
-        return \sprintf('%s_%s', $this->languageCode, $this->regionCode);
+        return \sprintf('%s_%s', $this->languageCode->toString(), $this->regionCode->toString());
     }
 }

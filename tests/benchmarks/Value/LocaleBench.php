@@ -13,16 +13,13 @@ use PhpBench\Benchmark\Metadata\Annotations\Revs;
  */
 final class LocaleBench
 {
-    /** @var Locale */
-    private $locale;
-
-    /** @var Locale */
-    private $comparator;
+    private Locale $locale;
+    private Locale $other;
 
     public function init(): void
     {
         $this->locale = Locale::fromString('nl_NL');
-        $this->comparator = Locale::fromString('en_GB');
+        $this->other = Locale::fromString('en_GB');
     }
 
     /**
@@ -31,6 +28,6 @@ final class LocaleBench
      */
     public function benchEquals(): void
     {
-        $this->locale->equals($this->comparator);
+        $this->locale->equals($this->other);
     }
 }

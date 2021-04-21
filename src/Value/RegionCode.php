@@ -3,59 +3,39 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value;
 
-use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  *
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
 final class RegionCode
 {
-    /**
-     * @ORM\Column(name="region_code", type="string", length=2)
-     *
-     * @var string
-     */
-    private $code;
+    private function __construct(
+        private string $code
+    ) {
+    }
 
     /**
-     * @param string $code
-     *
      * @throws InvalidArgument
+     *
+     * @psalm-pure
      */
-    public function __construct($code)
+    public static function fromString(string $code): self
     {
-        if (null === $code) {
-            throw new InvalidArgument('RegionCode can not be constructed with an empty ISO code');
-        }
-
         if (!\preg_match('/^[a-z]{2}$/i', $code)) {
             throw new InvalidArgument(\sprintf('Invalid region code given: %s', $code));
         }
 
-        $this->code = \strtoupper($code);
+        return new self(\strtoupper($code));
     }
 
-    /**
-     * @psalm-pure
-     */
-    public static function asNL(): self
+    public function equals(self $other): bool
     {
-        return new self('NL');
+        return $this->code === $other->code;
     }
 
-    public function equals(self $comparator): bool
-    {
-        return 0 === \strcmp($this->code, $comparator->code);
-    }
-
-    /**
-     * @return string returns lowercase value
-     */
     public function lower(): string
     {
         return \strtolower($this->code);
@@ -98,7 +78,7 @@ final class RegionCode
         );
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return $this->code;
     }

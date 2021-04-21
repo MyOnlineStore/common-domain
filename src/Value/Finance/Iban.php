@@ -3,36 +3,31 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Finance;
 
-use Doctrine\ORM\Mapping as ORM;
 use IsoCodes\Iban as IbanValidator;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
 final class Iban
 {
-    /**
-     * @ORM\Column(length=24)
-     *
-     * @var string
-     */
-    private $iban;
+    public function __construct(
+        private string $iban
+    ) {
+    }
 
     /**
      * @throws InvalidIban
      */
-    public function __construct(string $iban)
+    public static function fromString(string $iban): self
     {
-        $iban = \mb_strtoupper($iban);
+        $iban = \strtoupper($iban);
 
         if (!IbanValidator::validate($iban)) {
             throw new InvalidIban(\sprintf('"%s" is not a valid IBAN', $iban));
         }
 
-        $this->iban = $iban;
+        return new self($iban);
     }
 
     public function equals(self $other): bool
@@ -40,7 +35,7 @@ final class Iban
         return $this->iban === $other->iban;
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return $this->iban;
     }

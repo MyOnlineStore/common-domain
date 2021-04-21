@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Exception;
 
 /**
  * @psalm-immutable
+ * @psalm-suppress MutableDependency
  */
 class InvalidArgument extends \InvalidArgumentException
 {

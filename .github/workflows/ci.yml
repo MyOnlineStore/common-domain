@@ -11,12 +11,7 @@ jobs:
     test:
         name: Test
 
-        runs-on: ubuntu-18.04
-
-        strategy:
-            matrix:
-                php-version: ['7.2', '7.4', '8.0']
-            fail-fast: false
+        runs-on: ubuntu-20.04
 
         steps:
             # Setup
@@ -25,23 +20,26 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: ${{ matrix.php-version }}
+                    php-version: '8.0'
+                    ini-values: assert.exception=1, zend.assertions=1
                     coverage: pcov
-                    tools: cs2pr, prestissimo
+                    tools: cs2pr
                     extensions: bcmath, intl
             -   name: Cache Dependencies
-                uses: actions/cache@v1
+                uses: actions/cache@v2
                 with:
                     path: ~/.composer/cache
-                    key: php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+                    key: php8.0-composer-${{ hashFiles('**/composer.lock') }}
                     restore-keys: |
-                        php${{ matrix.php-version }}-composer-
+                        php8.0-composer-
             -   name: Install Dependencies
-                run: composer install --no-ansi --no-interaction --no-progress --no-suggest
+                run: composer install --no-interaction --no-ansi --no-progress --no-suggest
 
             # Test
-#            -   name: Codestyle
-#                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
+            -   name: Codestyle
+                run: php vendor/bin/phpcs --parallel=`nproc --all` -q --report=checkstyle | cs2pr
+            -   name: Psalm
+                run: php vendor/bin/psalm --threads=`nproc --all` --output-format=github
             -   name: PHPUnit Checks Matcher
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
             -   name: Unit Tests
@@ -49,29 +47,21 @@ jobs:
                     php vendor/bin/phpunit --coverage-text=coverage.txt --colors=never
                     COVERAGE=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage.txt"), $out); echo $out[1];')
                     echo "COVERAGE=${COVERAGE}" >> $GITHUB_ENV
-            -   name: Run Psalm
-                run: vendor/bin/psalm --output-format=github
+            -   name: Mutation Tests
+                run: |
+                    php vendor/bin/roave-infection-static-analysis-plugin --only-covered --show-mutations --threads=`nproc --all` --min-msi=100 --min-covered-msi=100 --no-progress > msi.txt
+                    cat msi.txt
+                    MSI=$(php -r 'preg_match("#\(MSI\):\s*([0-9.]+)%#", file_get_contents("msi.txt"), $out); echo $out[1];')
+                    echo "MSI=${MSI}" >> $GITHUB_ENV
 
-            # Compare to master
-#            -   name: Checkout Master
-#                uses: actions/checkout@v2
-#                with:
-#                    ref: master
-#            -   name: Install Dependencies Master
-#                run: composer install --no-interaction --no-ansi --no-progress --no-suggest
-#            -   name: Unit Tests Master
-#                run: |
-#                    php vendor/bin/phpunit --coverage-text=coverage-master.txt --colors=never
-#                    COVERAGE_MASTER=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage-master.txt"), $out); echo $out[1];')
-#                    echo "COVERAGE_MASTER=${COVERAGE_MASTER}" >> $GITHUB_ENV
-#            -   name: Report PR Status
-#                uses: actions/github-script@0.6.0
-#                with:
-#                    github-token: ${{github.token}}
-#                    script: |
-#                        const coverage = parseFloat(process.env.COVERAGE);
-#                        const coverageMaster = parseFloat(process.env.COVERAGE_MASTER);
-#                        const coverageChange = (coverage - coverageMaster).toFixed(2);
-#
-#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverage > 98 ? 'success' : 'failure', context: 'Unit Test Coverage', description: coverage+'%'});
-#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverageChange < 0 ? 'failure' : 'success', context: 'Unit Test Coverage Change', description: coverageChange+'%'});
+            # Report
+            -   name: Report PR Status
+                uses: actions/github-script@v3.1
+                with:
+                    github-token: ${{github.token}}
+                    script: |
+                        const msi = parseFloat(process.env.MSI);
+                        const coverage = parseFloat(process.env.COVERAGE);
+
+                        github.repos.createCommitStatus({...context.repo, sha: context.sha, state: msi > 95 ? 'success' : 'failure', context: 'Mutation Score Index', description: msi+'%'});
+                        github.repos.createCommitStatus({...context.repo, sha: context.sha, state: coverage > 99 ? 'success' : 'failure', context: 'Unit Test Coverage', description: coverage+'%'});

@@ -11,22 +11,22 @@ final class IbanTest extends TestCase
 {
     public function testConstructorAndToString(): void
     {
-        $emailAddress = new Iban('NL45ABNA0946659707');
-        self::assertEquals('NL45ABNA0946659707', (string) $emailAddress);
+        $iban = new Iban('NL45ABNA0946659707');
+        self::assertEquals('NL45ABNA0946659707', $iban->toString());
     }
 
     public function testConstructorDoesNotAcceptAnInvalidIban(): void
     {
         $this->expectException(InvalidIban::class);
-        new Iban('NLD60RABO0190431121');
+        Iban::fromString('NLD60RABO0190431121');
     }
 
     public function testEquals(): void
     {
-        $emailAddress = new Iban('NL45ABNA0946659707');
+        $iban = Iban::fromString('NL45ABNA0946659707');
 
-        self::assertTrue($emailAddress->equals(new Iban('NL45ABNA0946659707')));
-        self::assertTrue($emailAddress->equals(new Iban('nl45abnA0946659707')));
-        self::assertFalse($emailAddress->equals(new Iban('NL78RABO0334765924')));
+        self::assertTrue($iban->equals(Iban::fromString('NL45ABNA0946659707')));
+        self::assertTrue($iban->equals(Iban::fromString('nl45abnA0946659707')));
+        self::assertFalse($iban->equals(Iban::fromString('NL78RABO0334765924')));
     }
 }

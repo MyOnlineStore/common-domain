@@ -8,6 +8,7 @@ use libphonenumber\PhoneNumber as LibPhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
+use MyOnlineStore\Common\Domain\Exception\Contact\InvalidPhoneNumber;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
@@ -15,45 +16,28 @@ use MyOnlineStore\Common\Domain\Value\RegionCode;
  */
 final class PhoneNumber
 {
-    /** @var PhoneNumberUtil */
-    private $phoneNumberUtil;
-
-    /** @var LibPhoneNumber */
-    private $value;
+    private PhoneNumberUtil $phoneNumberUtil;
+    private LibPhoneNumber $value;
 
     /**
-     * @param string $value
-     *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, ?RegionCode $regionCode = null)
+    public function __construct(string $value, RegionCode $regionCode)
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
 
-        if (null === $regionCode) {
-            $regionCode = RegionCode::asNL();
-        }
-
         try {
             /** @psalm-suppress ImpureMethodCall */
-            $this->value = $this->phoneNumberUtil->parse($value, (string) $regionCode);
+            $this->value = $this->phoneNumberUtil->parse($value, $regionCode->toString());
         } catch (NumberParseException $exception) {
-            throw new \InvalidArgumentException(
-                \sprintf('Invalid phonenumber (%s)', $value),
-                0,
-                $exception
-            );
+            throw InvalidPhoneNumber::withPhoneNumber($value, $exception);
         }
     }
 
-    public function __toString(): string
+    public function equals(self $other): bool
     {
-        return $this->getShortInternationalFormat();
-    }
-
-    public function equals(self $comparison): bool
-    {
-        return 0 === \strcasecmp((string) $this, (string) $comparison);
+        /** @psalm-suppress ImpureMethodCall */
+        return $this->value->equals($other->value);
     }
 
     public function getCountryCode(): ?int
@@ -99,11 +83,19 @@ final class PhoneNumber
         );
     }
 
+    public function toString(): string
+    {
+        return $this->getShortInternationalFormat();
+    }
+
     /**
      * Create a new instance of this PhoneNumber with an other RegionCode
      */
     public function withRegionCode(RegionCode $regionCode): self
     {
-        return new static($this->value->getNationalNumber(), $regionCode);
+        $nationalNumber = $this->value->getNationalNumber();
+        \assert(null !== $nationalNumber);
+
+        return new self($nationalNumber, $regionCode);
     }
 }

@@ -3,36 +3,28 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
 final class IPAddress
 {
-    /**
-     * @ORM\Column(name="ip_address", length=39)
-     *
-     * @var string
-     */
-    private $value;
+    public const IPV4 = 'IPv4';
+    public const IPV6 = 'IPv6';
+
+    private string $ipAddress;
 
     /**
      * Returns a new IPAddress
-     *
-     * @param string $value
      */
-    public function __construct($value)
+    public function __construct(string $ipAddress)
     {
-        $filteredValue = \filter_var($value, \FILTER_VALIDATE_IP);
+        $filteredValue = \filter_var($ipAddress, \FILTER_VALIDATE_IP);
 
         if (!$filteredValue) {
-            throw new \InvalidArgumentException(\sprintf('opgegeven waarde %s is geen ip address', $value));
+            throw new \InvalidArgumentException(\sprintf('opgegeven waarde %s is geen ip address', $ipAddress));
         }
 
-        $this->value = $filteredValue;
+        $this->ipAddress = $filteredValue;
     }
 
     /**
@@ -40,36 +32,36 @@ final class IPAddress
      */
     public function getVersion(): string
     {
-        $isIPv4 = \filter_var($this->value, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4);
+        $isIPv4 = \filter_var($this->ipAddress, \FILTER_VALIDATE_IP, \FILTER_FLAG_IPV4);
 
         if (false !== $isIPv4) {
-            return IPAddressVersion::IPV4;
+            return self::IPV4;
         }
 
-        return IPAddressVersion::IPV6;
+        return self::IPV6;
     }
 
     public function isIPv4(): bool
     {
-        return IPAddressVersion::IPV4 === $this->getVersion();
+        return self::IPV4 === $this->getVersion();
     }
 
     public function isIPv6(): bool
     {
-        return IPAddressVersion::IPV6 === $this->getVersion();
+        return self::IPV6 === $this->getVersion();
     }
 
-    public function asLong(): int
+    public function toLong(): int
     {
         if ($this->isIPv6()) {
             throw new \UnexpectedValueException('ipAddress of type v6 cannot be converted to int');
         }
 
-        return \ip2long($this->value);
+        return \ip2long($this->ipAddress);
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
-        return (string) $this->value;
+        return $this->ipAddress;
     }
 }

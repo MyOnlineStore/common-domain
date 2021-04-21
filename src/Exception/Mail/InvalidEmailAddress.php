@@ -10,4 +10,8 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  */
 final class InvalidEmailAddress extends InvalidArgument
 {
+    public static function withEmailAddress(string $emailAddress): self
+    {
+        return new self(\sprintf('"%s" is not a valid email address', $emailAddress));
+    }
 }

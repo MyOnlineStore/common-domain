@@ -11,8 +11,8 @@ final class BicTest extends TestCase
 {
     public function testFromString(): void
     {
-        self::assertEquals('RABONL2U', (string) Bic::fromString('RABONL2U'));
-        self::assertEquals('RABONL2U', (string) Bic::fromString('rabonl2u'));
+        self::assertEquals('RABONL2U', Bic::fromString('RABONL2U')->toString());
+        self::assertEquals('RABONL2U', Bic::fromString('rabonl2u')->toString());
 
         $this->expectException(InvalidBic::class);
         Bic::fromString('foo');
