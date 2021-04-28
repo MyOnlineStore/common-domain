@@ -52,6 +52,7 @@ final class DomainNameTest extends TestCase
     {
         self::assertEquals('google.nl', (new DomainName('www.google.nl'))->getRootDomain());
         self::assertEquals('mijnwebwinkel.co.uk', (new DomainName('www.shop.mijnwebwinkel.co.uk'))->getRootDomain());
+        self::assertEquals('mijnwebwinkel.co.uk', (new DomainName(' www.shop.mijnwebwinkel.co.uk'))->getRootDomain());
     }
 
     public function testIsRootdomain(): void
