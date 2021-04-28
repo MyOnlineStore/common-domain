@@ -29,6 +29,8 @@ final class DomainName
      */
     public function __construct(string $domainName)
     {
+        $domainName = \trim($domainName);
+
         Assert::contains($domainName, '.');
 
         $this->domainName = $domainName;
