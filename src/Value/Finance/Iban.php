@@ -7,9 +7,10 @@ use IsoCodes\Iban as IbanValidator;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class Iban
+class Iban
 {
     public function __construct(
         private string $iban

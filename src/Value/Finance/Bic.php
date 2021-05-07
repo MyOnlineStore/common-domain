@@ -7,9 +7,10 @@ use IsoCodes\SwiftBic;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidBic;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class Bic
+class Bic
 {
     private function __construct(
         private string $bic

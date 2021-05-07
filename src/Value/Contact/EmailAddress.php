@@ -6,9 +6,10 @@ namespace MyOnlineStore\Common\Domain\Value\Contact;
 use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class EmailAddress
+class EmailAddress
 {
     private function __construct(
         private string $emailAddress

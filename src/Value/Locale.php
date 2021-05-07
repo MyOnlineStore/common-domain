@@ -6,9 +6,10 @@ namespace MyOnlineStore\Common\Domain\Value;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class Locale
+class Locale
 {
     public function __construct(
         public LanguageCode $languageCode,

@@ -6,9 +6,10 @@ namespace MyOnlineStore\Common\Domain\Value\Tax;
 use MyOnlineStore\Common\Domain\Exception\Tax\InvalidVatNumber;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class VatNumber
+class VatNumber
 {
     private function __construct(
         private string $vatNumber
