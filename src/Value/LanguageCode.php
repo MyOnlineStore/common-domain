@@ -8,9 +8,10 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 /**
  * ISO 639 code (https://en.wikipedia.org/wiki/ISO_639)
  *
+ * @final
  * @psalm-immutable
  */
-final class LanguageCode
+class LanguageCode
 {
     private function __construct(
         private string $code

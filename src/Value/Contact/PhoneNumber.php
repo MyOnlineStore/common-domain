@@ -12,9 +12,10 @@ use MyOnlineStore\Common\Domain\Exception\Contact\InvalidPhoneNumber;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class PhoneNumber
+class PhoneNumber
 {
     private PhoneNumberUtil $phoneNumberUtil;
     private LibPhoneNumber $value;

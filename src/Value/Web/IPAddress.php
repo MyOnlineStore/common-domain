@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
 /**
+ * @final
  * @psalm-immutable
  */
-final class IPAddress
+class IPAddress
 {
     public const IPV4 = 'IPv4';
     public const IPV6 = 'IPv6';

@@ -8,9 +8,10 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 /**
  * ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  *
+ * @final
  * @psalm-immutable
  */
-final class RegionCode
+class RegionCode
 {
     private function __construct(
         private string $code
