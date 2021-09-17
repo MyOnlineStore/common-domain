@@ -25,17 +25,11 @@ class HexColor
             throw InvalidHexColor::withHexColor($value);
         }
 
-        if (1 === \preg_match('/#([a-f0-9]{6})\b/i', $value)) {
-            $value = \strtoupper($value);
+        if (4 === \strlen($value)) {
+            $value = \sprintf('#%s%s%s%s%s%s', $value[1], $value[1], $value[2], $value[2], $value[3], $value[3]);
         }
 
-        if (1 === \preg_match('/#([a-f0-9]{3})\b/i', $value)) {
-            $value = \strtoupper(
-                \sprintf('#%s%s%s%s%s%s', $value[1], $value[1], $value[2], $value[2], $value[3], $value[3])
-            );
-        }
-
-        return new self($value);
+        return new self(\strtoupper($value));
     }
 
     public function toString(): string
@@ -45,10 +39,10 @@ class HexColor
 
     private static function isValidHexColor(string $value): bool
     {
-        if (1 === \preg_match('/#([a-f0-9]{6})\b/i', $value)) {
+        if (1 === \preg_match('/#([a-f0-9A-F]{6})\b/', $value)) {
             return true;
         }
 
-        return 1 === \preg_match('/#([a-f0-9]{3})\b/i', $value);
+        return 1 === \preg_match('/#([a-f0-9A-F]{3})\b/', $value);
     }
 }

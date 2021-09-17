@@ -32,9 +32,26 @@ final class HexColorTest extends TestCase
 
     public function testCreationAndToString(): void
     {
-        self::assertEquals('#FFFFFF', HexColor::fromString('#FFF')->toString());
-        self::assertEquals('#FFFFFF', HexColor::fromString('#FFFFFF')->toString());
-        self::assertEquals('#112233', HexColor::fromString('#123')->toString());
+        self::assertEquals(
+            '#FFFFFF',
+            HexColor::fromString('#fff')
+                ->toString()
+        );
+        self::assertEquals(
+            '#FFFFFF',
+            HexColor::fromString('#FFFFFF')
+                ->toString()
+        );
+        self::assertEquals(
+            '#FFFFFF',
+            HexColor::fromString('#ffffff')
+                ->toString()
+        );
+        self::assertEquals(
+            '#112233',
+            HexColor::fromString('#123')
+                ->toString()
+        );
     }
 
     /**
