@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Contact;
 
+use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber as LibPhoneNumber;
 use libphonenumber\PhoneNumberFormat;
@@ -11,6 +12,8 @@ use libphonenumber\PhoneNumberUtil;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
+ * @StaticMethodConstructor("fromString")
+ *
  * @psalm-immutable
  */
 final class PhoneNumber
@@ -44,6 +47,11 @@ final class PhoneNumber
                 $exception
             );
         }
+    }
+
+    public static function fromString(string $value): self
+    {
+        return new self($value);
     }
 
     public function __toString(): string

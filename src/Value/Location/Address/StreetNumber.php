@@ -3,12 +3,15 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
+use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @StaticMethodConstructor("fromString")
  *
  * @psalm-immutable
  */

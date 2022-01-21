@@ -35,6 +35,13 @@ final class Amount extends Number
         parent::__construct($value, 0);
     }
 
+    public function toInt(): int
+    {
+        /** @psalm-suppress ImpureMethodCall */
+
+        return $this->value->asInteger();
+    }
+
     /**
      * @psalm-pure
      */

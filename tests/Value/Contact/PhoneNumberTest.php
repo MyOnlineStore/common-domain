@@ -143,9 +143,9 @@ final class PhoneNumberTest extends TestCase
         self::assertFalse((new PhoneNumber('112'))->isMobile());
     }
 
-    public function testToString(): void
+    public function testStringConversion(): void
     {
-        $phoneNumber = new PhoneNumber('0031882315726');
+        $phoneNumber = PhoneNumber::fromString('0031882315726');
         self::assertEquals($phoneNumber->getShortInternationalFormat(), (string) $phoneNumber);
     }
 

@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Finance;
 
+use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use IsoCodes\SwiftBic;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidBic;
 
 /**
+ * @StaticMethodConstructor("fromString")
+ *
  * @psalm-immutable
  */
 final class Bic
