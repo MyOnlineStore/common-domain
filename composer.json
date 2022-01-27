@@ -4,12 +4,6 @@
     "description": "Common MyOnlineStore domain concepts",
     "homepage": "https://github.com/MyOnlineStore/common-domain",
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/MyOnlineStore/Valinor.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "MyOnlineStore\\Common\\Domain\\": "src/"
@@ -25,7 +19,7 @@
         "php": "^7.4 || ^8.0",
         "ext-bcmath": "*",
         "ext-intl": "*",
-        "cuyz/valinor": "dev-fix-attributes-index",
+        "cuyz/valinor": "dev-master",
         "egulias/email-validator": "^2.1 || ^3.1",
         "giggsey/libphonenumber-for-php": "^8.12",
         "jeremykendall/php-domain-parser": "^5.7",
