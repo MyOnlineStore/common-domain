@@ -2,11 +2,14 @@
 
 namespace MyOnlineStore\Common\Domain\Value;
 
+use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use Doctrine\ORM\Mapping as ORM;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * @ORM\Embeddable
+ *
+ * @StaticMethodConstructor("fromString")
  *
  * @psalm-immutable
  */

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
-<psalm allowPhpStormGenerics="true"
-       errorBaseline="psalm-baseline.xml"
+<psalm errorBaseline="psalm-baseline.xml"
        errorLevel="2"
        resolveFromConfigFile="true"
        totallyTyped="true"

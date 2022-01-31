@@ -28,10 +28,10 @@ final class Name
      */
     private $lastName;
 
-    public function __construct(FirstName $firstName, LastName $lastName)
+    public function __construct(FirstName $first, LastName $last)
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->firstName = $first;
+        $this->lastName = $last;
     }
 
     public function equals(self $operand): bool
