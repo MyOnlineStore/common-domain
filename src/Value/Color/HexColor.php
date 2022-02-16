@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Color;
 
-use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use MyOnlineStore\Common\Domain\Exception\Color\InvalidHexColor;
 
 /**
- * @StaticMethodConstructor("fromString")
- *
  * @final
  * @psalm-immutable
  */
