@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
-use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
- * @StaticMethodConstructor("fromString")
- *
  * @psalm-immutable
  */
 final class StreetSuffix

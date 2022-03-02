@@ -19,10 +19,8 @@ final class BirthDate
 
     /**
      * @ORM\Column(name="birth_date", type="date_immutable")
-     *
-     * @var \DateTimeImmutable
      */
-    private $date;
+    private \DateTimeImmutable $date;
 
     private function __construct(\DateTimeImmutable $date)
     {
