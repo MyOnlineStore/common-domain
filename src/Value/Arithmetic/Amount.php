@@ -32,7 +32,7 @@ final class Amount extends Number
             throw new InvalidArgument(\sprintf('Amount must be a whole number, "%s" given', $value));
         }
 
-        parent::__construct($value, 0);
+        parent::__construct($value ?? 0, 0);
     }
 
     public function toInt(): int
