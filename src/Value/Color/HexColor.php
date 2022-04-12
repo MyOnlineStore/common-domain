@@ -39,10 +39,6 @@ class HexColor
 
     private static function isValidHexColor(string $value): bool
     {
-        if (1 === \preg_match('/#([a-f0-9A-F]{6})\b/', $value)) {
-            return true;
-        }
-
-        return 1 === \preg_match('/#([a-f0-9A-F]{3})\b/', $value);
+        return 1 === \preg_match('/^#[a-f0-9]{3}$|^#[a-f0-9]{6}$/i', $value);
     }
 }
