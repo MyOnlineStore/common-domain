@@ -28,6 +28,9 @@ final class HexColorTest extends TestCase
         yield ['123456'];
         yield ['1234567'];
         yield ['#GGGGGG'];
+        yield ['#FFFFFF,#FFFFFF'];
+        yield ['##FFFFFF'];
+        yield ['#FFFFFFFFFFFF'];
     }
 
     public function testCreationAndToString(): void
