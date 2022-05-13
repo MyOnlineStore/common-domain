@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use League\Uri\Http;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
- * @StaticMethodConstructor("fromString")
- *
  * @psalm-immutable
  */
 final class Url extends Http
