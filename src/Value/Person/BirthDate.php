@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
-use CuyZ\Valinor\Attribute\StaticMethodConstructor;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Embeddable
- *
- * @StaticMethodConstructor("fromString")
  *
  * @psalm-immutable
  */
