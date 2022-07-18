@@ -9,7 +9,7 @@ namespace MyOnlineStore\Common\Domain\Collection;
 class ImmutableCollection extends MutableCollection
 {
     /**
-     * @inheritDoc 
+     * @inheritDoc
      *
      * @return void
      */
@@ -18,10 +18,7 @@ class ImmutableCollection extends MutableCollection
         throw new \LogicException(\sprintf('Method %s is not available on immutable collections', __FUNCTION__));
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function offsetSet($index, $newval)
+    public function offsetSet(mixed $key, mixed $value): void
     {
         throw new \LogicException(\sprintf('Method %s is not available on immutable collections', __FUNCTION__));
     }
