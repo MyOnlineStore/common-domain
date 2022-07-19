@@ -5,11 +5,16 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
  * @deprecated Should be moved to common-collection
+ *
+ * @template TKey of array-key
+ * @template T
+ * @implements MutableCollectionInterface<TKey, T>
+ * @extends \ArrayObject<TKey, T>
  */
 class MutableCollection extends \ArrayObject implements MutableCollectionInterface
 {
     /**
-     * @param array $entries
+     * @param array<TKey,T> $entries
      */
     public function __construct(array $entries = [])
     {
@@ -18,12 +23,10 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
 
     /**
      * @inheritDoc
-     *
-     * @return void
      */
     public function add($element)
     {
-        $this[] = $element;
+        $this->append($element);
     }
 
     /**
@@ -35,9 +38,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @inheritDoc 
-     *
-     * @return void
+     * @inheritDoc
      */
     public function each(callable $callback)
     {
@@ -46,12 +47,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     public function equals(ImmutableCollectionInterface $otherCollection): bool
     {
-        if (static::class !== \get_class($otherCollection)) {
+        if (static::class !== $otherCollection::class) {
             return false;
         }
 
@@ -120,6 +118,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         return $this->getArrayCopy();
     }
 
+    /**
+     * @param callable(T): bool $callback
+     */
     protected function containsWith(callable $callback): bool
     {
         foreach ($this as $entry) {
@@ -132,6 +133,8 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
+     * @param \Closure(T): bool $closure
+     *
      * @return static
      */
     protected function filter(\Closure $closure)
@@ -140,7 +143,9 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
-     * @return mixed
+     * @param callable(T): bool $callback
+     *
+     * @return T
      *
      * @throws \OutOfBoundsException
      */
@@ -156,6 +161,8 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
     }
 
     /**
+     * @param \Closure(T): T $closure
+     *
      * @return static
      */
     protected function map(\Closure $closure)

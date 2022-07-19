@@ -5,13 +5,15 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
  * @deprecated Should be moved to common-collection
+ *
+ * @template TKey of array-key
+ * @template T
+ * @extends  MutableCollection<TKey, T>
  */
 class ImmutableCollection extends MutableCollection
 {
     /**
      * @inheritDoc
-     *
-     * @return void
      */
     public function add($element)
     {

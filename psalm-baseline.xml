@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.6.1@e93e532e4eaad6d68c4d7b606853800eaceccc72">
+<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
   <file src="src/Assertion/EnumValueGuardTrait.php">
     <InvalidScalarArgument occurrences="1">
       <code>$value</code>
@@ -12,35 +12,27 @@
     <DeprecatedInterface occurrences="1">
       <code>ImmutableCollection</code>
     </DeprecatedInterface>
-    <MissingParamType occurrences="1">
-      <code>$element</code>
-    </MissingParamType>
   </file>
   <file src="src/Collection/ImmutableCollectionInterface.php">
-    <DeprecatedClass occurrences="1">
-      <code>ImmutableCollectionInterface</code>
-    </DeprecatedClass>
     <MissingReturnType occurrences="1">
       <code>each</code>
     </MissingReturnType>
   </file>
   <file src="src/Collection/MutableCollection.php">
+    <DeprecatedClass occurrences="1">
+      <code>ImmutableCollectionInterface</code>
+    </DeprecatedClass>
     <DeprecatedInterface occurrences="1">
       <code>MutableCollection</code>
     </DeprecatedInterface>
-    <MissingParamType occurrences="1">
-      <code>$element</code>
-    </MissingParamType>
+    <MissingReturnType occurrences="1">
+      <code>each</code>
+    </MissingReturnType>
     <UnsafeInstantiation occurrences="3">
       <code>new static(\array_filter($this-&gt;toArray(), $closure))</code>
       <code>new static(\array_map($closure, $this-&gt;toArray()))</code>
       <code>new static(\array_values($this-&gt;toArray()))</code>
     </UnsafeInstantiation>
-  </file>
-  <file src="src/Collection/MutableCollectionInterface.php">
-    <MissingReturnType occurrences="1">
-      <code>add</code>
-    </MissingReturnType>
   </file>
   <file src="src/Collection/RegionCodeCollection.php">
     <DeprecatedClass occurrences="4">
@@ -64,10 +56,11 @@
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;toArray()</code>
     </ArgumentTypeCoercion>
-    <DeprecatedClass occurrences="6">
+    <DeprecatedClass occurrences="7">
       <code>ImmutableCollection</code>
       <code>StoreId</code>
       <code>StoreId[]|int[]</code>
+      <code>StoreIds</code>
       <code>StoreIdsInterface</code>
       <code>new StoreId($entry)</code>
     </DeprecatedClass>
@@ -104,27 +97,42 @@
       <code>\sprintf('1%s', \str_repeat('0', $currency-&gt;getMinorUnit()))</code>
       <code>\sprintf('1%s', \str_repeat('0', $this-&gt;currency-&gt;getMinorUnit()))</code>
     </ArgumentTypeCoercion>
-    <InvalidToString occurrences="1">
-      <code>string</code>
-    </InvalidToString>
-    <NullableReturnStatement occurrences="1"/>
   </file>
   <file src="src/Value/Money/Price.php">
     <ArgumentTypeCoercion occurrences="2">
       <code>(string) $amount</code>
       <code>(string) $amount</code>
     </ArgumentTypeCoercion>
-    <PossiblyNullArgument occurrences="4">
-      <code>$amountPerPercentage</code>
-      <code>$priceWithoutPercentage</code>
-      <code>$value</code>
-      <code>$value</code>
-    </PossiblyNullArgument>
   </file>
   <file src="src/Value/RegionCode.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $code</code>
     </DocblockTypeContradiction>
+  </file>
+  <file src="src/Value/Web/DomainName.php">
+    <ImpureMethodCall occurrences="16">
+      <code>fromString</code>
+      <code>registrableDomain</code>
+      <code>registrableDomain</code>
+      <code>registrableDomain</code>
+      <code>resolve</code>
+      <code>subDomain</code>
+      <code>suffix</code>
+      <code>toString</code>
+      <code>toString</code>
+      <code>toString</code>
+      <code>toString</code>
+      <code>toString</code>
+      <code>value</code>
+      <code>value</code>
+      <code>value</code>
+      <code>value</code>
+    </ImpureMethodCall>
+    <ImpureStaticProperty occurrences="3">
+      <code>self::$rules</code>
+      <code>self::$rules</code>
+      <code>self::$rules</code>
+    </ImpureStaticProperty>
   </file>
   <file src="src/Value/Web/IPAddress.php">
     <RedundantCastGivenDocblockType occurrences="1">
@@ -132,9 +140,54 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Value/Web/Url.php">
-    <DeprecatedInterface occurrences="1">
-      <code>Url</code>
-    </DeprecatedInterface>
+    <ImpureMethodCall occurrences="28">
+      <code>__toString</code>
+      <code>getAuthority</code>
+      <code>getFragment</code>
+      <code>getFragment</code>
+      <code>getFragment</code>
+      <code>getHost</code>
+      <code>getHost</code>
+      <code>getHost</code>
+      <code>getPath</code>
+      <code>getPath</code>
+      <code>getPath</code>
+      <code>getPort</code>
+      <code>getPort</code>
+      <code>getPort</code>
+      <code>getQuery</code>
+      <code>getQuery</code>
+      <code>getQuery</code>
+      <code>getScheme</code>
+      <code>getScheme</code>
+      <code>getScheme</code>
+      <code>getUserInfo</code>
+      <code>withFragment</code>
+      <code>withHost</code>
+      <code>withPath</code>
+      <code>withPort</code>
+      <code>withQuery</code>
+      <code>withScheme</code>
+      <code>withUserInfo</code>
+    </ImpureMethodCall>
+    <LessSpecificReturnStatement occurrences="7">
+      <code>new self($this-&gt;leagueUri-&gt;withFragment($fragment))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withHost($host))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withPath($path))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withPort($port))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withQuery($query))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withScheme($scheme))</code>
+      <code>new self($this-&gt;leagueUri-&gt;withUserInfo($user, $password))</code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType occurrences="7">
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+      <code>self</code>
+    </MoreSpecificReturnType>
   </file>
   <file src="src/Value/Web/UrlPath.php">
     <DocblockTypeContradiction occurrences="1">

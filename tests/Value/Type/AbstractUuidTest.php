@@ -16,7 +16,7 @@ final class AbstractUuidTest extends TestCase
 
         self::assertEquals(
             $uuid->getBytes(),
-            (string) UuidStub::fromBytes($uuid->getBytes())->bytes()
+            UuidStub::fromBytes($uuid->getBytes())->bytes()
         );
     }
 
@@ -32,8 +32,7 @@ final class AbstractUuidTest extends TestCase
     {
         $uuid = Uuid::fromString((string) UuidStub::generate());
 
-        self::assertInstanceOf(Uuid::class, $uuid);
-        self::assertEquals(4, $uuid->getVersion());
+        self::assertEquals(4, $uuid->getFields()->getVersion());
     }
 
     public function testEquals(): void

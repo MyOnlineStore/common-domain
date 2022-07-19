@@ -34,7 +34,10 @@ final class UrlTest extends TestCase
      */
     public function invalidUrlDataProvider(): array
     {
-        return [['http://'], ['htp:/www.myofflinestore.com'], ["\x00foobar\x01"]];
+        return [
+            ['http://'],
+            ["\x00foobar\x01"],
+        ];
     }
 
     /**

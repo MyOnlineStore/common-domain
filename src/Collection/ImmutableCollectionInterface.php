@@ -5,39 +5,40 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
  * @deprecated Should be moved to common-collection
+ *
+ * @template TKey of array-key
+ * @template T
+ * @implements \IteratorAggregate<TKey, T>
+ * @implements \ArrayAccess<TKey, T>
  */
-interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \ArrayAccess
+interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
-     * @param mixed $element
+     * @param T $element
      *
      * @return bool
      */
     public function contains($element);
 
     /**
-     * @param callable $callback
+     * @param callable(T): void $callback
      */
     public function each(callable $callback);
 
     /**
      * Returns if given collection is of the same type and has the same elements
-     *
-     * @param ImmutableCollectionInterface $otherCollection
-     *
-     * @return bool
      */
     public function equals(ImmutableCollectionInterface $otherCollection): bool;
 
     /**
-     * @return mixed
+     * @return T|false
      */
     public function first();
 
     /**
-     * @param mixed $element
+     * @param T $element
      *
-     * @return mixed Index van het gegeven element, of false wanneer deze niet voorkomt in de collectie
+     * @return TKey|false Index van het gegeven element, of false wanneer deze niet voorkomt in de collectie
      */
     public function indexOf($element);
 
@@ -49,7 +50,7 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \
     /**
      * Sets the internal iterator to the last element in the collection and returns this element.
      *
-     * @return mixed
+     * @return T|false
      */
     public function last();
 
@@ -59,7 +60,7 @@ interface ImmutableCollectionInterface extends \Countable, \IteratorAggregate, \
     public function reindex();
 
     /**
-     * @return array
+     * @return array<TKey, T>
      */
     public function toArray();
 }

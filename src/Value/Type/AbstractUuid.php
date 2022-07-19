@@ -12,7 +12,7 @@ use Ramsey\Uuid\UuidInterface;
  */
 abstract class AbstractUuid
 {
-    /** @var UuidInterface */
+    /** @var UuidInterface $uuid */
     protected $uuid;
 
     final private function __construct(UuidInterface $uuid)
@@ -21,13 +21,9 @@ abstract class AbstractUuid
     }
 
     /**
-     * @param string $bytes
-     *
-     * @return static
-     *
      * @psalm-pure
      */
-    public static function fromBytes($bytes)
+    public static function fromBytes(string $bytes): static
     {
         return new static(Uuid::fromBytes($bytes));
     }
@@ -35,43 +31,30 @@ abstract class AbstractUuid
     /**
      * @param string $namespace Must be a valid uuid on itself
      *
-     * @return static
-     *
      * @throws InvalidUuidStringException
      *
      * @psalm-pure
      */
-    public static function fromNumericId(string $namespace, int $numericId): AbstractUuid
+    public static function fromNumericId(string $namespace, int $numericId): static
     {
         return new static(Uuid::uuid5($namespace, (string) $numericId));
     }
 
     /**
-     * @param string $string
-     *
-     * @return static
-     *
      * @psalm-pure
      */
-    public static function fromString($string)
+    public static function fromString(string $string): static
     {
         return new static(Uuid::fromString($string));
     }
 
     /**
-     * @return static
-     *
      * @psalm-pure
      */
-    public static function generate()
+    public static function generate(): static
     {
         /** @psalm-suppress ImpureMethodCall */
         return new static(Uuid::uuid4());
-    }
-
-    public function __toString(): string
-    {
-        return $this->uuid->toString();
     }
 
     public function bytes(): string
@@ -82,5 +65,15 @@ abstract class AbstractUuid
     public function equals(AbstractUuid $otherUuid): bool
     {
         return $this->uuid->equals($otherUuid->uuid);
+    }
+
+    public function toString(): string
+    {
+        return $this->uuid->toString();
+    }
+
+    public function __toString(): string
+    {
+        return $this->uuid->toString();
     }
 }
