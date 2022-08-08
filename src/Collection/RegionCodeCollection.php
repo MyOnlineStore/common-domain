@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
  * @deprecated Should be moved to common-collection
+ *
+ * @extends ImmutableCollection<array-key, RegionCode>
  */
 final class RegionCodeCollection extends ImmutableCollection implements RegionCodeCollectionInterface
 {

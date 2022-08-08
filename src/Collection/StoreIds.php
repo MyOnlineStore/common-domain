@@ -7,6 +7,8 @@ use MyOnlineStore\Common\Domain\Value\StoreId;
 
 /**
  * @deprecated Should be moved to common-collection
+ *
+ * @extends ImmutableCollection<array-key, StoreId>
  */
 final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 {
@@ -36,6 +38,9 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
         return $this[\array_rand($this->toArray(), 1)];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function contains($element): bool
     {
         return \in_array($element, $this->getArrayCopy(), false);
