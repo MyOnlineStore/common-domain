@@ -15,7 +15,7 @@ class Number
     protected $value;
 
     /**
-     * @param mixed $value
+     * @param float|int|string|self $value
      *
      * @throws \InvalidArgumentException
      */

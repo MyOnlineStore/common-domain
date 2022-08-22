@@ -28,7 +28,7 @@ final class Amount extends Number
      */
     public function __construct($value)
     {
-        if (false !== \strpos((string) $value, '.')) {
+        if (\str_contains((string) $value, '.')) {
             throw new InvalidArgument(\sprintf('Amount must be a whole number, "%s" given', $value));
         }
 
