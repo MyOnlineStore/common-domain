@@ -15,7 +15,7 @@ final class BirthDateTest extends TestCase
 
         self::assertEquals(
             \DateTimeImmutable::createFromFormat('Y-m-d', $date),
-            $birthDate->getDate()
+            $birthDate->getDate(),
         );
         self::assertSame($date, (string) $birthDate);
     }
@@ -27,7 +27,7 @@ final class BirthDateTest extends TestCase
 
         self::assertEquals(
             \DateTimeImmutable::createFromFormat('d-m-Y', $date),
-            $birthDate->getDate()
+            $birthDate->getDate(),
         );
         self::assertSame('2019-10-18', (string) $birthDate);
     }

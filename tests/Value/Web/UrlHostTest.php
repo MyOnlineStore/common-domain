@@ -10,17 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 class UrlHostTest extends TestCase
 {
-    /**
-     * @dataProvider providerValidHostUrls
-     */
+    /** @dataProvider providerValidHostUrls */
     public function testValidUrlHosts(string $hostname): void
     {
         self::assertEquals($hostname, (string) new UrlHost($hostname));
     }
 
-    /**
-     * @dataProvider provider
-     */
+    /** @dataProvider provider */
     public function testInvalidUrlHost(string $hostname): void
     {
         $this->expectException(InvalidHostName::class);
@@ -33,9 +29,7 @@ class UrlHostTest extends TestCase
         self::assertEquals(new DomainName((string) $urlHost), $urlHost->getDomainName());
     }
 
-    /**
-     * @dataProvider providerValidHostUrls
-     */
+    /** @dataProvider providerValidHostUrls */
     public function testInValidDomainName(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -44,17 +38,13 @@ class UrlHostTest extends TestCase
         $urlHost->getDomainName();
     }
 
-    /**
-     * @dataProvider providerValidDomains
-     */
+    /** @dataProvider providerValidDomains */
     public function testValidDomainsFromDomainName(string $domainName): void
     {
         self::assertEquals($domainName, (string) UrlHost::fromDomainName(new DomainName($domainName)));
     }
 
-    /**
-     * @dataProvider providerValidHostUrls
-     */
+    /** @dataProvider providerValidHostUrls */
     public function testInvalidDomainsFromDomainName(string $domainName): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -62,9 +52,7 @@ class UrlHostTest extends TestCase
         self::assertEquals($domainName, (string) UrlHost::fromDomainName(new DomainName($domainName)));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provider(): array
     {
         return [
@@ -75,9 +63,7 @@ class UrlHostTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function providerValidHostUrls(): array
     {
         return [
@@ -87,9 +73,7 @@ class UrlHostTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function providerValidDomains(): array
     {
         return [

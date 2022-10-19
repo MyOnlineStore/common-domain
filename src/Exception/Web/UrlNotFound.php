@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Exception\Web;
 
 use MyOnlineStore\Common\Domain\Exception\NotFoundException;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class UrlNotFound extends NotFoundException
 {
 }

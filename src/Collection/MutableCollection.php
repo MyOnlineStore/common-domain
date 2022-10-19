@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
- * @deprecated Should be moved to common-collection
- *
  * @template TKey of array-key
  * @template T
  * @implements MutableCollectionInterface<TKey, T>
@@ -13,33 +11,25 @@ namespace MyOnlineStore\Common\Domain\Collection;
  */
 class MutableCollection extends \ArrayObject implements MutableCollectionInterface
 {
-    /**
-     * @param array<TKey,T> $entries
-     */
+    /** @param array<TKey,T> $entries */
     public function __construct(array $entries = [])
     {
         parent::__construct($entries);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function add($element)
     {
         $this->append($element);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function contains($element)
     {
         return \in_array($element, $this->getArrayCopy(), true);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function each(callable $callback)
     {
         foreach ($this as $entry) {
@@ -66,9 +56,7 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function first()
     {
         $arrayCopy = $this->getArrayCopy();
@@ -76,25 +64,19 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         return \reset($arrayCopy);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function indexOf($element)
     {
         return \array_search($element, $this->getArrayCopy(), true);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function isEmpty()
     {
         return 0 === $this->count();
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function last()
     {
         $arrayCopy = $this->getArrayCopy();
@@ -102,25 +84,19 @@ class MutableCollection extends \ArrayObject implements MutableCollectionInterfa
         return \end($arrayCopy);
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function reindex()
     {
         return new static(\array_values($this->toArray()));
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function toArray()
     {
         return $this->getArrayCopy();
     }
 
-    /**
-     * @param callable(T): bool $callback
-     */
+    /** @param callable(T): bool $callback */
     protected function containsWith(callable $callback): bool
     {
         foreach ($this as $entry) {

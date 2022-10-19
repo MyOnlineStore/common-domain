@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Exception;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 class NotFoundException extends \Exception
 {
 }

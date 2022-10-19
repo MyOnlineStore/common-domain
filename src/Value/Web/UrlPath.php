@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class UrlPath
 {
     /** @var string */

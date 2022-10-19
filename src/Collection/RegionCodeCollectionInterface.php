@@ -5,20 +5,12 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
-/**
- * @method RegionCode[] getIterator()
- *
- * @deprecated Should be moved to common-collection
- */
+/** @method RegionCode[] getIterator() */
 interface RegionCodeCollectionInterface extends ImmutableCollectionInterface, StringCollectionInterface
 {
-    /**
-     * @return RegionCodeCollectionInterface
-     */
+    /** @return RegionCodeCollectionInterface */
     public function reindex();
 
-    /**
-     * @return RegionCodeCollectionInterface
-     */
+    /** @return RegionCodeCollectionInterface */
     public function unique(): RegionCodeCollectionInterface;
 }

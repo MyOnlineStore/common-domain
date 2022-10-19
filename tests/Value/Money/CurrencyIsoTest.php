@@ -25,17 +25,15 @@ final class CurrencyIsoTest extends TestCase
     {
         self::assertTrue(
             CurrencyIso::fromString('OMR')->equals(
-                CurrencyIso::fromString('OMR')
-            )
+                CurrencyIso::fromString('OMR'),
+            ),
         );
         self::assertFalse(CurrencyIso::fromString('OMR')->equals(
-            CurrencyIso::fromString('EUR')
+            CurrencyIso::fromString('EUR'),
         ));
     }
 
-    /**
-     * @dataProvider invalidArgumentProvider
-     */
+    /** @dataProvider invalidArgumentProvider */
     public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidCurrencyIso::class);
@@ -57,9 +55,7 @@ final class CurrencyIsoTest extends TestCase
         self::assertEquals('JPY', (string) CurrencyIso::fromString('JPY'));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function invalidArgumentProvider(): array
     {
         return [

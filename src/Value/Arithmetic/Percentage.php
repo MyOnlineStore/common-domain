@@ -13,7 +13,7 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
  */
 final class Percentage extends Number
 {
-    private function __construct(string $value, ?int $scale = null)
+    private function __construct(string $value, int|null $scale = null)
     {
         parent::__construct($value, $scale);
 
@@ -23,10 +23,8 @@ final class Percentage extends Number
         }
     }
 
-    /**
-     * @psalm-pure
-     */
-    public static function fromString(string $value, ?int $scale = null): self
+    /** @psalm-pure */
+    public static function fromString(string $value, int|null $scale = null): self
     {
         return new self($value, $scale);
     }

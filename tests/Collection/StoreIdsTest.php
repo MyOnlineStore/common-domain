@@ -13,7 +13,7 @@ final class StoreIdsTest extends TestCase
     {
         self::assertEquals(
             new StoreIds([new StoreId(123), new StoreId(456), new StoreId(789)]),
-            new StoreIds([new StoreId(123), '456', 789])
+            new StoreIds([new StoreId(123), '456', 789]),
         );
     }
 
@@ -53,12 +53,12 @@ final class StoreIdsTest extends TestCase
                 $storeId2,
                 $storeId3,
                 $storeId3,
-            ]
+            ],
         );
 
         self::assertEquals(
             new StoreIds([0 => $storeId1, 2 => $storeId2, 3 => $storeId3]),
-            $collection->unique()
+            $collection->unique(),
         );
     }
 }

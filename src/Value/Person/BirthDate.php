@@ -14,9 +14,7 @@ final class BirthDate
 {
     private const FORMAT = 'Y-m-d';
 
-    /**
-     * @ORM\Column(name="birth_date", type="date_immutable")
-     */
+    /** @ORM\Column(name="birth_date", type="date_immutable") */
     private \DateTimeImmutable $date;
 
     private function __construct(\DateTimeImmutable $date)
@@ -24,9 +22,7 @@ final class BirthDate
         $this->date = $date;
     }
 
-    /**
-     * @psalm-suppress InvalidToString
-     */
+    /** @psalm-suppress InvalidToString */
     public function __toString(): string
     {
         return $this->date->format(self::FORMAT);
@@ -37,30 +33,24 @@ final class BirthDate
         return (string) $this === (string) $comparator;
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function fromDateTime(\DateTimeImmutable $date): self
     {
         return new self($date);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function fromString(string $date): self
     {
         return self::fromStringWithFormat($date);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function fromStringWithFormat(
         string $date,
         string $format = self::FORMAT
     ): self {
-        /** @psalm-suppress PossiblyFalseArgument */
+        /** @psalm-suppress ImpureMethodCall, PossiblyFalseArgument */
 
         return new self(\DateTimeImmutable::createFromFormat($format, $date));
     }

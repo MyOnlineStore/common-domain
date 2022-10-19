@@ -41,9 +41,7 @@ final class ZipCode
         return new self(\mb_strtoupper($zipCode));
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asNotAvailable(): self
     {
         return new self(self::NOT_AVAILABLE);

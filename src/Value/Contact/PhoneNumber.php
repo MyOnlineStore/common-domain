@@ -10,9 +10,7 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class PhoneNumber
 {
     /** @var PhoneNumberUtil */
@@ -26,7 +24,7 @@ final class PhoneNumber
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, ?RegionCode $regionCode = null)
+    public function __construct($value, RegionCode|null $regionCode = null)
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
 
@@ -41,7 +39,7 @@ final class PhoneNumber
             throw new \InvalidArgumentException(
                 \sprintf('Invalid phonenumber (%s)', $value),
                 0,
-                $exception
+                $exception,
             );
         }
     }
@@ -61,7 +59,7 @@ final class PhoneNumber
         return 0 === \strcasecmp((string) $this, (string) $comparison);
     }
 
-    public function getCountryCode(): ?int
+    public function getCountryCode(): int|null
     {
         return $this->value->getCountryCode();
     }
@@ -87,7 +85,7 @@ final class PhoneNumber
                 PhoneNumberType::FIXED_LINE,
                 PhoneNumberType::FIXED_LINE_OR_MOBILE,
             ],
-            true
+            true,
         );
     }
 
@@ -100,7 +98,7 @@ final class PhoneNumber
                 PhoneNumberType::MOBILE,
                 PhoneNumberType::FIXED_LINE_OR_MOBILE,
             ],
-            true
+            true,
         );
     }
 

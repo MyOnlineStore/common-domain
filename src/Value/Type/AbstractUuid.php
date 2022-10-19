@@ -7,9 +7,7 @@ use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 abstract class AbstractUuid
 {
     /** @var UuidInterface $uuid */
@@ -20,9 +18,7 @@ abstract class AbstractUuid
         $this->uuid = $uuid;
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function fromBytes(string $bytes): static
     {
         return new static(Uuid::fromBytes($bytes));
@@ -40,17 +36,13 @@ abstract class AbstractUuid
         return new static(Uuid::uuid5($namespace, (string) $numericId));
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function fromString(string $string): static
     {
         return new static(Uuid::fromString($string));
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function generate(): static
     {
         /** @psalm-suppress ImpureMethodCall */

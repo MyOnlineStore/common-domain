@@ -33,14 +33,12 @@ final class Money
         $this->currency = $currency;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function add(self $otherMoney): self
     {
         if (!$this->currency->equals($otherMoney->currency)) {
             throw new \InvalidArgumentException(
-                \sprintf('Cannot mix %s currency with %s', $this->currency, $otherMoney->currency)
+                \sprintf('Cannot mix %s currency with %s', $this->currency, $otherMoney->currency),
             );
         }
 
@@ -63,10 +61,10 @@ final class Money
                 (int) \bcmul(
                     (string) \round((float) $amount, $currency->getMinorUnit()),
                     \sprintf('1%s', \str_repeat('0', $currency->getMinorUnit())),
-                    $currency->getMinorUnit()
-                )
+                    $currency->getMinorUnit(),
+                ),
             ),
-            $currency
+            $currency,
         );
     }
 
@@ -91,7 +89,7 @@ final class Money
         return \bcdiv(
             (string) $this->amount,
             \sprintf('1%s', \str_repeat('0', $this->currency->getMinorUnit())),
-            $this->currency->getMinorUnit()
+            $this->currency->getMinorUnit(),
         );
     }
 }

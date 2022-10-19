@@ -12,7 +12,7 @@ final class InvalidHexColorTest extends TestCase
     {
         $exception = InvalidHexColor::withHexColor(
             'foobar',
-            $previous = $this->createMock(\Throwable::class)
+            $previous = $this->createMock(\Throwable::class),
         );
 
         self::assertStringContainsString('foobar', $exception->getMessage());

@@ -16,7 +16,7 @@ class HexColor
 
     private function __construct(string $value)
     {
-        if (!$this->isValidHexColor($value)) {
+        if (!self::isValidHexColor($value)) {
             throw InvalidHexColor::withHexColor($value);
         }
 
@@ -27,9 +27,7 @@ class HexColor
         $this->value = \strtoupper($value);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public static function fromString(string $value): self
     {
         return new self($value);

@@ -62,9 +62,7 @@ final class LocaleTest extends TestCase
         self::assertEquals(new RegionCode('DE'), Locale::fromString('de_DE')->regionCode());
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function invalidArgumentProvider(): array
     {
         return [

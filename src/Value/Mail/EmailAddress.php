@@ -22,9 +22,7 @@ final class EmailAddress
      */
     private $emailAddress;
 
-    /**
-     * @throws InvalidEmailAddress
-     */
+    /** @throws InvalidEmailAddress */
     public function __construct(string $emailAddress)
     {
         $validator = new EmailValidator();
@@ -42,8 +40,13 @@ final class EmailAddress
         return $this->emailAddress === $comparator->emailAddress;
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return $this->emailAddress;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 }

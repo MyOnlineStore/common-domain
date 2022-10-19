@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Exception\Mail;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class InvalidEmailAddress extends InvalidArgument
 {
 }

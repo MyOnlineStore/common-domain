@@ -8,17 +8,13 @@ use Pdp\ResolvedDomainName;
 use Pdp\Rules;
 use Pdp\SyntaxError;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class DomainName
 {
     private ResolvedDomainName $resolvedDomainName;
-    private static ?Rules $rules = null;
+    private static Rules|null $rules = null;
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function __construct(string $domainName)
     {
         $domainName = \trim($domainName);
@@ -30,7 +26,7 @@ final class DomainName
         } catch (SyntaxError $exception) {
             throw new \InvalidArgumentException(
                 \sprintf('Invalid domain given "%s".', $domainName),
-                previous: $exception
+                previous: $exception,
             );
         }
     }
@@ -45,42 +41,32 @@ final class DomainName
         return $this->resolvedDomainName->toString() === $otherDomainName->resolvedDomainName->toString();
     }
 
-    /**
-     * @deprecated Should be extracted to external service
-     */
-    public function getHostName(): ?string
+    /** @deprecated Should be extracted to external service */
+    public function getHostName(): string|null
     {
         return \explode('.', $this->resolvedDomainName->registrableDomain()->toString(), 2)[0] ?? null;
     }
 
-    /**
-     * @deprecated Should be extracted to external service
-     */
+    /** @deprecated Should be extracted to external service */
     public function getRootDomain(): self
     {
         return new self($this->resolvedDomainName->registrableDomain()->toString());
     }
 
-    /**
-     * @deprecated Should be extracted to external service
-     */
+    /** @deprecated Should be extracted to external service */
     public function isRootDomain(): bool
     {
         return $this->resolvedDomainName->registrableDomain()->value() === $this->resolvedDomainName->value();
     }
 
-    /**
-     * @deprecated Should be extracted to external service
-     */
-    public function getSubdomain(): ?string
+    /** @deprecated Should be extracted to external service */
+    public function getSubdomain(): string|null
     {
         return $this->resolvedDomainName->subDomain()->value();
     }
 
-    /**
-     * @deprecated Should be extracted to external service
-     */
-    public function getTld(): ?string
+    /** @deprecated Should be extracted to external service */
+    public function getTld(): string|null
     {
         return $this->resolvedDomainName->suffix()->value();
     }
@@ -14163,7 +14149,7 @@ enterprisecloud.nu
 
 // ===END PRIVATE DOMAINS===
 
-RULES
+RULES,
             );
         }
 

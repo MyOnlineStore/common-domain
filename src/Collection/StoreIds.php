@@ -6,17 +6,14 @@ namespace MyOnlineStore\Common\Domain\Collection;
 use MyOnlineStore\Common\Domain\Value\StoreId;
 
 /**
- * @deprecated Should be moved to common-collection
- *
  * @extends ImmutableCollection<array-key, StoreId>
+ * @use StringCollectionTrait<array-key, StoreId>
  */
 final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 {
     use StringCollectionTrait;
 
-    /**
-     * @param StoreId[]|int[] $entries
-     */
+    /** @param StoreId[]|int[] $entries */
     public function __construct(array $entries = [])
     {
         parent::__construct(
@@ -24,8 +21,8 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
                 static function ($entry) {
                     return $entry instanceof StoreId ? $entry : new StoreId($entry);
                 },
-                $entries
-            )
+                $entries,
+            ),
         );
     }
 
@@ -38,9 +35,7 @@ final class StoreIds extends ImmutableCollection implements StoreIdsInterface
         return $this[\array_rand($this->toArray(), 1)];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function contains($element): bool
     {
         return \in_array($element, $this->getArrayCopy(), false);

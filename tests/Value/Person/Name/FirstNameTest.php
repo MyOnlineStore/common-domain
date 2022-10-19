@@ -23,9 +23,7 @@ final class FirstNameTest extends TestCase
         yield ["\t "];
     }
 
-    /**
-     * @dataProvider emptyDataProvider
-     */
+    /** @dataProvider emptyDataProvider */
     public function testEmpty(string $empty): void
     {
         $this->expectException(InvalidArgument::class);

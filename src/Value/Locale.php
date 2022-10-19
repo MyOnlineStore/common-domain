@@ -43,9 +43,9 @@ final class Locale
      */
     public static function fromString($string): self
     {
-        if (false === \strpos($string, '_')) {
+        if (!\str_contains($string, '_')) {
             throw new InvalidArgument(
-                \sprintf('Given string "%s" is not a valid string representation of a locale', $string)
+                \sprintf('Given string "%s" is not a valid string representation of a locale', $string),
             );
         }
 
@@ -70,8 +70,13 @@ final class Locale
         return $this->regionCode;
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return \sprintf('%s_%s', $this->languageCode, $this->regionCode);
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 }

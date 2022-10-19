@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Assertion;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 trait EnumValueGuardTrait
 {
     /**
      * @param mixed $value
      *
-     * @return mixed
+     * @return scalar
      *
      * @throws \InvalidArgumentException
      */
@@ -19,7 +17,7 @@ trait EnumValueGuardTrait
     {
         if (!\is_scalar($value)) {
             throw new \InvalidArgumentException(
-                \sprintf('given value is not a scalar value but of type %s', \gettype($value))
+                \sprintf('given value is not a scalar value but of type %s', \gettype($value)),
             );
         }
 
@@ -31,8 +29,8 @@ trait EnumValueGuardTrait
                     'Invalid %s value given: "%s" (valid values: %s)',
                     self::class,
                     $value,
-                    \implode(', ', $validValues)
-                )
+                    \implode(', ', $validValues),
+                ),
             );
         }
 
@@ -40,7 +38,7 @@ trait EnumValueGuardTrait
     }
 
     /**
-     * @return mixed[]
+     * @return scalar[]
      *
      * @psalm-pure
      */

@@ -40,8 +40,13 @@ final class LanguageCode
         return $this->code === $comparator->code;
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return $this->code;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 }
