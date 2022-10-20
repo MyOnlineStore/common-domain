@@ -40,8 +40,8 @@ final class MutableCollectionTest extends TestCase
                     static function (\Throwable $exception) {
                         return 'foo' === $exception->getMessage();
                     },
-                ]
-            )
+                ],
+            ),
         );
 
         self::assertFalse(
@@ -51,8 +51,8 @@ final class MutableCollectionTest extends TestCase
                     static function (\Throwable $exception) {
                         return 'qux' === $exception->getMessage();
                     },
-                ]
-            )
+                ],
+            ),
         );
     }
 
@@ -69,7 +69,7 @@ final class MutableCollectionTest extends TestCase
         $test->each(
             static function (\Iterator $item): void {
                 $item->next();
-            }
+            },
         );
     }
 
@@ -101,9 +101,7 @@ final class MutableCollectionTest extends TestCase
 
         $extendedClass = new class ([$element1, $element2]) extends MutableCollection
         {
-            /**
-             * @return static
-             */
+            /** @return static */
             public function filter(\Closure $closure)
             {
                 return parent::filter($closure);
@@ -115,8 +113,8 @@ final class MutableCollectionTest extends TestCase
             $extendedClass->filter(
                 static function (\stdClass $element) {
                     return $element->isFoobar();
-                }
-            )->toArray()
+                },
+            )->toArray(),
         );
     }
 
@@ -153,8 +151,8 @@ final class MutableCollectionTest extends TestCase
             $extendedClass->firstHaving(
                 static function (\stdClass $element) {
                     return $element->isFoobar();
-                }
-            )
+                },
+            ),
         );
     }
 
@@ -182,7 +180,7 @@ final class MutableCollectionTest extends TestCase
         $extendedClass->firstHaving(
             static function (\stdClass $element) {
                 return $element->isFoobar();
-            }
+            },
         );
     }
 
@@ -215,9 +213,7 @@ final class MutableCollectionTest extends TestCase
 
         $extendedClass = new class ([$element1, $element2]) extends MutableCollection
         {
-            /**
-             * @return static
-             */
+            /** @return static */
             public function map(\Closure $closure)
             {
                 return parent::map($closure);
@@ -229,8 +225,8 @@ final class MutableCollectionTest extends TestCase
             $extendedClass->map(
                 static function (\stdClass $element) {
                     return $element;
-                }
-            )->toArray()
+                },
+            )->toArray(),
         );
     }
 

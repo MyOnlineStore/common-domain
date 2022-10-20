@@ -22,7 +22,7 @@ final class PriceTest extends TestCase
         self::assertSame('2.00', (new Price('1'))->add(new Price('1'), Price::PRECISION_DISPLAY)->getAmount());
         self::assertSame(
             '12425.46',
-            (new Price('1.23432423'))->add(new Price('12424.234243'), Price::PRECISION_DISPLAY)->getAmount()
+            (new Price('1.23432423'))->add(new Price('12424.234243'), Price::PRECISION_DISPLAY)->getAmount(),
         );
     }
 

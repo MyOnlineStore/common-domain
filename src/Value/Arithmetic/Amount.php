@@ -42,9 +42,7 @@ final class Amount extends Number
         return $this->value->asInteger();
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asZero(): Amount
     {
         return new self(0);

@@ -9,9 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UrlTest extends TestCase
 {
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function validUrlDataProvider(): array
     {
         return [
@@ -21,17 +19,13 @@ final class UrlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider validUrlDataProvider
-     */
+    /** @dataProvider validUrlDataProvider */
     public function testFromStringWillParseStringCorrectly(string $input): void
     {
         self::assertEquals((string) Uri::createFromString($input), (string) Url::fromString($input));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function invalidUrlDataProvider(): array
     {
         return [
@@ -40,9 +34,7 @@ final class UrlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidUrlDataProvider
-     */
+    /** @dataProvider invalidUrlDataProvider */
     public function testFromStringWillThrowExceptionForMalformedUrls(string $input): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -60,19 +52,15 @@ final class UrlTest extends TestCase
         self::assertTrue(Url::createFromString('https://api.host.com:8080/api-route?token=foo#bar')->equals($otherUrl));
     }
 
-    /**
-     * @dataProvider invalidEqualUrlProvider
-     */
+    /** @dataProvider invalidEqualUrlProvider */
     public function testEqualsWillReturnFalseIfObjectDoesNotMatch(Url $otherUrl): void
     {
         self::assertFalse(
-            Url::createFromString('https://api.host.com:8080/api-route?token=foo#bar')->equals($otherUrl)
+            Url::createFromString('https://api.host.com:8080/api-route?token=foo#bar')->equals($otherUrl),
         );
     }
 
-    /**
-     * @return Url[][]
-     */
+    /** @return Url[][] */
     public function invalidEqualUrlProvider(): array
     {
         return [

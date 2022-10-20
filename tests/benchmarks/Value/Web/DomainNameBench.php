@@ -7,9 +7,7 @@ use MyOnlineStore\Common\Domain\Value\Web\DomainName;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 
-/**
- * @BeforeMethods({"init"})
- */
+/** @BeforeMethods({"init"}) */
 final class DomainNameBench
 {
     /** @var DomainName */

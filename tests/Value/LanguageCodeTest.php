@@ -9,9 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class LanguageCodeTest extends TestCase
 {
-    /**
-     * @dataProvider invalidArgumentProvider
-     */
+    /** @dataProvider invalidArgumentProvider */
     public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidArgument::class);
@@ -31,9 +29,7 @@ final class LanguageCodeTest extends TestCase
         self::assertFalse((new LanguageCode('nl'))->equals(new LanguageCode('en')));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function invalidArgumentProvider(): array
     {
         return [

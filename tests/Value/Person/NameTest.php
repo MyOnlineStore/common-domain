@@ -14,7 +14,7 @@ final class NameTest extends TestCase
     {
         $name = new Name(
             $firstname = FirstName::fromString('foo'),
-            $lastname = LastName::fromString('bar')
+            $lastname = LastName::fromString('bar'),
         );
 
         self::assertSame($firstname, $name->getFirstName());

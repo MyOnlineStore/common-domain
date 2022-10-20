@@ -10,9 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class MoneyTest extends TestCase
 {
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function fractionedArgumentProvider(): array
     {
         return [
@@ -86,9 +84,7 @@ final class MoneyTest extends TestCase
         self::assertSame($currency, $money->getCurrency());
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function wholeArgumentProvider(): array
     {
         return [

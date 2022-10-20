@@ -25,9 +25,9 @@ final class RegionCodeCollectionTest extends TestCase
                     new RegionCode('NL'),
                     new RegionCode('BE'),
                     new RegionCode('DE'),
-                ]
+                ],
             ),
-            RegionCodeCollection::fromStrings(['NL', 'BE', 'DE'])
+            RegionCodeCollection::fromStrings(['NL', 'BE', 'DE']),
         );
     }
 
@@ -41,7 +41,7 @@ final class RegionCodeCollectionTest extends TestCase
                 new RegionCode('NL'),
                 new RegionCode('DE'),
                 'foo',
-            ]
+            ],
         );
 
         self::assertEquals(
@@ -50,9 +50,9 @@ final class RegionCodeCollectionTest extends TestCase
                     new RegionCode('NL'),
                     new RegionCode('BE'),
                     new RegionCode('DE'),
-                ]
+                ],
             ),
-            $collection->unique()
+            $collection->unique(),
         );
     }
 }

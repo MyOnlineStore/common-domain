@@ -6,9 +6,7 @@ namespace MyOnlineStore\Common\Domain\Assertion;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use Webmozart\Assert\Assert as WebmozartAssert;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class Assert extends WebmozartAssert
 {
     /**

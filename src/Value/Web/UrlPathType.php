@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class UrlPathType
 {
     use EnumValueGuardTrait;
@@ -26,33 +24,25 @@ final class UrlPathType
         $this->value = $value;
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asAbsolutePath(): self
     {
         return new self(self::ABSOLUTE_PATH);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asAbsoluteUrl(): self
     {
         return new self(self::ABSOLUTE_URL);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asNetworkPath(): self
     {
         return new self(self::NETWORK_PATH);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asRelativePath(): self
     {
         return new self(self::RELATIVE_PATH);
@@ -68,9 +58,7 @@ final class UrlPathType
         return $this->value;
     }
 
-    /**
-     * @return int[]
-     */
+    /** @return int[] */
     protected function getValidValues(): array
     {
         return [

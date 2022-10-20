@@ -2,13 +2,8 @@
 
 namespace MyOnlineStore\Common\Domain\Collection;
 
-/**
- * @deprecated Should be moved to common-collection
- */
 interface StringCollectionInterface
 {
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function asStrings(): array;
 }

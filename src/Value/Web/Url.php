@@ -9,9 +9,7 @@ use League\Uri\Http;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use Psr\Http\Message\UriInterface as Psr7UriInterface;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class Url implements Psr7UriInterface
 {
     private function __construct(
@@ -82,7 +80,7 @@ final class Url implements Psr7UriInterface
         } catch (SyntaxError $exception) {
             throw new InvalidArgument(
                 \sprintf('Invalid URL "%s" provided', $value),
-                previous: $exception
+                previous: $exception,
             );
         }
 

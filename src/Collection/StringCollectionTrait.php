@@ -4,20 +4,17 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
- * @deprecated Should be moved to common-collection
+ * @template TKey of array-key
+ * @template T
  */
 trait StringCollectionTrait
 {
-    /**
-     * @return string[]
-     */
+    /** @return array<TKey, string> */
     public function asStrings(): array
     {
         return \array_map('strval', $this->toArray());
     }
 
-    /**
-     * @return array
-     */
+    /** @return array<TKey, T> */
     abstract public function toArray();
 }

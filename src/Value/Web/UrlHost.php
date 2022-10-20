@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 use MyOnlineStore\Common\Domain\Exception\Web\InvalidHostName;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class UrlHost
 {
     /** @var string */
@@ -32,9 +30,7 @@ final class UrlHost
         return $this->hostname;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function getDomainName(): DomainName
     {
         return new DomainName($this->hostname);

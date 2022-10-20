@@ -26,9 +26,7 @@ final class Price
      */
     private $amount;
 
-    /**
-     * @param float|int|string $amount
-     */
+    /** @param float|int|string $amount */
     public function __construct($amount)
     {
         if (!\is_numeric($amount) && '' !== $amount) {
@@ -68,7 +66,7 @@ final class Price
      * add a percentage of the value represented by this Price
      * object and returns a new Price object
      *
-     * @psalm-param numeric-string $percentage
+     * @param numeric-string $percentage
      */
     public function addPercentage(string $percentage, int $scale = self::PRECISION_CALC): self
     {
@@ -79,6 +77,7 @@ final class Price
         return new self($priceWithPercentage);
     }
 
+    /** @param 0|positive-int $roundingMode */
     public function asCents(int $roundingMode = \PHP_ROUND_HALF_EVEN): int
     {
         return (int) \round((float) \bcmul('100.0', $this->amount, self::PRECISION_CALC), 0, $roundingMode);

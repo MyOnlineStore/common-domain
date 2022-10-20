@@ -25,9 +25,7 @@ final class DomainNameTest extends TestCase
         new DomainName($value);
     }
 
-    /**
-     * @dataProvider getValidStringValues
-     */
+    /** @dataProvider getValidStringValues */
     public function testValidStringValues(string $value): void
     {
         self::assertInstanceOf(DomainName::class, new DomainName($value));
@@ -38,7 +36,7 @@ final class DomainNameTest extends TestCase
         self::assertEquals('www.domain.org', (string) DomainName::createSubDomain(new DomainName('domain.org'), 'www'));
         self::assertEquals(
             'www.test.domain.org',
-            (string) DomainName::createSubDomain(new DomainName('test.domain.org'), 'www')
+            (string) DomainName::createSubDomain(new DomainName('test.domain.org'), 'www'),
         );
     }
 
@@ -73,9 +71,7 @@ final class DomainNameTest extends TestCase
         self::assertEquals('mijnwebwinkel', (new DomainName('www.shop.mijnwebwinkel.co.uk'))->getHostName());
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function getInvalidStringValues(): array
     {
         return [
@@ -83,9 +79,7 @@ final class DomainNameTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function getValidStringValues(): array
     {
         return [

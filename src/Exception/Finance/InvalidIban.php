@@ -5,9 +5,7 @@ namespace MyOnlineStore\Common\Domain\Exception\Finance;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class InvalidIban extends InvalidArgument
 {
 }

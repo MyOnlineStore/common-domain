@@ -40,9 +40,7 @@ final class RegionCode
         $this->code = \strtoupper($code);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asNL(): self
     {
         return new self('NL');
@@ -53,9 +51,7 @@ final class RegionCode
         return 0 === \strcmp($this->code, $comparator->code);
     }
 
-    /**
-     * @return string returns lowercase value
-     */
+    /** @return string returns lowercase value */
     public function lower(): string
     {
         return \strtolower($this->code);
@@ -94,12 +90,17 @@ final class RegionCode
                 'SI', // Slovenia
                 'SK', // Slovakia
             ],
-            true
+            true,
         );
+    }
+
+    public function toString(): string
+    {
+        return $this->code;
     }
 
     public function __toString(): string
     {
-        return $this->code;
+        return $this->toString();
     }
 }

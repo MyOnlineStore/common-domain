@@ -6,9 +6,7 @@ namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 final class StreetSuffix
 {
     /** @var string */

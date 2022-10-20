@@ -10,9 +10,7 @@ namespace MyOnlineStore\Common\Domain\Assertion;
  */
 trait ArrayContainsClassAssertionTrait
 {
-    /**
-     * @param mixed[] $entries
-     */
+    /** @param mixed[] $entries */
     public function assertArrayContainsOnlyClass(array $entries, string $className): bool
     {
         foreach ($entries as $entry) {

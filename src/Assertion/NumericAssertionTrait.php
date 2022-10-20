@@ -2,9 +2,7 @@
 
 namespace MyOnlineStore\Common\Domain\Assertion;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 trait NumericAssertionTrait
 {
     /**

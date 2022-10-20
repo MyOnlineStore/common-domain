@@ -16,10 +16,8 @@ final class RegionCodeTest extends TestCase
         self::assertFalse($regionCode->equals(new RegionCode('DE')));
     }
 
-    /**
-     * @dataProvider invalidArgumentProvider
-     */
-    public function testInvalidTypes(?string $argument): void
+    /** @dataProvider invalidArgumentProvider */
+    public function testInvalidTypes(string|null $argument): void
     {
         $this->expectException(InvalidArgument::class);
         new RegionCode($argument);
@@ -39,9 +37,7 @@ final class RegionCodeTest extends TestCase
         self::assertEquals('de', (new RegionCode('DE'))->lower());
     }
 
-    /**
-     * @return string[][]|null[][]
-     */
+    /** @return string[][]|null[][] */
     public function invalidArgumentProvider(): array
     {
         return [
@@ -52,9 +48,7 @@ final class RegionCodeTest extends TestCase
         ];
     }
 
-    /**
-     * @return \Generator<array{RegionCode, bool}>
-     */
+    /** @return \Generator<array{RegionCode, bool}> */
     public function isEuRegionProvider(): \Generator
     {
         yield [new RegionCode('AT'), true];
@@ -89,9 +83,7 @@ final class RegionCodeTest extends TestCase
         yield [new RegionCode('GB'), false];
     }
 
-    /**
-     * @dataProvider isEuRegionProvider
-     */
+    /** @dataProvider isEuRegionProvider */
     public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {
         self::assertEquals($expected, $regionCode->isEuRegion());

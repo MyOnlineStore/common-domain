@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Collection;
 
 /**
- * @deprecated Should be moved to common-collection
- *
  * @template TKey of array-key
  * @template T
  * @implements \IteratorAggregate<TKey, T>
@@ -20,9 +18,7 @@ interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \Iterat
      */
     public function contains($element);
 
-    /**
-     * @param callable(T): void $callback
-     */
+    /** @param callable(T): void $callback */
     public function each(callable $callback);
 
     /**
@@ -30,9 +26,7 @@ interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \Iterat
      */
     public function equals(ImmutableCollectionInterface $otherCollection): bool;
 
-    /**
-     * @return T|false
-     */
+    /** @return T|false */
     public function first();
 
     /**
@@ -44,6 +38,9 @@ interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \Iterat
 
     /**
      * @return bool
+     *
+     * @psalm-assert-if-false T $this->first()
+     * @psalm-assert-if-false T $this->last()
      */
     public function isEmpty();
 
@@ -54,13 +51,9 @@ interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \Iterat
      */
     public function last();
 
-    /**
-     * @return static
-     */
+    /** @return static */
     public function reindex();
 
-    /**
-     * @return array<TKey, T>
-     */
+    /** @return array<TKey, T> */
     public function toArray();
 }

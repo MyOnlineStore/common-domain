@@ -6,17 +6,14 @@ namespace MyOnlineStore\Common\Domain\Collection;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
 /**
- * @deprecated Should be moved to common-collection
- *
  * @extends ImmutableCollection<array-key, RegionCode>
+ * @use StringCollectionTrait<array-key, RegionCode>
  */
 final class RegionCodeCollection extends ImmutableCollection implements RegionCodeCollectionInterface
 {
     use StringCollectionTrait;
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function __construct(array $entries = [])
     {
         parent::__construct(
@@ -24,14 +21,12 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
                 $entries,
                 static function ($entry) {
                     return $entry instanceof RegionCode;
-                }
-            )
+                },
+            ),
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function contains($element): bool
     {
         return \in_array($element, $this->getArrayCopy());
@@ -42,9 +37,7 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
         return new self(\array_unique($this->toArray()));
     }
 
-    /**
-     * @param string[] $isoCodes
-     */
+    /** @param string[] $isoCodes */
     public static function fromStrings(array $isoCodes): RegionCodeCollectionInterface
     {
         return new self(
@@ -52,8 +45,8 @@ final class RegionCodeCollection extends ImmutableCollection implements RegionCo
                 static function ($isoCode) {
                     return new RegionCode($isoCode);
                 },
-                $isoCodes
-            )
+                $isoCodes,
+            ),
         );
     }
 }

@@ -42,17 +42,13 @@ final class Gender
         return new self($gender);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asMale(): self
     {
         return new self(self::MALE);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asFemale(): self
     {
         return new self(self::FEMALE);

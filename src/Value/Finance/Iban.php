@@ -21,9 +21,7 @@ final class Iban
      */
     private $iban;
 
-    /**
-     * @throws InvalidIban
-     */
+    /** @throws InvalidIban */
     public function __construct(string $iban)
     {
         $iban = \mb_strtoupper($iban);

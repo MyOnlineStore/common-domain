@@ -16,7 +16,7 @@ final class AbstractUuidTest extends TestCase
 
         self::assertEquals(
             $uuid->getBytes(),
-            UuidStub::fromBytes($uuid->getBytes())->bytes()
+            UuidStub::fromBytes($uuid->getBytes())->bytes(),
         );
     }
 
@@ -24,7 +24,7 @@ final class AbstractUuidTest extends TestCase
     {
         self::assertEquals(
             '3e5c88c3-8369-4404-8828-6a3927533387',
-            (string) UuidStub::fromString('3e5c88c3-8369-4404-8828-6a3927533387')
+            (string) UuidStub::fromString('3e5c88c3-8369-4404-8828-6a3927533387'),
         );
     }
 

@@ -29,20 +29,20 @@
         "egulias/email-validator": "^3.2",
         "giggsey/libphonenumber-for-php": "^8.12",
         "jeremykendall/php-domain-parser": "^6.1",
-        "league/uri": "^6.7",
+        "league/uri": "^6.8",
         "litipk/php-bignumbers": "^0.8.6",
         "moneyphp/money": "^4.0",
-        "ramsey/uuid": "^4.3",
+        "ramsey/uuid": "^4.5",
         "ronanguilloux/isocodes": "^2.3",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "doctrine/orm": "^2.12",
-        "myonlinestore/coding-standard": "^3.1",
+        "doctrine/orm": "^2.13",
+        "myonlinestore/coding-standard": "^4.0",
         "phpbench/phpbench": "^1.2",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.17",
         "symfony/phpunit-bridge": "^6.1",
-        "vimeo/psalm": "^4.24"
+        "vimeo/psalm": "^4.29"
     }
 }

@@ -33,7 +33,7 @@ final class StreetTest extends TestCase
         $street = new Street(
             StreetName::fromString('foo'),
             StreetNumber::fromString('12a'),
-            StreetSuffix::fromString('bar')
+            StreetSuffix::fromString('bar'),
         );
 
         self::assertTrue(
@@ -41,36 +41,36 @@ final class StreetTest extends TestCase
                 new Street(
                     StreetName::fromString('foo'),
                     StreetNumber::fromString('12a'),
-                    StreetSuffix::fromString('bar')
-                )
-            )
+                    StreetSuffix::fromString('bar'),
+                ),
+            ),
         );
         self::assertFalse(
             $street->equals(
                 new Street(
                     StreetName::fromString('bar'),
                     StreetNumber::fromString('12a'),
-                    StreetSuffix::fromString('bar')
-                )
-            )
+                    StreetSuffix::fromString('bar'),
+                ),
+            ),
         );
         self::assertFalse(
             $street->equals(
                 new Street(
                     StreetName::fromString('foo'),
                     StreetNumber::fromString('12b'),
-                    StreetSuffix::fromString('bar')
-                )
-            )
+                    StreetSuffix::fromString('bar'),
+                ),
+            ),
         );
         self::assertFalse(
             $street->equals(
                 new Street(
                     StreetName::fromString('foo'),
                     StreetNumber::fromString('12a'),
-                    StreetSuffix::fromString('foo')
-                )
-            )
+                    StreetSuffix::fromString('foo'),
+                ),
+            ),
         );
         self::assertFalse($street->equals(new Street(StreetName::fromString('foo'), StreetNumber::fromString('12a'))));
 
@@ -84,25 +84,23 @@ final class StreetTest extends TestCase
                 new Street(
                     StreetName::fromString('foo'),
                     StreetNumber::fromString('12a'),
-                    StreetSuffix::fromString('foo')
-                )
-            )
+                    StreetSuffix::fromString('foo'),
+                ),
+            ),
         );
     }
 
-    /**
-     * @dataProvider dataFromSingleLine
-     */
-    public function testFromSingleLine(string $line, string $street, string $number, ?string $suffix): void
+    /** @dataProvider dataFromSingleLine */
+    public function testFromSingleLine(string $line, string $street, string $number, string|null $suffix): void
     {
         self::assertTrue(
             Street::fromSingleLine($line)->equals(
                 new Street(
                     StreetName::fromString($street),
                     StreetNumber::fromString($number),
-                    null !== $suffix ? StreetSuffix::fromString($suffix) : null
-                )
-            )
+                    null !== $suffix ? StreetSuffix::fromString($suffix) : null,
+                ),
+            ),
         );
     }
 
@@ -117,7 +115,7 @@ final class StreetTest extends TestCase
         $street = new Street(
             $name = StreetName::fromString('foo'),
             $number = StreetNumber::fromString('12a'),
-            $suffix = StreetSuffix::fromString('bar')
+            $suffix = StreetSuffix::fromString('bar'),
         );
 
         self::assertSame($name, $street->getName());
@@ -130,7 +128,7 @@ final class StreetTest extends TestCase
     {
         $street = new Street(
             $name = StreetName::fromString('foo'),
-            $number = StreetNumber::fromString('12a')
+            $number = StreetNumber::fromString('12a'),
         );
 
         self::assertSame($name, $street->getName());

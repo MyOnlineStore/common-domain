@@ -39,7 +39,7 @@ final class Street
      */
     private $suffix;
 
-    public function __construct(StreetName $name, StreetNumber $number, ?StreetSuffix $suffix = null)
+    public function __construct(StreetName $name, StreetNumber $number, StreetSuffix|null $suffix = null)
     {
         $this->name = $name;
         $this->number = $number;
@@ -58,7 +58,7 @@ final class Street
                 return new self(
                     StreetName::fromString($results['street']),
                     StreetNumber::fromString($results['number']),
-                    $results['suffix'] ? StreetSuffix::fromString($results['suffix']) : null
+                    $results['suffix'] ? StreetSuffix::fromString($results['suffix']) : null,
                 );
             }
         }
@@ -83,7 +83,7 @@ final class Street
         return $this->number;
     }
 
-    public function getSuffix(): ?StreetSuffix
+    public function getSuffix(): StreetSuffix|null
     {
         return $this->suffix ? StreetSuffix::fromString($this->suffix) : null;
     }

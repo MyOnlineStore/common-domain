@@ -43,25 +43,19 @@ final class ViewPort
         return $this->value;
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asSmall(): self
     {
         return new self(self::SMALL);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asMedium(): self
     {
         return new self(self::MEDIUM);
     }
 
-    /**
-     * @psalm-pure
-     */
+    /** @psalm-pure */
     public static function asLarge(): self
     {
         return new self(self::LARGE);
@@ -92,9 +86,7 @@ final class ViewPort
         return [self::SMALL, self::MEDIUM, self::LARGE];
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     protected function getValidValues(): array
     {
         return self::getAvailableViewPorts();

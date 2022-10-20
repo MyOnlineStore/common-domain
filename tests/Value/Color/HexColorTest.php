@@ -9,9 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class HexColorTest extends TestCase
 {
-    /**
-     * @return iterable<array{string}>
-     */
+    /** @return iterable<array{string}> */
     public function invalidStringProvider(): iterable
     {
         yield ['#'];
@@ -40,9 +38,7 @@ final class HexColorTest extends TestCase
         self::assertEquals('#112233', HexColor::fromString('#123')->toString());
     }
 
-    /**
-     * @dataProvider invalidStringProvider
-     */
+    /** @dataProvider invalidStringProvider */
     public function testInvalidStringValues(string $value): void
     {
         $this->expectException(InvalidHexColor::class);

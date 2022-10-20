@@ -8,17 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 final class HostNameTest extends TestCase
 {
-    /**
-     * @dataProvider providerValidHostNames
-     */
+    /** @dataProvider providerValidHostNames */
     public function testValidHostNames(string $hostname): void
     {
         self::assertEquals($hostname, (string) new HostName($hostname));
     }
 
-    /**
-     * @dataProvider providerInvalidHostNames
-     */
+    /** @dataProvider providerInvalidHostNames */
     public function testInvalidHostNames(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -26,9 +22,7 @@ final class HostNameTest extends TestCase
         new HostName($hostname);
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function providerInvalidHostNames(): array
     {
         return [
@@ -39,9 +33,7 @@ final class HostNameTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function providerValidHostNames(): array
     {
         return [
