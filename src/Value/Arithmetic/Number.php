@@ -17,7 +17,7 @@ class Number
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, int|null $scale = null)
+    public function __construct($value, int | null $scale = null)
     {
         $this->assignValue($value, $scale);
     }
@@ -28,7 +28,7 @@ class Number
     }
 
     /** @return static */
-    public function add(Number $operand, int|null $scale = null)
+    public function add(Number $operand, int | null $scale = null)
     {
         $this->assertOperand($operand);
 
@@ -43,7 +43,7 @@ class Number
      *
      * @throws \InvalidArgumentException
      */
-    public function changeValue($value, int|null $scale = null)
+    public function changeValue($value, int | null $scale = null)
     {
         $newMetric = clone $this;
         $newMetric->assignValue($value, $scale);
@@ -52,7 +52,7 @@ class Number
     }
 
     /** @return static */
-    public function divideBy(Number $operand, int|null $scale = null)
+    public function divideBy(Number $operand, int | null $scale = null)
     {
         $this->assertOperand($operand);
 
@@ -60,7 +60,7 @@ class Number
         return $this->changeValue($this->value->div($operand->value, $scale), $scale);
     }
 
-    public function equals(Number $operand, int|null $scale = null): bool
+    public function equals(Number $operand, int | null $scale = null): bool
     {
         $this->assertOperand($operand);
 
@@ -68,13 +68,13 @@ class Number
         return $this->value->equals($operand->value, $scale);
     }
 
-    public function isGreaterThan(Number $operand, int|null $scale = null): bool
+    public function isGreaterThan(Number $operand, int | null $scale = null): bool
     {
         /** @psalm-suppress ImpureMethodCall */
         return 1 === $this->value->comp($operand->value, $scale);
     }
 
-    public function isLessThan(Number $operand, int|null $scale = null): bool
+    public function isLessThan(Number $operand, int | null $scale = null): bool
     {
         /** @psalm-suppress ImpureMethodCall */
         return -1 === $this->value->comp($operand->value, $scale);
@@ -87,7 +87,7 @@ class Number
     }
 
     /** @return static */
-    public function multiplyBy(Number $operand, int|null $scale = null)
+    public function multiplyBy(Number $operand, int | null $scale = null)
     {
         $this->assertOperand($operand);
 
@@ -96,14 +96,14 @@ class Number
     }
 
     /** @return static */
-    public function powerTo(Number $operand, int|null $scale = null)
+    public function powerTo(Number $operand, int | null $scale = null)
     {
         /** @psalm-suppress ImpureMethodCall */
         return $this->changeValue($this->value->pow($operand->value, $scale));
     }
 
     /** @return static */
-    public function subtract(Number $operand, int|null $scale = null)
+    public function subtract(Number $operand, int | null $scale = null)
     {
         $this->assertOperand($operand);
 
@@ -128,7 +128,7 @@ class Number
      *
      * @throws \InvalidArgumentException
      */
-    private function assignValue($value, int|null $scale = null): void
+    private function assignValue($value, int | null $scale = null): void
     {
         if ($value instanceof self) {
             $value = $value->value;

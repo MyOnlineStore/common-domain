@@ -62,7 +62,7 @@ final class Url implements Psr7UriInterface
      *
      * @param Psr7UriInterface|UriInterface $uri the input URI to create
      */
-    public static function createFromUri(Psr7UriInterface|UriInterface $uri): self
+    public static function createFromUri(Psr7UriInterface | UriInterface $uri): self
     {
         return new self(Http::createFromUri($uri));
     }

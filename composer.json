@@ -40,9 +40,9 @@
         "doctrine/orm": "^2.13",
         "myonlinestore/coding-standard": "^4.0",
         "phpbench/phpbench": "^1.2",
-        "phpunit/phpunit": "^9.5",
-        "psalm/plugin-phpunit": "^0.17",
+        "phpunit/phpunit": "^10.0",
+        "psalm/plugin-phpunit": "^0.18",
         "symfony/phpunit-bridge": "^6.1",
-        "vimeo/psalm": "^4.29"
+        "vimeo/psalm": "^5.6"
     }
 }

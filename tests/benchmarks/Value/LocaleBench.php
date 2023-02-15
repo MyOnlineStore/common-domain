@@ -11,11 +11,9 @@ use PhpBench\Benchmark\Metadata\Annotations\Revs;
 /** @BeforeMethods({"init"}) */
 final class LocaleBench
 {
-    /** @var Locale */
-    private $locale;
+    private Locale | null $locale = null;
 
-    /** @var Locale */
-    private $comparator;
+    private Locale | null $comparator = null;
 
     public function init(): void
     {

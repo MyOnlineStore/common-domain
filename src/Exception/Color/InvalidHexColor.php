@@ -9,7 +9,7 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 final class InvalidHexColor extends InvalidArgument
 {
     /** @psalm-pure */
-    public static function withHexColor(string $color, \Throwable|null $previous = null): self
+    public static function withHexColor(string $color, \Throwable | null $previous = null): self
     {
         return new self(
             \sprintf(

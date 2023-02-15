@@ -5,12 +5,13 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Contact;
 
 use MyOnlineStore\Common\Domain\Value\Contact\PhoneNumber;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
     /** @return string[][] */
-    public function getInvalidStringValues(): array
+    public static function getInvalidStringValues(): array
     {
         return [
             ['+313'],
@@ -21,7 +22,7 @@ final class PhoneNumberTest extends TestCase
     }
 
     /** @return string[][] */
-    public function getValidStringValues(): array
+    public static function getValidStringValues(): array
     {
         return [
             ['0031882315726'],
@@ -34,7 +35,7 @@ final class PhoneNumberTest extends TestCase
     }
 
     /** @return mixed[][] */
-    public function shortInternationalFormatProvider(): array
+    public static function shortInternationalFormatProvider(): array
     {
         return [
             ['+321882315726', new PhoneNumber('1882315726', new RegionCode('BE'))],
@@ -48,7 +49,7 @@ final class PhoneNumberTest extends TestCase
     }
 
     /** @return mixed[][] */
-    public function equalPhoneNumberProvider(): array
+    public static function equalPhoneNumberProvider(): array
     {
         return [
             [false, new PhoneNumber('0031612483496'), new PhoneNumber('0031612483497')],
@@ -59,7 +60,7 @@ final class PhoneNumberTest extends TestCase
         ];
     }
 
-    /** @dataProvider equalPhoneNumberProvider */
+    #[DataProvider('equalPhoneNumberProvider')]
     public function testEqualsWillReturnFormatterEquality(
         bool $expectedResult,
         PhoneNumber $phoneNumber,
@@ -95,13 +96,13 @@ final class PhoneNumberTest extends TestCase
         self::assertEquals('+44882315726', (string) $phoneNumber->withRegionCode(new RegionCode('GB')));
     }
 
-    /** @dataProvider shortInternationalFormatProvider */
+    #[DataProvider('shortInternationalFormatProvider')]
     public function testShortInternationalFormat(string $expectedFormat, PhoneNumber $phoneNumber): void
     {
         self::assertEquals($expectedFormat, $phoneNumber->getShortInternationalFormat());
     }
 
-    /** @dataProvider getInvalidStringValues */
+    #[DataProvider('getInvalidStringValues')]
     public function testInvalidStringValues(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -135,7 +136,7 @@ final class PhoneNumberTest extends TestCase
         self::assertEquals($phoneNumber->getShortInternationalFormat(), (string) $phoneNumber);
     }
 
-    /** @dataProvider getValidStringValues */
+    #[DataProvider('getValidStringValues')]
     public function testValidStringValues(string $value): void
     {
         self::assertInstanceOf(PhoneNumber::class, new PhoneNumber($value));

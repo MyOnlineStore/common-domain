@@ -24,7 +24,7 @@ final class PhoneNumber
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($value, RegionCode|null $regionCode = null)
+    public function __construct($value, RegionCode | null $regionCode = null)
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
 
@@ -59,7 +59,7 @@ final class PhoneNumber
         return 0 === \strcasecmp((string) $this, (string) $comparison);
     }
 
-    public function getCountryCode(): int|null
+    public function getCountryCode(): int | null
     {
         return $this->value->getCountryCode();
     }

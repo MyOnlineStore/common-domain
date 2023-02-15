@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Person\Name;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\Person\Name\FirstName;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class FirstNameTest extends TestCase
@@ -14,7 +15,7 @@ final class FirstNameTest extends TestCase
         self::assertSame('foo', (string) FirstName::fromString('foo'));
     }
 
-    public function emptyDataProvider(): \Generator
+    public static function emptyDataProvider(): \Generator
     {
         yield [''];
         yield [' '];
@@ -23,7 +24,7 @@ final class FirstNameTest extends TestCase
         yield ["\t "];
     }
 
-    /** @dataProvider emptyDataProvider */
+    #[DataProvider('emptyDataProvider')]
     public function testEmpty(string $empty): void
     {
         $this->expectException(InvalidArgument::class);

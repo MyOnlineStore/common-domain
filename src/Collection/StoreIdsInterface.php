@@ -5,7 +5,7 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\StoreId;
 
-/** @method StoreId[] getIterator() */
+/** @extends ImmutableCollectionInterface<array-key, StoreId> */
 interface StoreIdsInterface extends ImmutableCollectionInterface
 {
     /** @throws \InvalidArgumentException */

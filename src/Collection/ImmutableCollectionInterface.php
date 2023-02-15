@@ -6,8 +6,8 @@ namespace MyOnlineStore\Common\Domain\Collection;
 /**
  * @template TKey of array-key
  * @template T
- * @implements \IteratorAggregate<TKey, T>
- * @implements \ArrayAccess<TKey, T>
+ * @extends \IteratorAggregate<TKey, T>
+ * @extends \ArrayAccess<TKey, T>
  */
 interface ImmutableCollectionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 {

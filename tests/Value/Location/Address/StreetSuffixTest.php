@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Location\Address;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\Location\Address\StreetSuffix;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class StreetSuffixTest extends TestCase
@@ -15,7 +16,7 @@ final class StreetSuffixTest extends TestCase
         self::assertSame('foo', (string) StreetSuffix::fromString(' foo '));
     }
 
-    public function emptyDataProvider(): \Generator
+    public static function emptyDataProvider(): \Generator
     {
         yield [''];
         yield [' '];
@@ -24,7 +25,7 @@ final class StreetSuffixTest extends TestCase
         yield ["\t "];
     }
 
-    /** @dataProvider emptyDataProvider */
+    #[DataProvider('emptyDataProvider')]
     public function testEmpty(string $empty): void
     {
         $this->expectException(InvalidArgument::class);

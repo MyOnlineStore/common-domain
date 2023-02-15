@@ -50,7 +50,7 @@ final class IPAddressTest extends TestCase
     {
         $address = new IPAddress(self::IPV4_ADDRESS);
 
-        self::assertSame(3581795162, $address->asLong());
+        self::assertSame(3_581_795_162, $address->asLong());
     }
 
     public function testAsLongIpv6ShouldThrowError(): void

@@ -6,17 +6,18 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Web;
 use MyOnlineStore\Common\Domain\Exception\Web\InvalidHostName;
 use MyOnlineStore\Common\Domain\Value\Web\DomainName;
 use MyOnlineStore\Common\Domain\Value\Web\UrlHost;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class UrlHostTest extends TestCase
 {
-    /** @dataProvider providerValidHostUrls */
+    #[DataProvider('providerValidHostUrls')]
     public function testValidUrlHosts(string $hostname): void
     {
         self::assertEquals($hostname, (string) new UrlHost($hostname));
     }
 
-    /** @dataProvider provider */
+    #[DataProvider('provider')]
     public function testInvalidUrlHost(string $hostname): void
     {
         $this->expectException(InvalidHostName::class);
@@ -29,7 +30,7 @@ class UrlHostTest extends TestCase
         self::assertEquals(new DomainName((string) $urlHost), $urlHost->getDomainName());
     }
 
-    /** @dataProvider providerValidHostUrls */
+    #[DataProvider('providerValidHostUrls')]
     public function testInValidDomainName(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -38,13 +39,13 @@ class UrlHostTest extends TestCase
         $urlHost->getDomainName();
     }
 
-    /** @dataProvider providerValidDomains */
+    #[DataProvider('providerValidDomains')]
     public function testValidDomainsFromDomainName(string $domainName): void
     {
         self::assertEquals($domainName, (string) UrlHost::fromDomainName(new DomainName($domainName)));
     }
 
-    /** @dataProvider providerValidHostUrls */
+    #[DataProvider('providerValidHostUrls')]
     public function testInvalidDomainsFromDomainName(string $domainName): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -53,7 +54,7 @@ class UrlHostTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provider(): array
+    public static function provider(): array
     {
         return [
             ['!jkfd.com'],
@@ -64,7 +65,7 @@ class UrlHostTest extends TestCase
     }
 
     /** @return string[][] */
-    public function providerValidHostUrls(): array
+    public static function providerValidHostUrls(): array
     {
         return [
             ['localhost'],
@@ -74,7 +75,7 @@ class UrlHostTest extends TestCase
     }
 
     /** @return string[][] */
-    public function providerValidDomains(): array
+    public static function providerValidDomains(): array
     {
         return [
             ['localhost.nl'],

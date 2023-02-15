@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class RegionCodeTest extends TestCase
@@ -16,8 +17,8 @@ final class RegionCodeTest extends TestCase
         self::assertFalse($regionCode->equals(new RegionCode('DE')));
     }
 
-    /** @dataProvider invalidArgumentProvider */
-    public function testInvalidTypes(string|null $argument): void
+    #[DataProvider('invalidArgumentProvider')]
+    public function testInvalidTypes(string | null $argument): void
     {
         $this->expectException(InvalidArgument::class);
         new RegionCode($argument);
@@ -38,7 +39,7 @@ final class RegionCodeTest extends TestCase
     }
 
     /** @return string[][]|null[][] */
-    public function invalidArgumentProvider(): array
+    public static function invalidArgumentProvider(): array
     {
         return [
             ['N'],
@@ -49,7 +50,7 @@ final class RegionCodeTest extends TestCase
     }
 
     /** @return \Generator<array{RegionCode, bool}> */
-    public function isEuRegionProvider(): \Generator
+    public static function isEuRegionProvider(): \Generator
     {
         yield [new RegionCode('AT'), true];
         yield [new RegionCode('BE'), true];
@@ -83,7 +84,7 @@ final class RegionCodeTest extends TestCase
         yield [new RegionCode('GB'), false];
     }
 
-    /** @dataProvider isEuRegionProvider */
+    #[DataProvider('isEuRegionProvider')]
     public function testIsEuRegion(RegionCode $regionCode, bool $expected): void
     {
         self::assertEquals($expected, $regionCode->isEuRegion());

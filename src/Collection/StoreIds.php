@@ -5,12 +5,10 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\StoreId;
 
-/**
- * @extends ImmutableCollection<array-key, StoreId>
- * @use StringCollectionTrait<array-key, StoreId>
- */
+/** @extends ImmutableCollection<array-key, StoreId> */
 final class StoreIds extends ImmutableCollection implements StoreIdsInterface
 {
+    /** @use StringCollectionTrait<array-key, StoreId> */
     use StringCollectionTrait;
 
     /** @param StoreId[]|int[] $entries */

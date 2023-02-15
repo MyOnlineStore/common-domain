@@ -5,12 +5,13 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Web;
 
 use League\Uri\Uri;
 use MyOnlineStore\Common\Domain\Value\Web\Url;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class UrlTest extends TestCase
 {
     /** @return string[][] */
-    public function validUrlDataProvider(): array
+    public static function validUrlDataProvider(): array
     {
         return [
             ['', '/'],
@@ -19,14 +20,14 @@ final class UrlTest extends TestCase
         ];
     }
 
-    /** @dataProvider validUrlDataProvider */
+    #[DataProvider('validUrlDataProvider')]
     public function testFromStringWillParseStringCorrectly(string $input): void
     {
         self::assertEquals((string) Uri::createFromString($input), (string) Url::fromString($input));
     }
 
     /** @return string[][] */
-    public function invalidUrlDataProvider(): array
+    public static function invalidUrlDataProvider(): array
     {
         return [
             ['http://'],
@@ -34,7 +35,7 @@ final class UrlTest extends TestCase
         ];
     }
 
-    /** @dataProvider invalidUrlDataProvider */
+    #[DataProvider('invalidUrlDataProvider')]
     public function testFromStringWillThrowExceptionForMalformedUrls(string $input): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -52,7 +53,7 @@ final class UrlTest extends TestCase
         self::assertTrue(Url::createFromString('https://api.host.com:8080/api-route?token=foo#bar')->equals($otherUrl));
     }
 
-    /** @dataProvider invalidEqualUrlProvider */
+    #[DataProvider('invalidEqualUrlProvider')]
     public function testEqualsWillReturnFalseIfObjectDoesNotMatch(Url $otherUrl): void
     {
         self::assertFalse(
@@ -61,7 +62,7 @@ final class UrlTest extends TestCase
     }
 
     /** @return Url[][] */
-    public function invalidEqualUrlProvider(): array
+    public static function invalidEqualUrlProvider(): array
     {
         return [
             [Url::createFromString('https://api.host.com')],
