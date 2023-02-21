@@ -7,6 +7,7 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
 use MyOnlineStore\Common\Domain\Value\Locale;
 use MyOnlineStore\Common\Domain\Value\RegionCode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class LocaleTest extends TestCase
@@ -17,12 +18,8 @@ final class LocaleTest extends TestCase
         self::assertFalse(Locale::fromString('nl_BE')->equals(Locale::fromString('nl_NL')));
     }
 
-    /**
-     * @dataProvider invalidArgumentProvider
-     *
-     * @param mixed $argument
-     */
-    public function testFromInvalidString($argument): void
+    #[DataProvider('invalidArgumentProvider')]
+    public function testFromInvalidString(mixed $argument): void
     {
         $this->expectException(InvalidArgument::class);
         Locale::fromString($argument);
@@ -63,7 +60,7 @@ final class LocaleTest extends TestCase
     }
 
     /** @return string[][] */
-    public function invalidArgumentProvider(): array
+    public static function invalidArgumentProvider(): array
     {
         return [
             [123],

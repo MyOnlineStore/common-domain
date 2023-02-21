@@ -5,11 +5,12 @@ namespace MyOnlineStore\Common\Domain\Tests\Value;
 
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 use MyOnlineStore\Common\Domain\Value\LanguageCode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class LanguageCodeTest extends TestCase
 {
-    /** @dataProvider invalidArgumentProvider */
+    #[DataProvider('invalidArgumentProvider')]
     public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidArgument::class);
@@ -30,7 +31,7 @@ final class LanguageCodeTest extends TestCase
     }
 
     /** @return string[][] */
-    public function invalidArgumentProvider(): array
+    public static function invalidArgumentProvider(): array
     {
         return [
             ['n'],

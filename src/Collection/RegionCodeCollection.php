@@ -5,12 +5,10 @@ namespace MyOnlineStore\Common\Domain\Collection;
 
 use MyOnlineStore\Common\Domain\Value\RegionCode;
 
-/**
- * @extends ImmutableCollection<array-key, RegionCode>
- * @use StringCollectionTrait<array-key, RegionCode>
- */
+/** @extends ImmutableCollection<array-key, RegionCode> */
 final class RegionCodeCollection extends ImmutableCollection implements RegionCodeCollectionInterface
 {
+    /** @use StringCollectionTrait<array-key, RegionCode> */
     use StringCollectionTrait;
 
     /** @inheritdoc */

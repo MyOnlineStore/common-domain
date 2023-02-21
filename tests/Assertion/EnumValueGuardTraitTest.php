@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Assertion;
 
 use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class EnumValueGuardTraitTest extends TestCase
 {
-    /** @var EnumValueGuardTrait */
-    private $trait;
+    /** @var MockObject&EnumValueGuardTrait */
+    private MockObject $trait;
 
     protected function setUp(): void
     {

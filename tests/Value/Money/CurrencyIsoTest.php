@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Money;
 
 use MyOnlineStore\Common\Domain\Exception\Currency\InvalidCurrencyIso;
 use MyOnlineStore\Common\Domain\Value\Money\CurrencyIso;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class CurrencyIsoTest extends TestCase
@@ -33,7 +34,7 @@ final class CurrencyIsoTest extends TestCase
         ));
     }
 
-    /** @dataProvider invalidArgumentProvider */
+    #[DataProvider('invalidArgumentProvider')]
     public function testInvalidTypes(string $argument): void
     {
         $this->expectException(InvalidCurrencyIso::class);
@@ -56,7 +57,7 @@ final class CurrencyIsoTest extends TestCase
     }
 
     /** @return string[][] */
-    public function invalidArgumentProvider(): array
+    public static function invalidArgumentProvider(): array
     {
         return [
             ['EU'],

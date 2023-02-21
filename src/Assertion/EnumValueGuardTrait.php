@@ -24,6 +24,7 @@ trait EnumValueGuardTrait
         $validValues = $this->getValidValues();
 
         if (!\in_array($value, $validValues, true)) {
+            /** @psalm-suppress ArgumentTypeCoercion */
             throw new \InvalidArgumentException(
                 \sprintf(
                     'Invalid %s value given: "%s" (valid values: %s)',

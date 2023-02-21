@@ -12,9 +12,8 @@ final class NumericAssertionTraitTest extends TestCase
     {
         $trait = $this->getMockForTrait(NumericAssertionTrait::class);
 
-        $reflection = new \ReflectionClass(\get_class($trait));
+        $reflection = new \ReflectionClass($trait::class);
         $assertion = $reflection->getMethod('assertIsNumeric');
-        $assertion->setAccessible(true);
 
         self::assertFalse($assertion->invoke($trait, 'foo'));
         self::assertTrue($assertion->invoke($trait, 10));

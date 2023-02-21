@@ -13,9 +13,8 @@ final class ArrayContainsClassAssertionTraitTest extends TestCase
     {
         $trait = $this->getMockForTrait(ArrayContainsClassAssertionTrait::class);
 
-        $reflection = new \ReflectionClass(\get_class($trait));
+        $reflection = new \ReflectionClass($trait::class);
         $assertion = $reflection->getMethod('assertArrayContainsOnlyClass');
-        $assertion->setAccessible(true);
 
         self::assertTrue($assertion->invoke($trait, [new \stdClass()], \stdClass::class));
         self::assertFalse($assertion->invoke($trait, [new \stdClass(), Locale::fromString('nl_NL')], \stdClass::class));

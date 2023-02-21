@@ -12,7 +12,7 @@ use Pdp\SyntaxError;
 final class DomainName
 {
     private ResolvedDomainName $resolvedDomainName;
-    private static Rules|null $rules = null;
+    private static Rules | null $rules = null;
 
     /** @throws \InvalidArgumentException */
     public function __construct(string $domainName)
@@ -42,7 +42,7 @@ final class DomainName
     }
 
     /** @deprecated Should be extracted to external service */
-    public function getHostName(): string|null
+    public function getHostName(): string | null
     {
         return \explode('.', $this->resolvedDomainName->registrableDomain()->toString(), 2)[0] ?? null;
     }
@@ -60,13 +60,13 @@ final class DomainName
     }
 
     /** @deprecated Should be extracted to external service */
-    public function getSubdomain(): string|null
+    public function getSubdomain(): string | null
     {
         return $this->resolvedDomainName->subDomain()->value();
     }
 
     /** @deprecated Should be extracted to external service */
-    public function getTld(): string|null
+    public function getTld(): string | null
     {
         return $this->resolvedDomainName->suffix()->value();
     }
@@ -80,7 +80,7 @@ final class DomainName
     {
         if (null === self::$rules) {
             self::$rules = Rules::fromString(
-                <<<RULES
+                <<<'RULES'
 
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this

@@ -32,7 +32,7 @@ final class NumberTest extends TestCase
 
         $numberMock = $this->getMockBuilder(Number::class)
             ->setConstructorArgs([123])
-            ->setMethods(['assertOperand'])
+            ->onlyMethods(['assertOperand'])
             ->getMockForAbstractClass();
 
         $numberMock->expects(self::exactly(5))->method('assertOperand')->with($operand);
@@ -50,8 +50,8 @@ final class NumberTest extends TestCase
         $subclassedNumber = $this->createSubclassedNumber(123);
         $newSubclassedNumber = $subclassedNumber->add(new Number(543));
 
-        self::assertNotEquals(\get_class($subclassedNumber), Number::class);
-        self::assertInstanceOf(\get_class($subclassedNumber), $newSubclassedNumber);
+        self::assertNotEquals($subclassedNumber::class, Number::class);
+        self::assertInstanceOf($subclassedNumber::class, $newSubclassedNumber);
         self::assertEquals($this->createSubclassedNumber(666), $newSubclassedNumber);
 
         self::assertEquals(new Number(666), (new Number(543))->add($subclassedNumber));
@@ -150,12 +150,7 @@ final class NumberTest extends TestCase
         self::assertEquals(new Number(1.23, 2), (new Number(123))->toScale(2));
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return MockObject|Number
-     */
-    private function createSubclassedNumber($value)
+    private function createSubclassedNumber(mixed $value): MockObject | Number
     {
         return $this->getMockBuilder(Number::class)->setConstructorArgs([$value])->getMockForAbstractClass();
     }

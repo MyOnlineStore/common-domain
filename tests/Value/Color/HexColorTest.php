@@ -5,12 +5,13 @@ namespace MyOnlineStore\Common\Domain\Tests\Value\Color;
 
 use MyOnlineStore\Common\Domain\Exception\Color\InvalidHexColor;
 use MyOnlineStore\Common\Domain\Value\Color\HexColor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class HexColorTest extends TestCase
 {
     /** @return iterable<array{string}> */
-    public function invalidStringProvider(): iterable
+    public static function invalidStringProvider(): iterable
     {
         yield ['#'];
         yield ['#1'];
@@ -38,7 +39,7 @@ final class HexColorTest extends TestCase
         self::assertEquals('#112233', HexColor::fromString('#123')->toString());
     }
 
-    /** @dataProvider invalidStringProvider */
+    #[DataProvider('invalidStringProvider')]
     public function testInvalidStringValues(string $value): void
     {
         $this->expectException(InvalidHexColor::class);

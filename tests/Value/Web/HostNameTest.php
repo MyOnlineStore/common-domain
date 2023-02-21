@@ -4,17 +4,18 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Web;
 
 use MyOnlineStore\Common\Domain\Value\Web\HostName;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class HostNameTest extends TestCase
 {
-    /** @dataProvider providerValidHostNames */
+    #[DataProvider('providerValidHostNames')]
     public function testValidHostNames(string $hostname): void
     {
         self::assertEquals($hostname, (string) new HostName($hostname));
     }
 
-    /** @dataProvider providerInvalidHostNames */
+    #[DataProvider('providerInvalidHostNames')]
     public function testInvalidHostNames(string $hostname): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -23,7 +24,7 @@ final class HostNameTest extends TestCase
     }
 
     /** @return string[][] */
-    public function providerInvalidHostNames(): array
+    public static function providerInvalidHostNames(): array
     {
         return [
             ['!jkfd.com'],
@@ -34,7 +35,7 @@ final class HostNameTest extends TestCase
     }
 
     /** @return string[][] */
-    public function providerValidHostNames(): array
+    public static function providerValidHostNames(): array
     {
         return [
             ['localhost'],

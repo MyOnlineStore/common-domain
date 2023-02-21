@@ -10,11 +10,9 @@ use PhpBench\Benchmark\Metadata\Annotations\Revs;
 /** @BeforeMethods({"init"}) */
 final class DomainNameBench
 {
-    /** @var DomainName */
-    private $domainName;
+    private DomainName | null $domainName = null;
 
-    /** @var DomainName */
-    private $comparator;
+    private DomainName | null $comparator = null;
 
     public function init(): void
     {

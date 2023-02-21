@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace MyOnlineStore\Common\Domain\Tests\Value\Web;
 
 use MyOnlineStore\Common\Domain\Value\Web\DomainName;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class DomainNameTest extends TestCase
@@ -13,19 +14,15 @@ final class DomainNameTest extends TestCase
         self::assertEquals('foo.bar', (string) new DomainName('foo.bar'));
     }
 
-    /**
-     * @dataProvider getInvalidStringValues
-     *
-     * @param mixed $value
-     */
-    public function testInvalidStringValues($value): void
+    #[DataProvider('getInvalidStringValues')]
+    public function testInvalidStringValues(mixed $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         new DomainName($value);
     }
 
-    /** @dataProvider getValidStringValues */
+    #[DataProvider('getValidStringValues')]
     public function testValidStringValues(string $value): void
     {
         self::assertInstanceOf(DomainName::class, new DomainName($value));
@@ -72,7 +69,7 @@ final class DomainNameTest extends TestCase
     }
 
     /** @return string[][] */
-    public function getInvalidStringValues(): array
+    public static function getInvalidStringValues(): array
     {
         return [
             ['foo'],
@@ -80,7 +77,7 @@ final class DomainNameTest extends TestCase
     }
 
     /** @return string[][] */
-    public function getValidStringValues(): array
+    public static function getValidStringValues(): array
     {
         return [
             ['myonlinestore.com'],

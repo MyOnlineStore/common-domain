@@ -3,4 +3,6 @@ vendor
 composer.lock
 phpunit.xml
 .phpcs-cache
+.phpunit.cache
 .phpunit.result.cache
+rector.php

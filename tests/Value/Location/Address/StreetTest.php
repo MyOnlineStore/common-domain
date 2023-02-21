@@ -8,11 +8,12 @@ use MyOnlineStore\Common\Domain\Value\Location\Address\Street;
 use MyOnlineStore\Common\Domain\Value\Location\Address\StreetName;
 use MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber;
 use MyOnlineStore\Common\Domain\Value\Location\Address\StreetSuffix;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class StreetTest extends TestCase
 {
-    public function dataFromSingleLine(): \Generator
+    public static function dataFromSingleLine(): \Generator
     {
         yield ['foo 12a', 'foo', '12', 'a'];
         yield ['foo 12 a', 'foo', '12', 'a'];
@@ -90,8 +91,8 @@ final class StreetTest extends TestCase
         );
     }
 
-    /** @dataProvider dataFromSingleLine */
-    public function testFromSingleLine(string $line, string $street, string $number, string|null $suffix): void
+    #[DataProvider('dataFromSingleLine')]
+    public function testFromSingleLine(string $line, string $street, string $number, string | null $suffix): void
     {
         self::assertTrue(
             Street::fromSingleLine($line)->equals(
