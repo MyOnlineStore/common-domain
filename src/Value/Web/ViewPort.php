@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class ViewPort
 {
     use EnumValueGuardTrait;
@@ -20,11 +20,11 @@ final class ViewPort
     const LARGE = 'large';
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="string", name="viewport")
      *
      * @var string
      */
+    #[Id]
+    #[Column(type: 'string', name: 'viewport')]
     private $value;
 
     /**

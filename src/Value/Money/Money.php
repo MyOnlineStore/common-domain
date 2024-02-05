@@ -3,28 +3,26 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class Money
 {
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Arithmetic\Amount", columnPrefix=false)
-     *
      * @var Amount
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Arithmetic\Amount', columnPrefix: false)]
     private $amount;
 
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Money\CurrencyIso", columnPrefix=false)
-     *
      * @var CurrencyIso
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Money\CurrencyIso', columnPrefix: false)]
     private $currency;
 
     public function __construct(Amount $amount, CurrencyIso $currency)

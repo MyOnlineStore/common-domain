@@ -3,29 +3,27 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Value\Person\Name\FirstName;
 use MyOnlineStore\Common\Domain\Value\Person\Name\LastName;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class Name
 {
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Person\Name\FirstName", columnPrefix=false)
-     *
      * @var FirstName
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Person\Name\FirstName', columnPrefix: false)]
     private $firstName;
 
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Person\Name\LastName", columnPrefix=false)
-     *
      * @var LastName
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Person\Name\LastName', columnPrefix: false)]
     private $lastName;
 
     public function __construct(FirstName $first, LastName $last)

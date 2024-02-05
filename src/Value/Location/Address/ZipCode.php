@@ -3,25 +3,24 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class ZipCode
 {
     // not all countries use zipCodes, see SCS-417 and https://gist.github.com/kennwilson/3902548
     private const NOT_AVAILABLE = 'N/A';
 
     /**
-     * @ORM\Column(name="zip_code", length=10)
-     *
      * @var string
      */
+    #[Column(name: 'zip_code', length: 10)]
     private $zipCode;
 
     private function __construct(string $zipCode)

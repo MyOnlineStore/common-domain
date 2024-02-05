@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class Street
 {
     private const SINGLE_LINE_PATTERNS = [
@@ -19,24 +19,21 @@ final class Street
     ];
 
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetName", columnPrefix=false)
-     *
      * @var StreetName
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetName', columnPrefix: false)]
     private $name;
 
     /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber", columnPrefix=false)
-     *
      * @var StreetNumber
      */
+    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber', columnPrefix: false)]
     private $number;
 
     /**
-     * @ORM\Column(name="street_suffix", nullable=true)
-     *
      * @var string|null
      */
+    #[Column(name: 'street_suffix', nullable: true)]
     private $suffix;
 
     public function __construct(StreetName $name, StreetNumber $number, StreetSuffix | null $suffix = null)

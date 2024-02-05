@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\Currency\InvalidCurrencyIso;
 
 /**
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class CurrencyIso
 {
     private const CURRENCIES =  [
@@ -1270,10 +1270,9 @@ final class CurrencyIso
     ];
 
     /**
-     * @ORM\Column(name="currency", length=3)
-     *
      * @var string
      */
+    #[Column(name: 'currency', length: 3)]
     private $currency;
 
     private function __construct(string $currency)
