@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Street
 {
@@ -18,21 +16,15 @@ final class Street
         '/^(?P<number>\d+)(?P<suffix>\w*)\s+(?P<street>.*)$/',
     ];
 
-    /**
-     * @var StreetName
-     */
+    /** @var StreetName */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetName', columnPrefix: false)]
     private $name;
 
-    /**
-     * @var StreetNumber
-     */
+    /** @var StreetNumber */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber', columnPrefix: false)]
     private $number;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     #[Column(name: 'street_suffix', nullable: true)]
     private $suffix;
 

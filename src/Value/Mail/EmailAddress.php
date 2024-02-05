@@ -9,15 +9,11 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class EmailAddress
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'email_address')]
     private $emailAddress;
 

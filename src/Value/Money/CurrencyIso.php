@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\Currency\InvalidCurrencyIso;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class CurrencyIso
 {

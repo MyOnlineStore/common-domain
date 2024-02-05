@@ -7,18 +7,14 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\Person\InvalidGender;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Gender
 {
     private const MALE = 'M';
     private const FEMALE = 'F';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'gender', length: 1)]
     private $gender;
 

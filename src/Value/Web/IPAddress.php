@@ -6,15 +6,11 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class IPAddress
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'ip_address', length: 39)]
     private $value;
 

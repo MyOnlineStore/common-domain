@@ -8,18 +8,14 @@ use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class ZipCode
 {
     // not all countries use zipCodes, see SCS-417 and https://gist.github.com/kennwilson/3902548
     private const NOT_AVAILABLE = 'N/A';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'zip_code', length: 10)]
     private $zipCode;
 

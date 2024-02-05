@@ -8,15 +8,11 @@ use Doctrine\ORM\Mapping\Embeddable;
 use IsoCodes\Iban as IbanValidator;
 use MyOnlineStore\Common\Domain\Exception\Finance\InvalidIban;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Iban
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(length: 24)]
     private $iban;
 

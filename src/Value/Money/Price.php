@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Price
 {
@@ -18,7 +16,6 @@ final class Price
     public const PRECISION_INTERMEDIATE = 7;
 
     /**
-     *
      * @var string
      * @psalm-var numeric-string
      */

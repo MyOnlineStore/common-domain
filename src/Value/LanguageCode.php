@@ -9,15 +9,12 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 /**
  * ISO 639 code (https://en.wikipedia.org/wiki/ISO_639)
  *
- *
  * @psalm-immutable
  */
 #[Embeddable]
 final class LanguageCode
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'language_code', length: 3)]
     private $code;
 

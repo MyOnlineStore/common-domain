@@ -6,23 +6,17 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Locale
 {
     public const FALLBACK_FRONTEND_LOCALE = 'en_GB';
 
-    /**
-     * @var RegionCode
-     */
+    /** @var RegionCode */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\RegionCode', columnPrefix: false)]
     private $regionCode;
 
-    /**
-     * @var LanguageCode
-     */
+    /** @var LanguageCode */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\LanguageCode', columnPrefix: false)]
     private $languageCode;
 

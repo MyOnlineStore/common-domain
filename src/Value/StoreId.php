@@ -5,15 +5,11 @@ namespace MyOnlineStore\Common\Domain\Value;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class StoreId
 {
-    /**
-     * @var int|string
-     */
+    /** @var int|string */
     #[Column(name: 'store_id', type: 'integer')]
     private $id;
 

@@ -8,15 +8,11 @@ use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class FirstName
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'first_name')]
     private $firstName;
 

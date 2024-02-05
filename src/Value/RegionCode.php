@@ -15,9 +15,7 @@ use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 #[Embeddable]
 final class RegionCode
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     #[Column(name: 'region_code', type: 'string', length: 2)]
     private $code;
 

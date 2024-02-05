@@ -5,11 +5,10 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Id;
 use MyOnlineStore\Common\Domain\Assertion\EnumValueGuardTrait;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class ViewPort
 {
@@ -19,10 +18,7 @@ final class ViewPort
     const MEDIUM = 'medium';
     const LARGE = 'large';
 
-    /**
-     *
-     * @var string
-     */
+    /** @var string */
     #[Id]
     #[Column(type: 'string', name: 'viewport')]
     private $value;

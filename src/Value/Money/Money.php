@@ -7,21 +7,15 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
-/**
- * @psalm-immutable
- */
+/** @psalm-immutable */
 #[Embeddable]
 final class Money
 {
-    /**
-     * @var Amount
-     */
+    /** @var Amount */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Arithmetic\Amount', columnPrefix: false)]
     private $amount;
 
-    /**
-     * @var CurrencyIso
-     */
+    /** @var CurrencyIso */
     #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Money\CurrencyIso', columnPrefix: false)]
     private $currency;
 
