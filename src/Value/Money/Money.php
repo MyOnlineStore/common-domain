@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Money;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Embedded;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
 /** @psalm-immutable */

@@ -4,6 +4,7 @@ namespace MyOnlineStore\Common\Domain\Value;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Embedded;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /** @psalm-immutable */
@@ -13,11 +14,11 @@ final class Locale
     public const FALLBACK_FRONTEND_LOCALE = 'en_GB';
 
     /** @var RegionCode */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\RegionCode', columnPrefix: false)]
+    #[Embedded(class: RegionCode::class, columnPrefix: false)]
     private $regionCode;
 
     /** @var LanguageCode */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\LanguageCode', columnPrefix: false)]
+    #[Embedded(class: LanguageCode::class, columnPrefix: false)]
     private $languageCode;
 
     public function __construct(LanguageCode $languageCode, RegionCode $regionCode)

@@ -16,7 +16,7 @@ class ImmutableCollection extends MutableCollection
         throw new \LogicException(\sprintf('Method %s is not available on immutable collections', __FUNCTION__));
     }
 
-    public function offsetSet(mixed $key, mixed $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         throw new \LogicException(\sprintf('Method %s is not available on immutable collections', __FUNCTION__));
     }

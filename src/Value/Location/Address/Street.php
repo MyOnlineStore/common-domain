@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Embedded;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /** @psalm-immutable */
@@ -57,6 +58,7 @@ final class Street
 
     public function equals(self $operand): bool
     {
+        /** @palm-supress RiskyTruthyFalsyComparison */
         return $this->name->equals($operand->name) &&
             $this->number->equals($operand->number) &&
             $this->suffix === $operand->suffix;
@@ -79,6 +81,7 @@ final class Street
 
     public function __toString(): string
     {
+        /** @palm-supress RiskyTruthyFalsyComparison */
         return \trim(\sprintf('%s %s %s', $this->name, $this->number, $this->suffix ?: ''));
     }
 }

@@ -5,6 +5,7 @@ namespace MyOnlineStore\Common\Domain\Value\Person;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Embedded;
 use MyOnlineStore\Common\Domain\Value\Person\Name\FirstName;
 use MyOnlineStore\Common\Domain\Value\Person\Name\LastName;
 
