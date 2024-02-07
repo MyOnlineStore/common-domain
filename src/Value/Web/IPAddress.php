@@ -3,20 +3,15 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Web;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class IPAddress
 {
-    /**
-     * @ORM\Column(name="ip_address", length=39)
-     *
-     * @var string
-     */
+    /** @var string */
+    #[Column(name: 'ip_address', length: 39)]
     private $value;
 
     /**

@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Money;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class Price
 {
     public const PRECISION_CALC = 6;
@@ -18,12 +16,10 @@ final class Price
     public const PRECISION_INTERMEDIATE = 7;
 
     /**
-     * @ORM\Column(name="price", type="decimal", precision=15, scale=6)
-     *
      * @var string
-     *
      * @psalm-var numeric-string
      */
+    #[Column(name: 'price', type: 'decimal', precision: 15, scale: 6)]
     private $amount;
 
     /** @param float|int|string $amount */

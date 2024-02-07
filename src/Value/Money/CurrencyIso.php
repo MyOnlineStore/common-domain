@@ -939,11 +939,18 @@ final class CurrencyIso
                  'numericCode' => 690,
              ],
         'SLL' =>
+            [
+                'alphabeticCode' => 'SLL',
+                'currency' => 'Leone',
+                'minorUnit' => 2,
+                'numericCode' => 694,
+            ],
+        'SLE' =>
              [
-                 'alphabeticCode' => 'SLL',
+                 'alphabeticCode' => 'SLE',
                  'currency' => 'Leone',
                  'minorUnit' => 2,
-                 'numericCode' => 694,
+                 'numericCode' => 925,
              ],
         'SGD' =>
              [
@@ -1161,6 +1168,13 @@ final class CurrencyIso
                  'currency' => 'Vatu',
                  'minorUnit' => 0,
                  'numericCode' => 548,
+             ],
+        'VED' =>
+             [
+                 'alphabeticCode' => 'VED',
+                 'currency' => 'Bolívar Soberano',
+                 'minorUnit' => 2,
+                 'numericCode' => 926,
              ],
         'VES' =>
              [

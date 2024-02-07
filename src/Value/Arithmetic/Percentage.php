@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class Percentage extends Number
 {
     private function __construct(string $value, int | null $scale = null)

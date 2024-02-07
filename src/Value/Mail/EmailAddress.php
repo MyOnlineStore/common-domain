@@ -3,23 +3,18 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Mail;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use MyOnlineStore\Common\Domain\Exception\Mail\InvalidEmailAddress;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class EmailAddress
 {
-    /**
-     * @ORM\Column(name="email_address")
-     *
-     * @var string
-     */
+    /** @var string */
+    #[Column(name: 'email_address')]
     private $emailAddress;
 
     /** @throws InvalidEmailAddress */

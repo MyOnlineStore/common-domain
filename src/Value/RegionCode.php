@@ -3,23 +3,20 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  *
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class RegionCode
 {
-    /**
-     * @ORM\Column(name="region_code", type="string", length=2)
-     *
-     * @var string
-     */
+    /** @var string */
+    #[Column(name: 'region_code', type: 'string', length: 2)]
     private $code;
 
     /**

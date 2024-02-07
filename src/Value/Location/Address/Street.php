@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Location\Address;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
+use Doctrine\ORM\Mapping\Embedded;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class Street
 {
     private const SINGLE_LINE_PATTERNS = [
@@ -18,25 +17,16 @@ final class Street
         '/^(?P<number>\d+)(?P<suffix>\w*)\s+(?P<street>.*)$/',
     ];
 
-    /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetName", columnPrefix=false)
-     *
-     * @var StreetName
-     */
+    /** @var StreetName */
+    #[Embedded(class: StreetName::class, columnPrefix: false)]
     private $name;
 
-    /**
-     * @ORM\Embedded(class="MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber", columnPrefix=false)
-     *
-     * @var StreetNumber
-     */
+    /** @var StreetNumber */
+    #[Embedded(class: StreetNumber::class, columnPrefix: false)]
     private $number;
 
-    /**
-     * @ORM\Column(name="street_suffix", nullable=true)
-     *
-     * @var string|null
-     */
+    /** @var string|null */
+    #[Column(name: 'street_suffix', nullable: true)]
     private $suffix;
 
     public function __construct(StreetName $name, StreetNumber $number, StreetSuffix | null $suffix = null)
@@ -68,6 +58,7 @@ final class Street
 
     public function equals(self $operand): bool
     {
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return $this->name->equals($operand->name) &&
             $this->number->equals($operand->number) &&
             $this->suffix === $operand->suffix;
@@ -85,11 +76,13 @@ final class Street
 
     public function getSuffix(): StreetSuffix | null
     {
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return $this->suffix ? StreetSuffix::fromString($this->suffix) : null;
     }
 
     public function __toString(): string
     {
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return \trim(\sprintf('%s %s %s', $this->name, $this->number, $this->suffix ?: ''));
     }
 }

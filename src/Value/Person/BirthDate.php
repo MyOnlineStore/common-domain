@@ -3,18 +3,16 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class BirthDate
 {
     private const FORMAT = 'Y-m-d';
 
-    /** @ORM\Column(name="birth_date", type="date_immutable") */
+    #[Column(name: 'birth_date', type: 'date_immutable')]
     private \DateTimeImmutable $date;
 
     private function __construct(\DateTimeImmutable $date)

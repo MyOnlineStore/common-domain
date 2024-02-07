@@ -2,20 +2,15 @@
 
 namespace MyOnlineStore\Common\Domain\Value;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class StoreId
 {
-    /**
-     * @ORM\Column(name="store_id", type="integer")
-     *
-     * @var int|string
-     */
+    /** @var int|string */
+    #[Column(name: 'store_id', type: 'integer')]
     private $id;
 
     /** @param int|string $id */

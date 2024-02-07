@@ -2,23 +2,20 @@
 
 namespace MyOnlineStore\Common\Domain\Value;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
 /**
  * ISO 639 code (https://en.wikipedia.org/wiki/ISO_639)
  *
- * @ORM\Embeddable
- *
  * @psalm-immutable
  */
+#[Embeddable]
 final class LanguageCode
 {
-    /**
-     * @ORM\Column(name="language_code", length=3)
-     *
-     * @var string
-     */
+    /** @var string */
+    #[Column(name: 'language_code', length: 3)]
     private $code;
 
     /**

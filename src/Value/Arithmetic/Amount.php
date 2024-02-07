@@ -3,22 +3,17 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Arithmetic;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use Litipk\BigNumbers\Decimal;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class Amount extends Number
 {
-    /**
-     * @ORM\Column(name="amount", type="bignumbers", options={"doctrine_type"="bigint"})
-     *
-     * @var Decimal
-     */
+    /** @var Decimal */
+    #[Column(name: 'amount', type: 'bignumbers', options: ['doctrine_type' => 'bigint'])]
     protected $value;
 
     /**
@@ -28,7 +23,7 @@ final class Amount extends Number
      */
     public function __construct($value)
     {
-        if (\str_contains((string) $value, '.')) {
+        if (\str_contains((string)$value, '.')) {
             throw new InvalidArgument(\sprintf('Amount must be a whole number, "%s" given', $value));
         }
 

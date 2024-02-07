@@ -3,22 +3,17 @@ declare(strict_types=1);
 
 namespace MyOnlineStore\Common\Domain\Value\Person\Name;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Embeddable;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use MyOnlineStore\Common\Domain\Exception\InvalidArgument;
 
-/**
- * @ORM\Embeddable
- *
- * @psalm-immutable
- */
+/** @psalm-immutable */
+#[Embeddable]
 final class FirstName
 {
-    /**
-     * @ORM\Column(name="first_name")
-     *
-     * @var string
-     */
+    /** @var string */
+    #[Column(name: 'first_name')]
     private $firstName;
 
     private function __construct(string $firstName)
