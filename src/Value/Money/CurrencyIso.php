@@ -1169,6 +1169,13 @@ final class CurrencyIso
                  'minorUnit' => 0,
                  'numericCode' => 548,
              ],
+        'VED' =>
+             [
+                 'alphabeticCode' => 'VED',
+                 'currency' => 'Bolívar Soberano',
+                 'minorUnit' => 2,
+                 'numericCode' => 926,
+             ],
         'VES' =>
              [
                  'alphabeticCode' => 'VES',
