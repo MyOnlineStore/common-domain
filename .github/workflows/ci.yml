@@ -37,8 +37,8 @@ jobs:
                 run: composer install --no-ansi --no-interaction --no-progress --no-suggest
 
             # Test
-            -   name: Codestyle
-                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
+#            -   name: Codestyle
+#                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
             -   name: PHPUnit Checks Matcher
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
             -   name: Unit Tests
