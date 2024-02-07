@@ -13,11 +13,11 @@ use MyOnlineStore\Common\Domain\Value\Arithmetic\Amount;
 final class Money
 {
     /** @var Amount */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Arithmetic\Amount', columnPrefix: false)]
+    #[Embedded(class: Amount::class, columnPrefix: false)]
     private $amount;
 
     /** @var CurrencyIso */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Money\CurrencyIso', columnPrefix: false)]
+    #[Embedded(class: CurrencyIso::class, columnPrefix: false)]
     private $currency;
 
     public function __construct(Amount $amount, CurrencyIso $currency)

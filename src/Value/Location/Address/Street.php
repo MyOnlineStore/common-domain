@@ -18,11 +18,11 @@ final class Street
     ];
 
     /** @var StreetName */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetName', columnPrefix: false)]
+    #[Embedded(class: StreetName::class, columnPrefix: false)]
     private $name;
 
     /** @var StreetNumber */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Location\Address\StreetNumber', columnPrefix: false)]
+    #[Embedded(class: StreetNumber::class, columnPrefix: false)]
     private $number;
 
     /** @var string|null */
@@ -58,7 +58,7 @@ final class Street
 
     public function equals(self $operand): bool
     {
-        /** @palm-supress RiskyTruthyFalsyComparison */
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return $this->name->equals($operand->name) &&
             $this->number->equals($operand->number) &&
             $this->suffix === $operand->suffix;
@@ -76,12 +76,13 @@ final class Street
 
     public function getSuffix(): StreetSuffix | null
     {
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return $this->suffix ? StreetSuffix::fromString($this->suffix) : null;
     }
 
     public function __toString(): string
     {
-        /** @palm-supress RiskyTruthyFalsyComparison */
+        /** @psalm-suppress RiskyTruthyFalsyComparison */
         return \trim(\sprintf('%s %s %s', $this->name, $this->number, $this->suffix ?: ''));
     }
 }

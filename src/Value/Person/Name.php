@@ -15,16 +15,12 @@ use MyOnlineStore\Common\Domain\Value\Person\Name\LastName;
 #[Embeddable]
 final class Name
 {
-    /**
-     * @var FirstName
-     */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Person\Name\FirstName', columnPrefix: false)]
+    /** @var FirstName */
+    #[Embedded(class: FirstName::class, columnPrefix: false)]
     private $firstName;
 
-    /**
-     * @var LastName
-     */
-    #[Embedded(class: 'MyOnlineStore\Common\Domain\Value\Person\Name\LastName', columnPrefix: false)]
+    /** @var LastName */
+    #[Embedded(class: LastName::class, columnPrefix: false)]
     private $lastName;
 
     public function __construct(FirstName $first, LastName $last)
