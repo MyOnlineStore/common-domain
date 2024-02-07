@@ -1,4 +1,4 @@
-name: CI
+name: Test
 
 on:
     push:
@@ -10,14 +10,11 @@ on:
 jobs:
     test:
         name: Test
-
-        runs-on: ubuntu-18.04
-
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 php-version: ['8.1']
             fail-fast: false
-
         steps:
             # Setup
             -   name: Checkout
@@ -40,8 +37,8 @@ jobs:
                 run: composer install --no-ansi --no-interaction --no-progress --no-suggest
 
             # Test
-#            -   name: Codestyle
-#                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
+            -   name: Codestyle
+                run: php vendor/bin/phpcs -q --report=checkstyle | cs2pr
             -   name: PHPUnit Checks Matcher
                 run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
             -   name: Unit Tests
@@ -51,27 +48,3 @@ jobs:
                     echo "COVERAGE=${COVERAGE}" >> $GITHUB_ENV
             -   name: Run Psalm
                 run: vendor/bin/psalm --output-format=github
-
-            # Compare to master
-#            -   name: Checkout Master
-#                uses: actions/checkout@v2
-#                with:
-#                    ref: master
-#            -   name: Install Dependencies Master
-#                run: composer install --no-interaction --no-ansi --no-progress --no-suggest
-#            -   name: Unit Tests Master
-#                run: |
-#                    php vendor/bin/phpunit --coverage-text=coverage-master.txt --colors=never
-#                    COVERAGE_MASTER=$(php -r 'preg_match("#Lines:\s*(\d+.\d+)%#", file_get_contents("coverage-master.txt"), $out); echo $out[1];')
-#                    echo "COVERAGE_MASTER=${COVERAGE_MASTER}" >> $GITHUB_ENV
-#            -   name: Report PR Status
-#                uses: actions/github-script@0.6.0
-#                with:
-#                    github-token: ${{github.token}}
-#                    script: |
-#                        const coverage = parseFloat(process.env.COVERAGE);
-#                        const coverageMaster = parseFloat(process.env.COVERAGE_MASTER);
-#                        const coverageChange = (coverage - coverageMaster).toFixed(2);
-#
-#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverage > 98 ? 'success' : 'failure', context: 'Unit Test Coverage', description: coverage+'%'});
-#                        github.repos.createStatus({...context.repo, sha: context.sha, state: coverageChange < 0 ? 'failure' : 'success', context: 'Unit Test Coverage Change', description: coverageChange+'%'});
