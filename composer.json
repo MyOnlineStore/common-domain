@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "myonlinestore/coding-standard": "^3.1",
-        "phpbench/phpbench": "dev-master",
+        "phpbench/phpbench": "1.2.14",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.15",
         "roave/infection-static-analysis-plugin": "^1.7",
