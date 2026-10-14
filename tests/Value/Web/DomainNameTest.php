@@ -73,6 +73,13 @@ final class DomainNameTest extends TestCase
     {
         return [
             ['foo'],
+            ['.'],
+            ['.nl'],
+            ['shop..nl'],
+            ['shop nl.nl'],
+            ['http://shop.nl'],
+            ['shop.nl:8080'],
+            ['127.0.0.1'],
         ];
     }
 
@@ -82,6 +89,11 @@ final class DomainNameTest extends TestCase
         return [
             ['myonlinestore.com'],
             ['www.google.com'],
+            ['shop.co.uk'],
+            ['bücher.de'],
+            ['xn--bcher-kva.de'],
+            ['shop.nl.'],
+            ['shop.unknowntld'],
         ];
     }
 }
