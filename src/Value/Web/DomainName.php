@@ -6,7 +6,6 @@ namespace MyOnlineStore\Common\Domain\Value\Web;
 use MyOnlineStore\Common\Domain\Assertion\Assert;
 use Pdp\ResolvedDomainName;
 use Pdp\Rules;
-use Pdp\SyntaxError;
 
 /** @psalm-immutable */
 final class DomainName
@@ -21,13 +20,11 @@ final class DomainName
 
         Assert::contains($domainName, '.');
 
-        try {
-            $this->resolvedDomainName = $this->getRules()->resolve($domainName);
-        } catch (SyntaxError $exception) {
-            throw new \InvalidArgumentException(
-                \sprintf('Invalid domain given "%s".', $domainName),
-                previous: $exception,
-            );
+        $this->resolvedDomainName = $this->getRules()->resolve($domainName);
+
+        // resolve() swallows syntax errors and yields an empty domain instead of throwing.
+        if (null === $this->resolvedDomainName->value()) {
+            throw new \InvalidArgumentException(\sprintf('Invalid domain given "%s".', $domainName));
         }
     }
 
